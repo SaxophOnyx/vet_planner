@@ -16,4 +16,4 @@ linter:
     prefer_const_literals_to_create_immutables: true
     prefer_constructors_over_static_methods: true
     constant_identifier_names: false
-    prefer_relative_imports: false
+    prefer_relative_imports: true

@@ -1,0 +1,21 @@
+name: navigation
+description: Application navigation module
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ^3.1.3
+  flutter: ^3.13.6
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  auto_route: ^7.8.4
+
+  splash:
+    path: ../features/splash
+
+dev_dependencies:
+  auto_route_generator: ^7.3.2
+  build_runner: ^2.4.8
