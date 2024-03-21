@@ -4,17 +4,21 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: ^3.1.3
-  flutter: ^3.13.6
+  sdk: ^3.3.1
+  flutter: ^3.19.3
 
 dependencies:
   flutter:
     sdk: flutter
 
-  auto_route: ^7.8.4
+  auto_route: ^7.9.1
 
   splash:
     path: ../features/splash
+  home:
+    path: ../features/home
+  medical_kit:
+    path: ../features/medical_kit
 
 dev_dependencies:
   auto_route_generator: ^7.3.2

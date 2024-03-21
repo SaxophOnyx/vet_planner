@@ -17,3 +17,4 @@ linter:
     prefer_constructors_over_static_methods: true
     constant_identifier_names: false
     prefer_relative_imports: true
+    annotate_overrides: true
