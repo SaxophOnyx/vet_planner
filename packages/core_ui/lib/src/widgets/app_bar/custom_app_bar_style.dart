@@ -1,0 +1,4 @@
+enum CustomAppBarStyle {
+  primary,
+  secondary,
+}

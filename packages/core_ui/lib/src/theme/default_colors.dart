@@ -6,24 +6,22 @@ class DefaultColors extends AppColors {
   const DefaultColors();
 
   @override
-  Color get background => const Color.fromARGB(255, 240, 240, 255);
+  Color get background => const Color(0xFFF9F9F9);
 
   @override
-  Color get container => Colors.white;
+  Color get backgroundSecondary => Colors.white;
 
   @override
-  Color get containerSecondary => const Color.fromARGB(255, 244, 244, 244);
+  Color get primary => const Color(0xFF6E41E2);
 
   @override
-  Color get primary => Colors.deepPurple;
-
   Color get onPrimary => Colors.white;
 
   @override
   Color get text => Colors.black;
 
   @override
-  Color get textSecondary => const Color.fromARGB(255, 120, 120, 120);
+  Color get textSecondary => const Color(0xFFB4B4B4);
 
   @override
   Color get error => Colors.red;

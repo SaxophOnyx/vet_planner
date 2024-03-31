@@ -4,11 +4,29 @@ import '../../core_ui.dart';
 
 abstract class AppFonts {
   static const String _interFamily = 'Inter';
+  static const FontWeight _regularWeight = FontWeight.w400;
+  static const FontWeight _semiBoldWeight = FontWeight.w600;
 
   static const TextStyle inter16Regular = TextStyle(
     fontSize: 16,
     height: 1.5,
-    fontWeight: FontWeight.w400,
+    fontWeight: _regularWeight,
+    fontFamily: _interFamily,
+    package: kPackageName,
+  );
+
+  static const TextStyle inter16SemiBold = TextStyle(
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: _semiBoldWeight,
+    fontFamily: _interFamily,
+    package: kPackageName,
+  );
+
+  static const TextStyle inter24SemiBold = TextStyle(
+    fontSize: 24,
+    height: 1.5,
+    fontWeight: _semiBoldWeight,
     fontFamily: _interFamily,
     package: kPackageName,
   );

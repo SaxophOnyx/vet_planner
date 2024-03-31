@@ -18,6 +18,8 @@ dependencies:
     path: ./packages/core_ui
   domain:
     path: ./packages/domain
+  data:
+    path: ./packages/data
   navigation:
     path: ./packages/navigation
 

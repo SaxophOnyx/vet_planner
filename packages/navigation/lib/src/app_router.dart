@@ -4,6 +4,7 @@ import 'package:medical_kit/medical_kit.dart';
 import 'package:splash/splash.dart';
 
 import '../navigation.dart';
+import 'route_builder.dart';
 
 part 'app_router.gr.dart';
 
@@ -30,15 +31,17 @@ class AppRouter extends _$AppRouter {
             ),
           ],
         ),
-
-        // Medical Kit
-        CustomRoute(
-          page: StoredMedicationsRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeft,
-        ),
         CustomRoute(
           page: AddMedicationTypeRoute.page,
-          transitionsBuilder: TransitionsBuilders.slideLeft,
+          customRouteBuilder: RouteBuilder.screen,
+        ),
+        CustomRoute(
+          page: StoredMedicationsRoute.page,
+          customRouteBuilder: RouteBuilder.screen,
+        ),
+        CustomRoute(
+          page: AddStoredMedicationRoute.page,
+          customRouteBuilder: RouteBuilder.screen,
         ),
       ];
 }

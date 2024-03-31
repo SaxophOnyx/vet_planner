@@ -24,7 +24,10 @@ class AddMedicationTypeBloc extends Bloc<AddMedicationTypeEvent, AddMedicationTy
     UpdateMedicationTypeName event,
     Emitter<AddMedicationTypeState> emit,
   ) {
-    emit(state.copyWithName(name: event.name, nameError: null));
+    emit(state.copyWithName(
+      name: event.name,
+      nameError: null,
+    ));
   }
 
   Future<void> _onSubmitInput(
@@ -32,7 +35,7 @@ class AddMedicationTypeBloc extends Bloc<AddMedicationTypeEvent, AddMedicationTy
     Emitter<AddMedicationTypeState> emit,
   ) async {
     final String name = state.name;
-    final String? nameError = MedicationTypeNameValidator.validate(name);
+    final String? nameError = MedicationTypeNameValidator.validateName(name);
 
     emit(state.copyWithName(
       name: name,

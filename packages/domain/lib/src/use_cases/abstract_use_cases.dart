@@ -15,3 +15,7 @@ abstract class StreamUseCase<Input, Output> {
 
   Stream<Output> execute(Input payload);
 }
+
+class NoParams {
+  const NoParams();
+}
