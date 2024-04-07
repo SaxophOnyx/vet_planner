@@ -4,6 +4,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_kit/medical_kit.dart';
 import 'package:navigation/navigation.dart';
+import 'package:prescriptions/prescriptions.dart';
 
 @RoutePage()
 class HomeScreen extends StatelessWidget {
@@ -15,6 +16,7 @@ class HomeScreen extends StatelessWidget {
 
     return AutoTabsRouter(
       routes: const <PageRouteInfo>[
+        PrescriptionsRoute(),
         MedicalKitRoute(),
       ],
       builder: (BuildContext context, Widget child) {

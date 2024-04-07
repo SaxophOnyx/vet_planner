@@ -23,6 +23,8 @@ abstract class AppColors extends ThemeExtension<AppColors> {
 
   Color get transparent;
 
+  Color get barrier;
+
   @override
   ThemeExtension<AppColors> copyWith() => throw UnimplementedError();
 

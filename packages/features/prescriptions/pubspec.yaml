@@ -1,5 +1,5 @@
-name: home
-description: Application home module
+name: prescriptions
+description: Application prescriptions module
 publish_to: none
 
 environment:
@@ -10,14 +10,17 @@ dependencies:
   flutter:
     sdk: flutter
 
+  core:
+    path: ../../core
   core_ui:
     path: ../../core_ui
+  domain:
+    path: ../../domain
   navigation:
     path: ../../navigation
-  medical_kit:
-    path: ../medical_kit
-  prescriptions:
-    path: ../prescriptions
+
+  calendar_date_picker2: ^0.5.5
+  table_calendar: ^3.0.9
 
 dev_dependencies:
   lints: ^2.0.0

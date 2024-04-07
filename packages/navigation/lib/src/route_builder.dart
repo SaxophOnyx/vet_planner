@@ -28,4 +28,27 @@ abstract class RouteBuilder {
       reverseTransitionDuration: AppDimens.DEFAULT_ANIMATION_DURATION,
     );
   }
+
+  static Route<T> bottomSheet<T>(
+    BuildContext context,
+    Widget child,
+    AutoRoutePage<T> page,
+  ) {
+    return ModalBottomSheetRoute<T>(
+      isScrollControlled: true,
+      settings: page,
+      backgroundColor: context.appColors.barrier,
+      builder: (BuildContext context) {
+        return Padding(
+          padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.sizeOf(context).height * AppDimens.BOTTOM_SHEET_MAX_HEIGHT_RATIO,
+            ),
+            child: child,
+          ),
+        );
+      },
+    );
+  }
 }

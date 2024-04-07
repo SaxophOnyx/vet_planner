@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:home/home.dart';
 import 'package:medical_kit/medical_kit.dart';
+import 'package:prescriptions/prescriptions.dart';
 import 'package:splash/splash.dart';
 
 import '../navigation.dart';
@@ -12,6 +13,7 @@ part 'app_router.gr.dart';
   SplashModule,
   HomeModule,
   MedicalKitModule,
+  PrescriptionsModule,
 ])
 class AppRouter extends _$AppRouter {
   AppRouter({super.navigatorKey});
@@ -26,11 +28,16 @@ class AppRouter extends _$AppRouter {
           page: HomeRoute.page,
           children: <AutoRoute>[
             AutoRoute(
+              page: PrescriptionsRoute.page,
+            ),
+            AutoRoute(
               initial: true,
               page: MedicalKitRoute.page,
             ),
           ],
         ),
+
+        // Medical Kit
         CustomRoute(
           page: AddMedicationTypeRoute.page,
           customRouteBuilder: RouteBuilder.screen,
@@ -42,6 +49,17 @@ class AppRouter extends _$AppRouter {
         CustomRoute(
           page: AddStoredMedicationRoute.page,
           customRouteBuilder: RouteBuilder.screen,
+        ),
+
+        // Prescriptions
+        CustomRoute(
+          page: AddPrescriptionRoute.page,
+          customRouteBuilder: RouteBuilder.screen,
+        ),
+        // Prescriptions
+        CustomRoute(
+          page: AddPrescriptionEntryRoute.page,
+          customRouteBuilder: RouteBuilder.bottomSheet,
         ),
       ];
 }

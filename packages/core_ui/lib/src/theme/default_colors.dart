@@ -34,4 +34,7 @@ class DefaultColors extends AppColors {
 
   @override
   Color get transparent => Colors.transparent;
+
+  @override
+  Color get barrier => Colors.black26;
 }

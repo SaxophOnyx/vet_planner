@@ -13,6 +13,9 @@ abstract class AppDimens {
   static const double DEFAULT_SMALL_ICON_SIZE = 20;
   static const double DEFAULT_LARGE_ICON_SIZE = 40;
 
+  // Inputs
+  static const double DEFAULT_INPUT_HEIGHT = 50;
+
   // Controls
   static const double DEFAULT_CONTROL_MIN_WIDTH = 200;
   static const double DEFAULT_CONTROL_HEIGHT = 50;
@@ -23,4 +26,9 @@ abstract class AppDimens {
 
   // App bar
   static const double APP_BAR_HEIGHT = 50;
+
+  // Bottom Sheet
+  static const double BOTTOM_SHEET_MAX_HEIGHT_RATIO = 3 / 4;
+  static const double BOTTOM_SHEET_MIN_HEIGHT = 50;
+  static const double BOTTOM_SHEET_BORDER_RADIUS = 24;
 }
