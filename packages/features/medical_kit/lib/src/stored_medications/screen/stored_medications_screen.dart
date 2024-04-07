@@ -9,11 +9,11 @@ import 'stored_medications_content.dart';
 
 @RoutePage()
 class StoredMedicationsScreen extends StatelessWidget {
-  final MedicationType medicationType;
+  final Medication medication;
 
   const StoredMedicationsScreen({
     super.key,
-    required this.medicationType,
+    required this.medication,
   });
 
   @override
@@ -22,8 +22,8 @@ class StoredMedicationsScreen extends StatelessWidget {
       lazy: false,
       create: (_) => StoredMedicationsBloc(
         appRouter: appDI.get<AppRouter>(),
-        getStoredMedicationsForMedicationTypeUseCase: appDI.get<GetStoredMedicationsForMedicationTypeUseCase>(),
-        medicationType: medicationType,
+        getStoredMedicationsForMedicationUseCase: appDI.get<GetStoredMedicationsForMedicationUseCase>(),
+        medication: medication,
       )..add(const Initialize()),
       child: const StoredMedicationsContent(),
     );

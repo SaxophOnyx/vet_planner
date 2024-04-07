@@ -25,20 +25,20 @@ Future<void> _setupRepositories() async {
 }
 
 Future<void> _setupUseCases() async {
-  appDI.registerSingleton<GetMedicationTypesUseCase>(
-    GetMedicationTypesUseCase(
+  appDI.registerSingleton<GetMedicationsUseCase>(
+    GetMedicationsUseCase(
       medicationRepository: appDI.get<MedicationRepository>(),
     ),
   );
 
-  appDI.registerSingleton<AddMedicationTypeUseCase>(
-    AddMedicationTypeUseCase(
+  appDI.registerSingleton<AddMedicationUseCase>(
+    AddMedicationUseCase(
       medicationRepository: appDI.get<MedicationRepository>(),
     ),
   );
 
-  appDI.registerSingleton<GetStoredMedicationsForMedicationTypeUseCase>(
-    GetStoredMedicationsForMedicationTypeUseCase(
+  appDI.registerSingleton<GetStoredMedicationsForMedicationUseCase>(
+    GetStoredMedicationsForMedicationUseCase(
       medicationRepository: appDI.get<MedicationRepository>(),
     ),
   );

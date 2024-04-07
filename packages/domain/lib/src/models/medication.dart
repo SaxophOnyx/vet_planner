@@ -1,8 +1,8 @@
-class MedicationType {
+class Medication {
   final int id;
   final String name;
 
-  const MedicationType({
+  const Medication({
     required this.id,
     required this.name,
   });

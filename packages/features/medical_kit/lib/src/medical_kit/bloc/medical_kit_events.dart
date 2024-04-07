@@ -8,12 +8,12 @@ class Initialize extends MedicalKitEvent {
   const Initialize();
 }
 
-class AddMedicationType extends MedicalKitEvent {
-  const AddMedicationType();
+class AddMedication extends MedicalKitEvent {
+  const AddMedication();
 }
 
-class ViewStoredMedicationsForType extends MedicalKitEvent {
-  final int medicationTypeIndex;
+class ViewStoredMedications extends MedicalKitEvent {
+  final int medicationIndex;
 
-  const ViewStoredMedicationsForType(this.medicationTypeIndex);
+  const ViewStoredMedications(this.medicationIndex);
 }

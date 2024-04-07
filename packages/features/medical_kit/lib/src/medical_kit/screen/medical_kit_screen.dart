@@ -17,7 +17,7 @@ class MedicalKitScreen extends StatelessWidget {
       lazy: false,
       create: (_) => MedicalKitBloc(
         appRouter: appDI.get<AppRouter>(),
-        getMedicationTypesUseCase: appDI.get<GetMedicationTypesUseCase>(),
+        getMedicationsUseCase: appDI.get<GetMedicationsUseCase>(),
       )..add(const Initialize()),
       child: const MedicalKitContent(),
     );

@@ -2,26 +2,26 @@ part of 'medical_kit_bloc.dart';
 
 class MedicalKitState {
   final Loading loading;
-  final List<MedicationType> medicationTypes;
+  final List<Medication> medications;
 
   bool get isLoading => loading == Loading.inProgress;
 
   const MedicalKitState.initial()
       : loading = Loading.inProgress,
-        medicationTypes = const <MedicationType>[];
+        medications = const <Medication>[];
 
   const MedicalKitState({
     required this.loading,
-    required this.medicationTypes,
+    required this.medications,
   });
 
   MedicalKitState copyWith({
     Loading? loading,
-    List<MedicationType>? medicationTypes,
+    List<Medication>? medications,
   }) {
     return MedicalKitState(
       loading: loading ?? this.loading,
-      medicationTypes: medicationTypes ?? this.medicationTypes,
+      medications: medications ?? this.medications,
     );
   }
 }

@@ -10,17 +10,17 @@ part 'medical_kit_state.dart';
 
 class MedicalKitBloc extends Bloc<MedicalKitEvent, MedicalKitState> {
   final AppRouter _appRouter;
-  final GetMedicationTypesUseCase _getMedicationTypesUseCase;
+  final GetMedicationsUseCase _getMedicationsUseCase;
 
   MedicalKitBloc({
     required AppRouter appRouter,
-    required GetMedicationTypesUseCase getMedicationTypesUseCase,
+    required GetMedicationsUseCase getMedicationsUseCase,
   })  : _appRouter = appRouter,
-        _getMedicationTypesUseCase = getMedicationTypesUseCase,
+        _getMedicationsUseCase = getMedicationsUseCase,
         super(const MedicalKitState.initial()) {
     on<Initialize>(_onInitialize);
-    on<AddMedicationType>(_onAddMedicationType);
-    on<ViewStoredMedicationsForType>(_onViewStoredMedicationsForType);
+    on<AddMedication>(_onAddMedication);
+    on<ViewStoredMedications>(_onViewStoredMedications);
   }
 
   Future<void> _onInitialize(
@@ -28,10 +28,10 @@ class MedicalKitBloc extends Bloc<MedicalKitEvent, MedicalKitState> {
     Emitter<MedicalKitState> emit,
   ) async {
     try {
-      final List<MedicationType> medicationTypes = await _getMedicationTypesUseCase.execute();
+      final List<Medication> medications = await _getMedicationsUseCase.execute();
 
       emit(state.copyWith(
-        medicationTypes: medicationTypes,
+        medications: medications,
         loading: Loading.completed,
       ));
     } catch (_) {
@@ -41,31 +41,31 @@ class MedicalKitBloc extends Bloc<MedicalKitEvent, MedicalKitState> {
     }
   }
 
-  Future<void> _onAddMedicationType(
-    AddMedicationType event,
+  Future<void> _onAddMedication(
+    AddMedication event,
     Emitter<MedicalKitState> emit,
   ) async {
-    final MedicationType? medicationType = await _appRouter.push(const AddMedicationTypeRoute());
+    final Medication? medication = await _appRouter.push(const AddMedicationRoute());
 
-    if (medicationType != null) {
-      final List<MedicationType> updatedMedicationTypes = <MedicationType>[
-        ...state.medicationTypes,
-        medicationType,
+    if (medication != null) {
+      final List<Medication> updatedMedications = <Medication>[
+        ...state.medications,
+        medication,
       ];
 
       emit(state.copyWith(
-        medicationTypes: updatedMedicationTypes,
+        medications: updatedMedications,
       ));
 
       // TODO(SaxophOnyx): Implement success toast
     }
   }
 
-  Future<void> _onViewStoredMedicationsForType(
-    ViewStoredMedicationsForType event,
+  Future<void> _onViewStoredMedications(
+    ViewStoredMedications event,
     Emitter<MedicalKitState> emit,
   ) async {
-    final MedicationType medicationType = state.medicationTypes[event.medicationTypeIndex];
-    await _appRouter.push(StoredMedicationsRoute(medicationType: medicationType));
+    final Medication medication = state.medications[event.medicationIndex];
+    await _appRouter.push(StoredMedicationsRoute(medication: medication));
   }
 }

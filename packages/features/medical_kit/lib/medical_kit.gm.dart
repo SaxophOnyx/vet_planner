@@ -11,7 +11,7 @@
 import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:domain/domain.dart' as _i6;
 import 'package:flutter/material.dart' as _i7;
-import 'package:medical_kit/src/add_medication_type/screen/add_medication_type_screen.dart'
+import 'package:medical_kit/src/add_medication/screen/add_medication_screen.dart'
     as _i1;
 import 'package:medical_kit/src/add_stored_medication/screen/add_stored_medication_screen.dart'
     as _i2;
@@ -23,10 +23,10 @@ import 'package:medical_kit/src/stored_medications/screen/stored_medications_scr
 abstract class $MedicalKitModule extends _i5.AutoRouterModule {
   @override
   final Map<String, _i5.PageFactory> pagesMap = {
-    AddMedicationTypeRoute.name: (routeData) {
-      return _i5.AutoRoutePage<_i6.MedicationType>(
+    AddMedicationRoute.name: (routeData) {
+      return _i5.AutoRoutePage<_i6.Medication>(
         routeData: routeData,
-        child: const _i1.AddMedicationTypeScreen(),
+        child: const _i1.AddMedicationScreen(),
       );
     },
     AddStoredMedicationRoute.name: (routeData) {
@@ -35,7 +35,7 @@ abstract class $MedicalKitModule extends _i5.AutoRouterModule {
         routeData: routeData,
         child: _i2.AddStoredMedicationScreen(
           key: args.key,
-          medicationType: args.medicationType,
+          medication: args.medication,
         ),
       );
     },
@@ -51,7 +51,7 @@ abstract class $MedicalKitModule extends _i5.AutoRouterModule {
         routeData: routeData,
         child: _i4.StoredMedicationsScreen(
           key: args.key,
-          medicationType: args.medicationType,
+          medication: args.medication,
         ),
       );
     },
@@ -59,15 +59,15 @@ abstract class $MedicalKitModule extends _i5.AutoRouterModule {
 }
 
 /// generated route for
-/// [_i1.AddMedicationTypeScreen]
-class AddMedicationTypeRoute extends _i5.PageRouteInfo<void> {
-  const AddMedicationTypeRoute({List<_i5.PageRouteInfo>? children})
+/// [_i1.AddMedicationScreen]
+class AddMedicationRoute extends _i5.PageRouteInfo<void> {
+  const AddMedicationRoute({List<_i5.PageRouteInfo>? children})
       : super(
-          AddMedicationTypeRoute.name,
+          AddMedicationRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'AddMedicationTypeRoute';
+  static const String name = 'AddMedicationRoute';
 
   static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
 }
@@ -78,13 +78,13 @@ class AddStoredMedicationRoute
     extends _i5.PageRouteInfo<AddStoredMedicationRouteArgs> {
   AddStoredMedicationRoute({
     _i7.Key? key,
-    required _i6.MedicationType medicationType,
+    required _i6.Medication medication,
     List<_i5.PageRouteInfo>? children,
   }) : super(
           AddStoredMedicationRoute.name,
           args: AddStoredMedicationRouteArgs(
             key: key,
-            medicationType: medicationType,
+            medication: medication,
           ),
           initialChildren: children,
         );
@@ -98,16 +98,16 @@ class AddStoredMedicationRoute
 class AddStoredMedicationRouteArgs {
   const AddStoredMedicationRouteArgs({
     this.key,
-    required this.medicationType,
+    required this.medication,
   });
 
   final _i7.Key? key;
 
-  final _i6.MedicationType medicationType;
+  final _i6.Medication medication;
 
   @override
   String toString() {
-    return 'AddStoredMedicationRouteArgs{key: $key, medicationType: $medicationType}';
+    return 'AddStoredMedicationRouteArgs{key: $key, medication: $medication}';
   }
 }
 
@@ -131,13 +131,13 @@ class StoredMedicationsRoute
     extends _i5.PageRouteInfo<StoredMedicationsRouteArgs> {
   StoredMedicationsRoute({
     _i7.Key? key,
-    required _i6.MedicationType medicationType,
+    required _i6.Medication medication,
     List<_i5.PageRouteInfo>? children,
   }) : super(
           StoredMedicationsRoute.name,
           args: StoredMedicationsRouteArgs(
             key: key,
-            medicationType: medicationType,
+            medication: medication,
           ),
           initialChildren: children,
         );
@@ -151,15 +151,15 @@ class StoredMedicationsRoute
 class StoredMedicationsRouteArgs {
   const StoredMedicationsRouteArgs({
     this.key,
-    required this.medicationType,
+    required this.medication,
   });
 
   final _i7.Key? key;
 
-  final _i6.MedicationType medicationType;
+  final _i6.Medication medication;
 
   @override
   String toString() {
-    return 'StoredMedicationsRouteArgs{key: $key, medicationType: $medicationType}';
+    return 'StoredMedicationsRouteArgs{key: $key, medication: $medication}';
   }
 }

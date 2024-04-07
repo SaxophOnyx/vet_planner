@@ -9,11 +9,11 @@ import 'add_stored_medication_content.dart';
 
 @RoutePage<StoredMedication>()
 class AddStoredMedicationScreen extends StatelessWidget {
-  final MedicationType medicationType;
+  final Medication medication;
 
   const AddStoredMedicationScreen({
     super.key,
-    required this.medicationType,
+    required this.medication,
   });
 
   @override
@@ -23,7 +23,7 @@ class AddStoredMedicationScreen extends StatelessWidget {
       create: (_) => AddStoredMedicationBloc(
         appRouter: appDI.get<AppRouter>(),
         addStoredMedicationUseCase: appDI.get<AddStoredMedicationUseCase>(),
-        medicationType: medicationType,
+        medicationType: medication,
       ),
       child: const AddStoredMedicationContent(),
     );

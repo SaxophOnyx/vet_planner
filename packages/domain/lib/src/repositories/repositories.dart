@@ -1,18 +1,18 @@
 import '../../domain.dart';
 
 abstract class MedicationRepository {
-  Future<List<MedicationType>> getMedicationTypes();
+  Future<List<Medication>> getMedications();
 
-  Future<MedicationType> addMedicationType({
+  Future<Medication> addMedication({
     required String name,
   });
 
   Future<List<StoredMedication>> getStoredMedications({
-    required int medicationTypeId,
+    required int medicationId,
   });
 
   Future<StoredMedication> addStoredMedication({
-    required int medicationTypeId,
+    required int medicationId,
     required DateTime expirationDate,
   });
 }

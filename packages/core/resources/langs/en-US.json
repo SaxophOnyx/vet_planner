@@ -1,7 +1,18 @@
 {
-  "validation": {
-    "common": {
+  "common":{
+    "validation": {
       "notEmpty": "This field must not be empty"
+    },
+    "actions": {
+      "confirm": "Confirm"
+    }
+  },
+  "medKit": {
+    "addStored": {
+      "addStoredFor": "Add new batch of {name}",
+      "expirationDate": "Expires at",
+      "numberOfPacks": "Number of packs",
+      "quantityPerPack": "Quantity per pack"
     }
   }
 }

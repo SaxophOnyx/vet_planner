@@ -1,46 +1,44 @@
 import 'package:domain/domain.dart';
 
 class InMemoryMedicationRepository implements MedicationRepository {
-  final List<MedicationType> _medicationTypes = List<MedicationType>.empty(growable: true);
+  final List<Medication> _medications = List<Medication>.empty(growable: true);
   final List<StoredMedication> _storedMedications = List<StoredMedication>.empty(growable: true);
   int _currId = 0;
 
   @override
-  Future<MedicationType> addMedicationType({
+  Future<Medication> addMedication({
     required String name,
   }) async {
-    final MedicationType type = MedicationType(
+    final Medication type = Medication(
       name: name,
       id: ++_currId,
     );
 
-    _medicationTypes.add(type);
+    _medications.add(type);
 
     return type;
   }
 
   @override
-  Future<List<MedicationType>> getMedicationTypes() async {
-    return List<MedicationType>.from(_medicationTypes);
+  Future<List<Medication>> getMedications() async {
+    return List<Medication>.from(_medications);
   }
 
   @override
   Future<List<StoredMedication>> getStoredMedications({
-    required int medicationTypeId,
+    required int medicationId,
   }) async {
-    return _storedMedications
-        .where((StoredMedication medication) => medication.medicationTypeId == medicationTypeId)
-        .toList();
+    return _storedMedications.where((StoredMedication medication) => medication.medicationId == medicationId).toList();
   }
 
   @override
   Future<StoredMedication> addStoredMedication({
-    required int medicationTypeId,
+    required int medicationId,
     required DateTime expirationDate,
   }) async {
     final StoredMedication medication = StoredMedication(
       id: ++_currId,
-      medicationTypeId: medicationTypeId,
+      medicationId: medicationId,
       expirationDate: expirationDate,
     );
 

@@ -1,25 +1,25 @@
-part of 'add_medication_type_bloc.dart';
+part of 'add_medication_bloc.dart';
 
-class AddMedicationTypeState {
+class AddMedicationState {
   final String name;
   final String? nameError;
 
   bool get hasErrors => nameError != null;
 
-  const AddMedicationTypeState.initial()
+  const AddMedicationState.initial()
       : name = '',
         nameError = null;
 
-  const AddMedicationTypeState({
+  const AddMedicationState({
     required this.name,
     required this.nameError,
   });
 
-  AddMedicationTypeState copyWithName({
+  AddMedicationState copyWithName({
     String? name,
     String? nameError,
   }) {
-    return AddMedicationTypeState(
+    return AddMedicationState(
       name: name ?? this.name,
       nameError: nameError,
     );

@@ -1,14 +1,14 @@
 import '../../../domain.dart';
 
-class GetStoredMedicationsForMedicationTypeUseCase extends FutureUseCase<int, List<StoredMedication>> {
+class GetStoredMedicationsForMedicationUseCase extends FutureUseCase<int, List<StoredMedication>> {
   final MedicationRepository _medicationRepository;
 
-  GetStoredMedicationsForMedicationTypeUseCase({
+  GetStoredMedicationsForMedicationUseCase({
     required MedicationRepository medicationRepository,
   }) : _medicationRepository = medicationRepository;
 
   @override
   Future<List<StoredMedication>> execute(int payload) async {
-    return _medicationRepository.getStoredMedications(medicationTypeId: payload);
+    return _medicationRepository.getStoredMedications(medicationId: payload);
   }
 }

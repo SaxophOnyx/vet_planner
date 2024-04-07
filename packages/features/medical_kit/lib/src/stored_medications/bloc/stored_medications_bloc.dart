@@ -10,15 +10,15 @@ part 'stored_medications_state.dart';
 
 class StoredMedicationsBloc extends Bloc<StoredMedicationsEvent, StoredMedicationsState> {
   final AppRouter _appRouter;
-  final GetStoredMedicationsForMedicationTypeUseCase _getStoredMedicationsForMedicationTypeUseCase;
+  final GetStoredMedicationsForMedicationUseCase _getStoredMedicationsForMedicationUseCase;
 
   StoredMedicationsBloc({
     required AppRouter appRouter,
-    required GetStoredMedicationsForMedicationTypeUseCase getStoredMedicationsForMedicationTypeUseCase,
-    required MedicationType medicationType,
+    required GetStoredMedicationsForMedicationUseCase getStoredMedicationsForMedicationUseCase,
+    required Medication medication,
   })  : _appRouter = appRouter,
-        _getStoredMedicationsForMedicationTypeUseCase = getStoredMedicationsForMedicationTypeUseCase,
-        super(StoredMedicationsState.initial(medicationType: medicationType)) {
+        _getStoredMedicationsForMedicationUseCase = getStoredMedicationsForMedicationUseCase,
+        super(StoredMedicationsState.initial(medication: medication)) {
     on<Initialize>(_onInitialize);
     on<AddStoredMedication>(_onAddStoredMedication);
   }
@@ -28,8 +28,8 @@ class StoredMedicationsBloc extends Bloc<StoredMedicationsEvent, StoredMedicatio
     Emitter<StoredMedicationsState> emit,
   ) async {
     try {
-      final List<StoredMedication> storedMedications = await _getStoredMedicationsForMedicationTypeUseCase.execute(
-        state.medicationType.id,
+      final List<StoredMedication> storedMedications = await _getStoredMedicationsForMedicationUseCase.execute(
+        state.medication.id,
       );
 
       emit(state.copyWith(
@@ -48,7 +48,7 @@ class StoredMedicationsBloc extends Bloc<StoredMedicationsEvent, StoredMedicatio
     Emitter<StoredMedicationsState> emit,
   ) async {
     final StoredMedication? medication = await _appRouter.push(AddStoredMedicationRoute(
-      medicationType: state.medicationType,
+      medication: state.medication,
     ));
 
     if (medication != null) {

@@ -1,9 +1,9 @@
 import '../../core.dart';
 
-abstract class MedicationTypeNameValidator {
+abstract class MedicationNameValidator {
   static String? validateName(String? name) {
     if (name == null || name.isEmpty) {
-      return LocaleKeys.validation_common_notEmpty;
+      return LocaleKeys.common_validation_notEmpty;
     }
 
     return null;

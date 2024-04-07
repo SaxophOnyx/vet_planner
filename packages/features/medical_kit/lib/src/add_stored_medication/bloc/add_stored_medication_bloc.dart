@@ -12,11 +12,11 @@ class AddStoredMedicationBloc extends Bloc<AddStoredMedicationEvent, AddStoredMe
 
   AddStoredMedicationBloc({
     required AppRouter appRouter,
-    required MedicationType medicationType,
+    required Medication medicationType,
     required AddStoredMedicationUseCase addStoredMedicationUseCase,
   })  : _appRouter = appRouter,
         _addStoredMedicationUseCase = addStoredMedicationUseCase,
-        super(AddStoredMedicationState.initial(medicationType: medicationType)) {
+        super(AddStoredMedicationState.initial(medication: medicationType)) {
     on<UpdateExpirationDate>(_onUpdateExpirationDate);
     on<SubmitInput>(_onSubmitInput);
   }
@@ -34,7 +34,7 @@ class AddStoredMedicationBloc extends Bloc<AddStoredMedicationEvent, AddStoredMe
     final String? expirationDateError = StoredMedicationValidator.validateExpirationDate(expirationDate);
 
     emit(AddStoredMedicationState(
-      medicationType: state.medicationType,
+      medication: state.medication,
       expirationDate: expirationDate,
       expirationDateError: expirationDateError,
     ));
@@ -42,7 +42,7 @@ class AddStoredMedicationBloc extends Bloc<AddStoredMedicationEvent, AddStoredMe
     if (!state.hasError) {
       try {
         final StoredMedication medication = await _addStoredMedicationUseCase.execute(AddStoredMedicationPayload(
-          medicationTypeId: state.medicationType.id,
+          medicationId: state.medication.id,
           expirationDate: expirationDate!,
         ));
 

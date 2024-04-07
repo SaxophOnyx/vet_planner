@@ -32,14 +32,14 @@ class MedicalKitContent extends StatelessWidget {
             }
 
             return MedicationList(
-              medicationTypes: state.medicationTypes,
-              onViewStoredMedicationsPressed: (int index) => bloc.add(ViewStoredMedicationsForType(index)),
+              medication: state.medications,
+              onViewStoredMedicationsPressed: (int index) => bloc.add(ViewStoredMedications(index)),
             );
           },
         ),
       ),
       floatingActionButton: AppFloatingButton(
-        onPressed: () => bloc.add(const AddMedicationType()),
+        onPressed: () => bloc.add(const AddMedication()),
       ),
     );
   }

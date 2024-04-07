@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'medication_entry_child.dart';
 
 class MedicationEntry extends StatelessWidget {
-  final MedicationType medicationType;
+  final Medication medication;
   final void Function() onViewStoredMedicationsPressed;
 
   const MedicationEntry({
     super.key,
-    required this.medicationType,
+    required this.medication,
     required this.onViewStoredMedicationsPressed,
   });
 
@@ -47,7 +47,7 @@ class MedicationEntry extends StatelessWidget {
           const SizedBox(height: AppDimens.DEFAULT_CONTAINER_PADDING),
         ],
         title: Text(
-          medicationType.name,
+          medication.name,
           style: AppFonts.inter16SemiBold.copyWith(
             color: colors.text,
           ),

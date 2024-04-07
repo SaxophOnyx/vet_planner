@@ -39,7 +39,7 @@ class AppRouter extends _$AppRouter {
 
         // Medical Kit
         CustomRoute(
-          page: AddMedicationTypeRoute.page,
+          page: AddMedicationRoute.page,
           customRouteBuilder: RouteBuilder.screen,
         ),
         CustomRoute(
