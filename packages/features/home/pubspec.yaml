@@ -18,6 +18,8 @@ dependencies:
     path: ../medical_kit
   prescriptions:
     path: ../prescriptions
+  settings:
+    path: ../settings
 
 dev_dependencies:
   lints: ^2.0.0

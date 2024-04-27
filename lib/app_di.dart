@@ -6,6 +6,7 @@ import 'package:navigation/navigation.dart';
 
 Future<void> setupAppDI() async {
   await _setupNavigation();
+  await _setupProviders();
   await _setupRepositories();
   await _setupUseCases();
 }
@@ -15,6 +16,18 @@ Future<void> _setupNavigation() async {
 
   appDI.registerSingleton<AppRouter>(
     AppRouter(navigatorKey: navigatorKey),
+  );
+}
+
+Future<void> _setupProviders() async {
+  appDI.registerSingleton<AppDatabase>(
+    AppDatabase(),
+  );
+
+  appDI.registerSingleton<TestModelProvider>(
+    TestModelProvider(
+      appDatabase: appDI.get<AppDatabase>(),
+    ),
   );
 }
 
@@ -37,8 +50,8 @@ Future<void> _setupUseCases() async {
     ),
   );
 
-  appDI.registerSingleton<GetStoredMedicationsForMedicationUseCase>(
-    GetStoredMedicationsForMedicationUseCase(
+  appDI.registerSingleton<GetStoredMedicationsUseCase>(
+    GetStoredMedicationsUseCase(
       medicationRepository: appDI.get<MedicationRepository>(),
     ),
   );

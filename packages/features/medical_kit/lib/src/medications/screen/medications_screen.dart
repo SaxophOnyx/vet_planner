@@ -4,22 +4,23 @@ import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 
-import '../bloc/medical_kit_bloc.dart';
-import 'medical_kit_content.dart';
+import '../bloc/medications_bloc.dart';
+import 'medications_content.dart';
 
 @RoutePage()
-class MedicalKitScreen extends StatelessWidget {
-  const MedicalKitScreen({super.key});
+class MedicationsScreen extends StatelessWidget {
+  const MedicationsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MedicalKitBloc>(
+    return BlocProvider<MedicationsBloc>(
       lazy: false,
-      create: (_) => MedicalKitBloc(
+      create: (_) => MedicationsBloc(
         appRouter: appDI.get<AppRouter>(),
         getMedicationsUseCase: appDI.get<GetMedicationsUseCase>(),
+        getStoredMedicationsUseCase: appDI.get<GetStoredMedicationsUseCase>(),
       )..add(const Initialize()),
-      child: const MedicalKitContent(),
+      child: const MedicationsContent(),
     );
   }
 }

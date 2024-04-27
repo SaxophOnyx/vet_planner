@@ -22,7 +22,7 @@ class StoredMedicationsScreen extends StatelessWidget {
       lazy: false,
       create: (_) => StoredMedicationsBloc(
         appRouter: appDI.get<AppRouter>(),
-        getStoredMedicationsForMedicationUseCase: appDI.get<GetStoredMedicationsForMedicationUseCase>(),
+        getStoredMedicationsForMedicationUseCase: appDI.get<GetStoredMedicationsUseCase>(),
         medication: medication,
       )..add(const Initialize()),
       child: const StoredMedicationsContent(),

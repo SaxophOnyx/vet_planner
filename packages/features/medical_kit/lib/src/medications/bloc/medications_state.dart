@@ -1,25 +1,25 @@
-part of 'medical_kit_bloc.dart';
+part of 'medications_bloc.dart';
 
-class MedicalKitState {
+class MedicationsState {
   final Loading loading;
-  final List<Medication> medications;
+  final List<MedicationEntry> medications;
 
   bool get isLoading => loading == Loading.inProgress;
 
-  const MedicalKitState.initial()
+  const MedicationsState.initial()
       : loading = Loading.inProgress,
-        medications = const <Medication>[];
+        medications = const <MedicationEntry>[];
 
-  const MedicalKitState({
+  const MedicationsState({
     required this.loading,
     required this.medications,
   });
 
-  MedicalKitState copyWith({
+  MedicationsState copyWith({
     Loading? loading,
-    List<Medication>? medications,
+    List<MedicationEntry>? medications,
   }) {
-    return MedicalKitState(
+    return MedicationsState(
       loading: loading ?? this.loading,
       medications: medications ?? this.medications,
     );

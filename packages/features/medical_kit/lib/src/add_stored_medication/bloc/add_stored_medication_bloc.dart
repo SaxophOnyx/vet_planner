@@ -18,13 +18,33 @@ class AddStoredMedicationBloc extends Bloc<AddStoredMedicationEvent, AddStoredMe
         _addStoredMedicationUseCase = addStoredMedicationUseCase,
         super(AddStoredMedicationState.initial(medication: medicationType)) {
     on<UpdateExpirationDate>(_onUpdateExpirationDate);
+    on<UpdateQuantity>(_onUpdateQuantity);
     on<SubmitInput>(_onSubmitInput);
   }
 
   void _onUpdateExpirationDate(
     UpdateExpirationDate event,
     Emitter<AddStoredMedicationState> emit,
-  ) {}
+  ) {
+    emit(
+      state.copyWithExpirationDate(
+        expirationDate: DateTime.tryParse(event.date),
+        expirationDateError: null,
+      ),
+    );
+  }
+
+  void _onUpdateQuantity(
+    UpdateQuantity event,
+    Emitter<AddStoredMedicationState> emit,
+  ) {
+    emit(
+      state.copyWithQuantity(
+        quantity: int.tryParse(event.quantity),
+        quantityError: null,
+      ),
+    );
+  }
 
   Future<void> _onSubmitInput(
     SubmitInput event,
@@ -33,17 +53,20 @@ class AddStoredMedicationBloc extends Bloc<AddStoredMedicationEvent, AddStoredMe
     final DateTime? expirationDate = state.expirationDate;
     final String? expirationDateError = StoredMedicationValidator.validateExpirationDate(expirationDate);
 
-    emit(AddStoredMedicationState(
-      medication: state.medication,
-      expirationDate: expirationDate,
+    final int? quantity = state.quantity;
+    final String? quantityError = quantity == null ? LocaleKeys.common_validation_notEmpty.translate() : null;
+
+    emit(state.copyWithErrors(
       expirationDateError: expirationDateError,
+      quantityError: quantityError,
     ));
 
-    if (!state.hasError) {
+    if (!state.hasErrors) {
       try {
         final StoredMedication medication = await _addStoredMedicationUseCase.execute(AddStoredMedicationPayload(
           medicationId: state.medication.id,
           expirationDate: expirationDate!,
+          quantity: quantity!,
         ));
 
         await _appRouter.maybePop<StoredMedication>(medication);

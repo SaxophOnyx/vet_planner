@@ -10,11 +10,11 @@ part 'stored_medications_state.dart';
 
 class StoredMedicationsBloc extends Bloc<StoredMedicationsEvent, StoredMedicationsState> {
   final AppRouter _appRouter;
-  final GetStoredMedicationsForMedicationUseCase _getStoredMedicationsForMedicationUseCase;
+  final GetStoredMedicationsUseCase _getStoredMedicationsForMedicationUseCase;
 
   StoredMedicationsBloc({
     required AppRouter appRouter,
-    required GetStoredMedicationsForMedicationUseCase getStoredMedicationsForMedicationUseCase,
+    required GetStoredMedicationsUseCase getStoredMedicationsForMedicationUseCase,
     required Medication medication,
   })  : _appRouter = appRouter,
         _getStoredMedicationsForMedicationUseCase = getStoredMedicationsForMedicationUseCase,
@@ -28,12 +28,14 @@ class StoredMedicationsBloc extends Bloc<StoredMedicationsEvent, StoredMedicatio
     Emitter<StoredMedicationsState> emit,
   ) async {
     try {
-      final List<StoredMedication> storedMedications = await _getStoredMedicationsForMedicationUseCase.execute(
-        state.medication.id,
+      final List<List<StoredMedication>> storedMedications = await _getStoredMedicationsForMedicationUseCase.execute(
+        GetStoredMedicationsPayload(
+          medicationIds: <int>[state.medication.id],
+        ),
       );
 
       emit(state.copyWith(
-        storedMedications: storedMedications,
+        storedMedications: storedMedications.first,
         loading: Loading.completed,
       ));
     } catch (_) {

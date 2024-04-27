@@ -5,9 +5,15 @@ abstract class AddStoredMedicationEvent {
 }
 
 class UpdateExpirationDate extends AddStoredMedicationEvent {
-  final String rawDate;
+  final String date;
 
-  const UpdateExpirationDate(this.rawDate);
+  const UpdateExpirationDate(this.date);
+}
+
+class UpdateQuantity extends AddStoredMedicationEvent {
+  final String quantity;
+
+  const UpdateQuantity(this.quantity);
 }
 
 class SubmitInput extends AddStoredMedicationEvent {

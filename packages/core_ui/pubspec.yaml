@@ -12,6 +12,7 @@ dependencies:
 
   flutter_bloc: ^8.1.4
   dropdown_button2: ^2.3.9
+  carousel_slider: ^4.2.1
 
 dev_dependencies:
   lints: ^2.0.0

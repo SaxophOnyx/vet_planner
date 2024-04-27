@@ -8,7 +8,7 @@ abstract class AppButtonStyleMapper {
       case AppButtonStyle.primary:
         return colors.primary;
       case AppButtonStyle.secondary:
-        return colors.backgroundSecondary;
+        return colors.container;
     }
   }
 
@@ -17,7 +17,7 @@ abstract class AppButtonStyleMapper {
       case AppButtonStyle.primary:
         return colors.onPrimary;
       case AppButtonStyle.secondary:
-        return colors.text;
+        return colors.textSecondary;
     }
   }
 

@@ -5,7 +5,7 @@ abstract class AppColors extends ThemeExtension<AppColors> {
 
   Color get background;
 
-  Color get backgroundSecondary;
+  Color get container;
 
   Color get primary;
 

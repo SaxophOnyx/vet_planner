@@ -21,6 +21,8 @@ dependencies:
     path: ../features/medical_kit
   prescriptions:
     path: ../features/prescriptions
+  settings:
+    path: ../features/settings
 
 dev_dependencies:
   auto_route_generator: ^7.3.2

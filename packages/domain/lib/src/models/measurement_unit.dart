@@ -1,0 +1,4 @@
+enum MeasurementUnit {
+  piece,
+  milliliter,
+}

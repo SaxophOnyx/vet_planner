@@ -10,6 +10,18 @@ class UpdateMedicationName extends AddMedicationEvent {
   const UpdateMedicationName(this.name);
 }
 
+class UpdateMedicationType extends AddMedicationEvent {
+  final MedicationType type;
+
+  const UpdateMedicationType(this.type);
+}
+
+class UpdateMedicationConcentration extends AddMedicationEvent {
+  final String concentration;
+
+  const UpdateMedicationConcentration(this.concentration);
+}
+
 class SubmitInput extends AddMedicationEvent {
   const SubmitInput();
 }

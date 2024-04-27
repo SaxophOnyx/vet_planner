@@ -17,6 +17,8 @@ class AddMedicationBloc extends Bloc<AddMedicationEvent, AddMedicationState> {
         _addMedicationUseCase = addMedicationUseCase,
         super(const AddMedicationState.initial()) {
     on<UpdateMedicationName>(_onUpdateMedicationName);
+    on<UpdateMedicationType>(_onUpdateMedicationType);
+    on<UpdateMedicationConcentration>(_onUpdateMedicationConcentration);
     on<SubmitInput>(_onSubmitInput);
   }
 
@@ -30,6 +32,29 @@ class AddMedicationBloc extends Bloc<AddMedicationEvent, AddMedicationState> {
     ));
   }
 
+  void _onUpdateMedicationType(
+    UpdateMedicationType event,
+    Emitter<AddMedicationState> emit,
+  ) {
+    emit(
+      state.copyWithType(
+        type: event.type,
+      ),
+    );
+  }
+
+  void _onUpdateMedicationConcentration(
+    UpdateMedicationConcentration event,
+    Emitter<AddMedicationState> emit,
+  ) {
+    emit(
+      state.copyWithConcentration(
+        concentration: event.concentration,
+        concentrationError: null,
+      ),
+    );
+  }
+
   Future<void> _onSubmitInput(
     SubmitInput event,
     Emitter<AddMedicationState> emit,
@@ -37,14 +62,24 @@ class AddMedicationBloc extends Bloc<AddMedicationEvent, AddMedicationState> {
     final String name = state.name;
     final String? nameError = MedicationNameValidator.validateName(name);
 
-    emit(state.copyWithName(
-      name: name,
+    final MedicationType type = state.type;
+
+    final int? concentration = int.tryParse(state.concentration);
+    final String? concentrationError = concentration == null ? LocaleKeys.common_validation_notEmpty.translate() : null;
+
+    emit(state.copyWithErrors(
       nameError: nameError,
+      concentrationError: concentrationError,
     ));
 
     if (!state.hasErrors) {
       try {
-        final AddMedicationPayload payload = AddMedicationPayload(name: name);
+        final AddMedicationPayload payload = AddMedicationPayload(
+          type: type,
+          name: name,
+          concentrationPerUnit: concentration!,
+        );
+
         final Medication medicationType = await _addMedicationUseCase.execute(payload);
         await _appRouter.maybePop<Medication>(medicationType);
       } catch (_) {

@@ -3,10 +3,12 @@ import '../../../domain.dart';
 class AddStoredMedicationPayload {
   final int medicationId;
   final DateTime expirationDate;
+  final int quantity;
 
   const AddStoredMedicationPayload({
     required this.medicationId,
     required this.expirationDate,
+    required this.quantity,
   });
 }
 
@@ -22,6 +24,7 @@ class AddStoredMedicationUseCase extends FutureUseCase<AddStoredMedicationPayloa
     return _medicationRepository.addStoredMedication(
       medicationId: payload.medicationId,
       expirationDate: payload.expirationDate,
+      quantity: payload.quantity,
     );
   }
 }

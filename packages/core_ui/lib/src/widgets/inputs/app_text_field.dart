@@ -44,9 +44,10 @@ class AppTextField extends StatelessWidget {
             filled: true,
             isDense: true,
             errorText: hasError ? ' ' : null,
+            contentPadding: const EdgeInsets.all(AppDimens.DEFAULT_CONTAINER_PADDING),
             errorStyle: AppFonts.inter16Regular.copyWith(fontSize: 0),
             helperStyle: AppFonts.inter16Regular,
-            fillColor: colors.backgroundSecondary,
+            fillColor: colors.container,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppDimens.DEFAULT_BORDER_RADIUS),
               borderSide: BorderSide(
@@ -85,13 +86,18 @@ class AppTextField extends StatelessWidget {
             suffixIcon: suffixIcon,
           ),
         ),
-        const SizedBox(height: AppDimens.DEFAULT_LABEL_GAP),
-        Text(
-          error ?? '',
-          style: AppFonts.inter16Regular.copyWith(
-            color: colors.error,
+        if (hasError)
+          Padding(
+            padding: const EdgeInsets.only(
+              top: AppDimens.DEFAULT_LABEL_GAP,
+            ),
+            child: Text(
+              error ?? '',
+              style: AppFonts.inter16Regular.copyWith(
+                color: colors.error,
+              ),
+            ),
           ),
-        ),
       ],
     );
   }

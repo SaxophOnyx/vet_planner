@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:navigation/navigation.dart';
 
 class VetPlannerApp extends StatelessWidget {
@@ -22,6 +23,16 @@ class VetPlannerApp extends StatelessWidget {
               const DefaultColors(),
             ],
           ),
+          builder: (BuildContext context, Widget? child) {
+            final AppColors colors = context.appColors;
+
+            return AnnotatedRegion<SystemUiOverlayStyle>(
+              value: SystemUiOverlayStyle(
+                systemNavigationBarColor: colors.container,
+              ),
+              child: child ?? const SizedBox(),
+            );
+          },
         );
       },
     );

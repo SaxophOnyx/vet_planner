@@ -13,18 +13,27 @@ class AddStoredMedicationContent extends StatefulWidget {
 
 class _AddStoredMedicationContentState extends State<AddStoredMedicationContent> {
   final TextEditingController _expirationDateController = TextEditingController();
+  final TextEditingController _quantityController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
 
     final AddStoredMedicationBloc bloc = context.read<AddStoredMedicationBloc>();
-    _expirationDateController.addListener(() => bloc.add(UpdateExpirationDate(_expirationDateController.text)));
+
+    _expirationDateController.addListener(
+      () => bloc.add(UpdateExpirationDate(_expirationDateController.text)),
+    );
+
+    _quantityController.addListener(
+      () => bloc.add(UpdateQuantity(_quantityController.text)),
+    );
   }
 
   @override
   void dispose() {
     _expirationDateController.dispose();
+    _quantityController.dispose();
     super.dispose();
   }
 
@@ -40,24 +49,30 @@ class _AddStoredMedicationContentState extends State<AddStoredMedicationContent>
       backgroundColor: colors.background,
       body: Padding(
         padding: const EdgeInsets.all(AppDimens.DEFAULT_PAGE_PADDING),
-        child: Column(
-          children: <Widget>[
-            BlocBuilder<AddStoredMedicationBloc, AddStoredMedicationState>(
-              builder: (BuildContext context, AddStoredMedicationState state) {
-                return AppDateTextField(
+        child: BlocBuilder<AddStoredMedicationBloc, AddStoredMedicationState>(
+          builder: (BuildContext context, AddStoredMedicationState state) {
+            return Column(
+              children: <Widget>[
+                AppDateTextField(
                   label: 'Placeholder',
                   textEditingController: _expirationDateController,
                   error: state.expirationDateError?.translate(),
-                );
-              },
-            ),
-            const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
-            const Spacer(),
-            AppButton(
-              text: 'Title',
-              onPressed: () => bloc.add(const SubmitInput()),
-            ),
-          ],
+                ),
+                const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
+                AppTextField(
+                  label: 'Quantity',
+                  textEditingController: _quantityController,
+                  error: state.quantityError?.translate(),
+                ),
+                const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
+                const Spacer(),
+                AppButton(
+                  text: 'Submit',
+                  onPressed: () => bloc.add(const SubmitInput()),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );

@@ -15,7 +15,7 @@ import 'package:medical_kit/src/add_medication/screen/add_medication_screen.dart
     as _i1;
 import 'package:medical_kit/src/add_stored_medication/screen/add_stored_medication_screen.dart'
     as _i2;
-import 'package:medical_kit/src/medical_kit/screen/medical_kit_screen.dart'
+import 'package:medical_kit/src/medications/screen/medications_screen.dart'
     as _i3;
 import 'package:medical_kit/src/stored_medications/screen/stored_medications_screen.dart'
     as _i4;
@@ -39,10 +39,10 @@ abstract class $MedicalKitModule extends _i5.AutoRouterModule {
         ),
       );
     },
-    MedicalKitRoute.name: (routeData) {
+    MedicationsRoute.name: (routeData) {
       return _i5.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.MedicalKitScreen(),
+        child: const _i3.MedicationsScreen(),
       );
     },
     StoredMedicationsRoute.name: (routeData) {
@@ -112,15 +112,15 @@ class AddStoredMedicationRouteArgs {
 }
 
 /// generated route for
-/// [_i3.MedicalKitScreen]
-class MedicalKitRoute extends _i5.PageRouteInfo<void> {
-  const MedicalKitRoute({List<_i5.PageRouteInfo>? children})
+/// [_i3.MedicationsScreen]
+class MedicationsRoute extends _i5.PageRouteInfo<void> {
+  const MedicationsRoute({List<_i5.PageRouteInfo>? children})
       : super(
-          MedicalKitRoute.name,
+          MedicationsRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'MedicalKitRoute';
+  static const String name = 'MedicationsRoute';
 
   static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
 }

@@ -16,7 +16,7 @@ class StoredMedicationList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScrollConfiguration(
       behavior: const NoGlowScrollBehavior(),
-      child: ListView.builder(
+      child: ListView.separated(
         physics: const ClampingScrollPhysics(),
         itemCount: medications.length,
         itemBuilder: (BuildContext context, int index) {
@@ -24,6 +24,7 @@ class StoredMedicationList extends StatelessWidget {
             medication: medications[index],
           );
         },
+        separatorBuilder: (_, __) => const SizedBox(height: AppDimens.DEFAULT_LIST_ITEM_GAP),
       ),
     );
   }
