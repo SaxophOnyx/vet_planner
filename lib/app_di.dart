@@ -24,8 +24,14 @@ Future<void> _setupProviders() async {
     AppDatabase(),
   );
 
-  appDI.registerSingleton<TestModelProvider>(
-    TestModelProvider(
+  appDI.registerSingleton<MedicationProvider>(
+    MedicationProvider(
+      appDatabase: appDI.get<AppDatabase>(),
+    ),
+  );
+
+  appDI.registerSingleton<StoredMedicationProvider>(
+    StoredMedicationProvider(
       appDatabase: appDI.get<AppDatabase>(),
     ),
   );
@@ -33,7 +39,10 @@ Future<void> _setupProviders() async {
 
 Future<void> _setupRepositories() async {
   appDI.registerSingleton<MedicationRepository>(
-    InMemoryMedicationRepository(),
+    MedicationRepositoryImpl(
+      medicationProvider: appDI.get<MedicationProvider>(),
+      storedMedicationProvider: appDI.get<StoredMedicationProvider>(),
+    ),
   );
 }
 

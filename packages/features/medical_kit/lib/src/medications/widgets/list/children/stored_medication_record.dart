@@ -21,7 +21,7 @@ class StoredMedicationRecord extends StatelessWidget {
         border: Border(
           left: BorderSide(
             color: colors.textSecondary,
-            width: 3,
+            width: AppDimens.DEFAULT_BORDER_THICKNESS_LARGE,
           ),
         ),
       ),
@@ -32,7 +32,7 @@ class StoredMedicationRecord extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
-              medication.id.toString(),
+              medication.manualTitle ?? medication.id.toString(),
               style: AppFonts.inter16SemiBold.copyWith(
                 color: colors.text,
               ),

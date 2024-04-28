@@ -6,6 +6,7 @@ abstract class AppDimens {
   static const double DEFAULT_PAGE_PADDING = 20;
   static const double DEFAULT_CONTAINER_PADDING = 12;
   static const double DEFAULT_BORDER_THICKNESS = 1;
+  static const double DEFAULT_BORDER_THICKNESS_LARGE = 3;
   static const double DEFAULT_LOADER_THICKNESS = 3;
   static const double DEFAULT_LABEL_GAP = 4;
   static const Duration DEFAULT_ANIMATION_DURATION = Duration(milliseconds: 300);

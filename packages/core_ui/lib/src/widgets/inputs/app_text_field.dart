@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../core_ui.dart';
 
 class AppTextField extends StatelessWidget {
   final String label;
   final TextEditingController textEditingController;
+  final List<TextInputFormatter>? formatters;
   final String? error;
   final Widget? suffixIcon;
 
@@ -12,6 +14,7 @@ class AppTextField extends StatelessWidget {
     super.key,
     required this.label,
     required this.textEditingController,
+    this.formatters,
     this.error,
     this.suffixIcon,
   });
@@ -40,6 +43,7 @@ class AppTextField extends StatelessWidget {
           style: AppFonts.inter16Regular.copyWith(
             color: colors.text,
           ),
+          inputFormatters: formatters,
           decoration: InputDecoration(
             filled: true,
             isDense: true,

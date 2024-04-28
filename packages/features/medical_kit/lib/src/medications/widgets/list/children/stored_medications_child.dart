@@ -30,9 +30,9 @@ class StoredMedicationsChild extends StatelessWidget {
                 medication: storedMedications[index],
               );
             },
-            separatorBuilder: (_, __) => const SizedBox(height: AppDimens.DEFAULT_LIST_ITEM_GAP),
+            separatorBuilder: (_, __) => const SizedBox(height: AppDimens.DEFAULT_CONTAINER_PADDING),
           ),
-          const SizedBox(height: AppDimens.DEFAULT_CONTAINER_PADDING),
+          const SizedBox(height: AppDimens.DEFAULT_CONTAINER_PADDING * 2),
           AppButton(
             text: 'Manage stored',
             onPressed: onManageStoredMedicationsPressed,

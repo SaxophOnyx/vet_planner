@@ -32,8 +32,7 @@ class StoredMedicationEntry extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           QuantityText(
-            initial: medication.initialQuantity,
-            remaining: medication.remainingQuantity,
+            free: medication.freeQuantity,
             reserved: medication.reservedQuantity,
           ),
           const SizedBox(height: AppDimens.DEFAULT_LABEL_GAP),
@@ -47,7 +46,7 @@ class StoredMedicationEntry extends StatelessWidget {
       ),
       isThreeLine: true,
       leading: Icon(
-        Icons.padding,
+        Icons.warehouse,
         size: AppDimens.DEFAULT_LARGE_ICON_SIZE,
         color: colors.text,
       ),

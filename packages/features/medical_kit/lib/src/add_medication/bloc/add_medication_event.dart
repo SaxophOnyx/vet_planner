@@ -17,7 +17,7 @@ class UpdateMedicationType extends AddMedicationEvent {
 }
 
 class UpdateMedicationConcentration extends AddMedicationEvent {
-  final String concentration;
+  final int? concentration;
 
   const UpdateMedicationConcentration(this.concentration);
 }

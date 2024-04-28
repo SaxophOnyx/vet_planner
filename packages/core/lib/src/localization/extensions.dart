@@ -12,8 +12,17 @@ extension LocalizationExtensions on BuildContext {
 extension TranslationExtensions on String {
   String translate({
     Map<String, String>? namedArgs,
-    BuildContext? context,
   }) {
+    return this.tr(
+      namedArgs: namedArgs,
+    );
+  }
+
+  String observeTranslation(
+    BuildContext context, {
+    Map<String, String>? namedArgs,
+  }) {
+    context.locale;
     return this.tr(
       namedArgs: namedArgs,
       context: context,

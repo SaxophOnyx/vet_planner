@@ -14,6 +14,7 @@ class MedicationsBloc extends Bloc<MedicationsEvent, MedicationsState> {
   final GetMedicationsUseCase _getMedicationsUseCase;
   final GetStoredMedicationsUseCase _getStoredMedicationsUseCase;
 
+  // TODO(SaxophOnyx): Implement observe
   MedicationsBloc({
     required AppRouter appRouter,
     required GetMedicationsUseCase getMedicationsUseCase,

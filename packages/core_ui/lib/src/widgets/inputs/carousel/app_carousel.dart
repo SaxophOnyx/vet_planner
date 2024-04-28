@@ -50,7 +50,7 @@ class AppCarousel<T> extends StatelessWidget {
                   .toList(),
               options: CarouselOptions(
                 height: AppDimens.DEFAULT_INPUT_HEIGHT,
-                viewportFraction: 0.65,
+                viewportFraction: 0.5,
                 scrollPhysics: const ClampingScrollPhysics(),
                 onPageChanged: (int index, CarouselPageChangedReason reason) {
                   if (reason == CarouselPageChangedReason.manual) {

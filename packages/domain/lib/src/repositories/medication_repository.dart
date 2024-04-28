@@ -18,5 +18,6 @@ abstract class MedicationRepository {
     required int medicationId,
     required DateTime expirationDate,
     required int quantity,
+    String? manualTitle,
   });
 }

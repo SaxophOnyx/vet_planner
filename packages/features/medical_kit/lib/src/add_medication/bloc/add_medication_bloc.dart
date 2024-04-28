@@ -64,7 +64,7 @@ class AddMedicationBloc extends Bloc<AddMedicationEvent, AddMedicationState> {
 
     final MedicationType type = state.type;
 
-    final int? concentration = int.tryParse(state.concentration);
+    final int? concentration = state.concentration;
     final String? concentrationError = concentration == null ? LocaleKeys.common_validation_notEmpty.translate() : null;
 
     emit(state.copyWithErrors(

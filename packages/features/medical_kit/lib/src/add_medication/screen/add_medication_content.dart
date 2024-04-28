@@ -2,6 +2,7 @@ import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../bloc/add_medication_bloc.dart';
 
@@ -27,7 +28,7 @@ class _AddMedicationContentState extends State<AddMedicationContent> {
     );
 
     _concentrationController.addListener(
-      () => bloc.add(UpdateMedicationConcentration(_concentrationController.text)),
+      () => bloc.add(UpdateMedicationConcentration(int.tryParse(_concentrationController.text))),
     );
   }
 
@@ -55,13 +56,13 @@ class _AddMedicationContentState extends State<AddMedicationContent> {
             return Column(
               children: <Widget>[
                 AppTextField(
-                  label: 'Medication name',
+                  label: 'Name',
                   textEditingController: _nameController,
                   error: state.nameError?.translate(),
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 AppCarousel<MedicationType>(
-                  label: 'Medication type',
+                  label: 'Type',
                   value: MedicationType.ampoule,
                   values: MedicationType.values,
                   onValueChanged: (MedicationType value) => bloc.add(
@@ -71,9 +72,12 @@ class _AddMedicationContentState extends State<AddMedicationContent> {
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 AppTextField(
-                  label: 'Medication concentration',
+                  label: 'Concentration',
                   textEditingController: _concentrationController,
-                  error: state.concentrationError?.translate(),
+                  formatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly,
+                  ],
+                  error: state.concentrationError,
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 const Spacer(),

@@ -6,7 +6,7 @@ class AddMedicationState {
 
   final MedicationType type;
 
-  final String concentration;
+  final int? concentration;
   final String? concentrationError;
 
   bool get hasErrors => !compareAllTo(<String?>[
@@ -18,7 +18,7 @@ class AddMedicationState {
       : name = '',
         nameError = null,
         type = MedicationType.ampoule,
-        concentration = '',
+        concentration = null,
         concentrationError = null;
 
   const AddMedicationState({
@@ -55,7 +55,7 @@ class AddMedicationState {
   }
 
   AddMedicationState copyWithConcentration({
-    required String concentration,
+    required int? concentration,
     required String? concentrationError,
   }) {
     return AddMedicationState(

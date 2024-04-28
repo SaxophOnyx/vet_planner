@@ -4,11 +4,13 @@ class AddStoredMedicationPayload {
   final int medicationId;
   final DateTime expirationDate;
   final int quantity;
+  final String? manualTitle;
 
   const AddStoredMedicationPayload({
     required this.medicationId,
     required this.expirationDate,
     required this.quantity,
+    this.manualTitle,
   });
 }
 
@@ -25,6 +27,7 @@ class AddStoredMedicationUseCase extends FutureUseCase<AddStoredMedicationPayloa
       medicationId: payload.medicationId,
       expirationDate: payload.expirationDate,
       quantity: payload.quantity,
+      manualTitle: payload.manualTitle,
     );
   }
 }

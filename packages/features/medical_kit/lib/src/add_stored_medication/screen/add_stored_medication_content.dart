@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -56,13 +55,13 @@ class _AddStoredMedicationContentState extends State<AddStoredMedicationContent>
                 AppDateTextField(
                   label: 'Placeholder',
                   textEditingController: _expirationDateController,
-                  error: state.expirationDateError?.translate(),
+                  error: state.expirationDateError,
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 AppTextField(
                   label: 'Quantity',
                   textEditingController: _quantityController,
-                  error: state.quantityError?.translate(),
+                  error: state.quantityError,
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 const Spacer(),
