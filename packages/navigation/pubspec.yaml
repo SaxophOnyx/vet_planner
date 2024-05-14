@@ -21,6 +21,8 @@ dependencies:
     path: ../features/medical_kit
   prescriptions:
     path: ../features/prescriptions
+  add_prescription:
+    path: ../features/add_prescription
   settings:
     path: ../features/settings
 

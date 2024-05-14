@@ -1,0 +1,4 @@
+enum PrescriptionEntryType {
+  fixed,
+  periodic,
+}

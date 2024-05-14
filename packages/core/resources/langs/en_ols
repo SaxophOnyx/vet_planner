@@ -1,0 +1,52 @@
+{
+  "common":{
+    "validation": {
+      "notEmpty": "This field must not be empty",
+      "notExceed": "Length of this field must not exceed {max} character(s)",
+      "incorrectDate": "This date is incorrect"
+    },
+    "medicationType": {
+      "tablet": "Tablet",
+      "vial": "Vial",
+      "ampoule": "Ampoule"
+    },
+    "measurementUnit": {
+      "piece": "mg/piece",
+      "ml": "mg/ml"
+    }
+  },
+  "home": {
+    "navbar": {
+      "prescriptions": "Prescriptions",
+      "medKit": "Medical kit",
+      "settings": "Settings"
+    }
+  },
+  "medKit": {
+    "medications": {
+      "title": "Medical kit",
+      "noMedications": "There is nothing here yet",
+      "actions": {
+        "add": "Add stored",
+        "manage": "Manage stored"
+      }
+    },
+    "addMedication": {
+      "title": "Add medication",
+      "labels": {
+        "name": "Name",
+        "type": "Type",
+        "concentration": "Concentration"
+      },
+      "actions": {
+        "add": "Add medication"
+      }
+    },
+    "stored": {
+      "title": "Stored medications"
+    },
+    "addStored": {
+      "title": "Add new batch of {name}"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-extension MapIndexedExtension<T> on List<T> {
+extension AppListExtension<T> on List<T> {
   List<E> mapIndexed<E>(E Function(T item, int index) transform) {
     final List<E> result = <E>[];
 
@@ -12,7 +12,17 @@ extension MapIndexedExtension<T> on List<T> {
   }
 }
 
-extension DateTimeExtension on DateTime {
+extension AppSetExtension<T> on Set<T> {
+  Set<T> withRemovedOrAdded(T item) {
+    if (contains(item)) {
+      return Set<T>.from(this)..remove(item);
+    } else {
+      return Set<T>.from(this)..add(item);
+    }
+  }
+}
+
+extension AppDateTimeExtension on DateTime {
   bool get isWeekend => weekday == DateTime.saturday || weekday == DateTime.sunday;
 
   bool inRange(DateTime a, DateTime b) {

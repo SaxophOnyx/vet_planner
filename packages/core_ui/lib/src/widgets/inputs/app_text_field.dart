@@ -7,16 +7,20 @@ class AppTextField extends StatelessWidget {
   final String label;
   final TextEditingController textEditingController;
   final List<TextInputFormatter>? formatters;
+  final TextInputType? inputType;
   final String? error;
   final Widget? suffixIcon;
+  final bool isMultiline;
 
   const AppTextField({
     super.key,
     required this.label,
     required this.textEditingController,
     this.formatters,
+    this.inputType,
     this.error,
     this.suffixIcon,
+    this.isMultiline = false,
   });
 
   @override
@@ -36,6 +40,9 @@ class AppTextField extends StatelessWidget {
         ),
         const SizedBox(height: AppDimens.DEFAULT_LABEL_GAP),
         TextField(
+          keyboardType: inputType,
+          minLines: isMultiline ? 4 : null,
+          maxLines: isMultiline ? 4 : 1,
           controller: textEditingController,
           cursorColor: colors.primary,
           cursorErrorColor: colors.error,

@@ -1,6 +1,5 @@
-import 'dart:ui';
-
 import 'package:core_ui/core_ui.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // TODO(SaxophOnyx): Use constants
@@ -23,7 +22,7 @@ abstract class ExpirationDateMapper {
   }
 
   // TODO(SaxophOnyx): Use locale
-  static String getText({required Duration remaining}) {
+  static String getText({required Duration remaining, required BuildContext context}) {
     final int inDays = remaining.inDays;
 
     if (inDays.isNegative) {

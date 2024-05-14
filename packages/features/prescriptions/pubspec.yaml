@@ -18,6 +18,8 @@ dependencies:
     path: ../../domain
   navigation:
     path: ../../navigation
+  add_prescription:
+    path: ../add_prescription
 
   calendar_date_picker2: ^0.5.5
   table_calendar: ^3.0.9

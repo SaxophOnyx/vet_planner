@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:medical_kit/medical_kit.dart';
@@ -27,17 +28,17 @@ class HomeScreen extends StatelessWidget {
           backgroundColor: colors.background,
           body: child,
           bottomNavigationBar: AppBottomNavBar(
-            items: const <AppBottomNavBarItem>[
+            items: <AppBottomNavBarItem>[
               AppBottomNavBarItem(
-                text: 'Prescriptions',
-                icon: Icons.timeline,
+                text: LocaleKeys.home_navbar_prescriptions.observeTranslation(context),
+                icon: Icons.event,
               ),
               AppBottomNavBarItem(
-                text: 'Medical kit',
+                text: LocaleKeys.home_navbar_medKit.observeTranslation(context),
                 icon: Icons.medical_services,
               ),
               AppBottomNavBarItem(
-                text: 'Settings',
+                text: LocaleKeys.home_navbar_settings.observeTranslation(context),
                 icon: Icons.settings,
               ),
             ],

@@ -15,6 +15,14 @@ abstract class AppFonts {
     package: kPackageName,
   );
 
+  static const TextStyle inter14SemiBold = TextStyle(
+    fontSize: 14,
+    height: 1.5,
+    fontWeight: _semiBoldWeight,
+    fontFamily: _interFamily,
+    package: kPackageName,
+  );
+
   static const TextStyle inter16Regular = TextStyle(
     fontSize: 16,
     height: 1.5,

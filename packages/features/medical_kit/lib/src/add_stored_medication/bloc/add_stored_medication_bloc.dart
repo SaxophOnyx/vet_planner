@@ -26,10 +26,12 @@ class AddStoredMedicationBloc extends Bloc<AddStoredMedicationEvent, AddStoredMe
     UpdateExpirationDate event,
     Emitter<AddStoredMedicationState> emit,
   ) {
+    final DateTime? date = AppDateUtils.tryParseDate(event.date);
+
     emit(
       state.copyWithExpirationDate(
-        expirationDate: DateTime.tryParse(event.date),
-        expirationDateError: null,
+        expirationDate: date,
+        expirationDateError: date == null ? LocaleKeys.common_validation_incorrectDate.translate() : null,
       ),
     );
   }

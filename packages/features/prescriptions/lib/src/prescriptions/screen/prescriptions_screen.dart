@@ -1,9 +1,8 @@
+import 'package:add_prescription/add_prescription.dart';
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
-
-import '../../../prescriptions.dart';
 
 @RoutePage()
 class PrescriptionsScreen extends StatelessWidget {
@@ -21,7 +20,7 @@ class PrescriptionsScreen extends StatelessWidget {
       backgroundColor: colors.background,
       body: Center(
         child: AppFloatingButton(
-          onPressed: () {
+          onPressed: () async {
             final AppRouter appRouter = appDI.get<AppRouter>();
             appRouter.push(const AddPrescriptionRoute());
           },

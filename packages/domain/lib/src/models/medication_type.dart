@@ -2,25 +2,25 @@ import '../../domain.dart';
 
 enum MedicationType {
   tablet(
-    isDividable: true,
+    isDivisible: true,
     measurementUnit: MeasurementUnit.piece,
   ),
 
   vial(
-    isDividable: true,
+    isDivisible: true,
     measurementUnit: MeasurementUnit.milliliter,
   ),
 
   ampoule(
-    isDividable: false,
+    isDivisible: false,
     measurementUnit: MeasurementUnit.milliliter,
   );
 
-  final bool isDividable;
+  final bool isDivisible;
   final MeasurementUnit measurementUnit;
 
   const MedicationType({
-    required this.isDividable,
+    required this.isDivisible,
     required this.measurementUnit,
   });
 }

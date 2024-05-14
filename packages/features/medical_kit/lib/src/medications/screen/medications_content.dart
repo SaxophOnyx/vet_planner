@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,8 @@ class MedicationsContent extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: LocaleKeys.medKit_medications_title.translate(),
+        // title: LocaleKeys.medKit_medications_title.observeTranslation(context),
+        title: 'TMP',
         style: CustomAppBarStyle.secondary,
       ),
       backgroundColor: colors.background,
@@ -33,7 +33,8 @@ class MedicationsContent extends StatelessWidget {
             if (state.medications.isEmpty) {
               return Center(
                 child: Text(
-                  'There is no medications yet',
+                  // LocaleKeys.medKit_medications_noMedications.observeTranslation(context),
+                  'TMP',
                   textAlign: TextAlign.center,
                   style: AppFonts.inter16SemiBold.copyWith(
                     color: colors.text,

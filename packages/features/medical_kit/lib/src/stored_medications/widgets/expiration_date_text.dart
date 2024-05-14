@@ -21,7 +21,10 @@ class ExpirationDateText extends StatelessWidget {
     final Duration remaining = expiresAt.difference(actualNow);
 
     return Text(
-      ExpirationDateMapper.getText(remaining: remaining),
+      ExpirationDateMapper.getText(
+        remaining: remaining,
+        context: context,
+      ),
       style: AppFonts.inter14Regular.copyWith(
         color: ExpirationDateMapper.getTextColor(
           remaining: remaining,

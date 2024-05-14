@@ -13,6 +13,7 @@ abstract class AppDimens {
   static const Curve DEFAULT_ANIMATION_CURVE = Curves.easeOut;
   static const double DEFAULT_SMALL_ICON_SIZE = 20;
   static const double DEFAULT_LARGE_ICON_SIZE = 40;
+  static const double MIN_BUTTON_AREA_SPACER_HEIGHT = 40;
 
   // Inputs
   static const double DEFAULT_INPUT_HEIGHT = 50;

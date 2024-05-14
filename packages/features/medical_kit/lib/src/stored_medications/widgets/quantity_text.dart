@@ -19,19 +19,19 @@ class QuantityText extends StatelessWidget {
     return RichText(
       text: TextSpan(
         text: '$free free',
-        style: AppFonts.inter14Regular.copyWith(
+        style: AppFonts.inter14SemiBold.copyWith(
           color: colors.success,
         ),
         children: <InlineSpan>[
           TextSpan(
             text: ', ',
-            style: AppFonts.inter14Regular.copyWith(
+            style: AppFonts.inter14SemiBold.copyWith(
               color: colors.text,
             ),
           ),
           TextSpan(
             text: '$reserved reserved',
-            style: AppFonts.inter14Regular.copyWith(
+            style: AppFonts.inter14SemiBold.copyWith(
               color: colors.warning,
             ),
           ),

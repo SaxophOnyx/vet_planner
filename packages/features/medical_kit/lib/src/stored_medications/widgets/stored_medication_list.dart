@@ -2,7 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
-import 'stored_medication_entry.dart';
+import 'stored_medication_list_item.dart';
 
 class StoredMedicationList extends StatelessWidget {
   final List<StoredMedication> medications;
@@ -20,7 +20,7 @@ class StoredMedicationList extends StatelessWidget {
         physics: const ClampingScrollPhysics(),
         itemCount: medications.length,
         itemBuilder: (BuildContext context, int index) {
-          return StoredMedicationEntry(
+          return StoredMedicationListItem(
             medication: medications[index],
           );
         },

@@ -1,0 +1,50 @@
+import 'package:domain/domain.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+import '../providers/notification_provider.dart';
+
+class NotificationRepositoryImpl implements NotificationsRepository {
+  final NotificationProvider _notificationProvider;
+
+  bool _requiredInit = true;
+
+  NotificationRepositoryImpl({
+    required NotificationProvider notificationProvider,
+  }) : _notificationProvider = notificationProvider;
+
+  @override
+  Future<void> testNotification() async {
+    FlutterLocalNotificationsPlugin plugin = FlutterLocalNotificationsPlugin();
+
+    if (_requiredInit) {
+      _requiredInit = false;
+      final bool? didInit = await plugin.initialize(const InitializationSettings(
+        android: AndroidInitializationSettings(
+          'mipmap/ic_launcher',
+        ),
+      ));
+
+      debugPrint('didInit: $didInit');
+    }
+
+    final AndroidFlutterLocalNotificationsPlugin? aPlugin =
+        plugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
+
+    await aPlugin?.requestNotificationsPermission();
+
+    await plugin.show(
+      1,
+      'Test Title',
+      'Test Body',
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'TestChannelID',
+          'TestChannelName',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+      ),
+    );
+  }
+}

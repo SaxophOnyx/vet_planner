@@ -19,6 +19,7 @@ abstract class _$AppRouter extends RootStackRouter {
     ...HomeModule().pagesMap,
     ...MedicalKitModule().pagesMap,
     ...PrescriptionsModule().pagesMap,
+    ...AddPrescriptionModule().pagesMap,
     ...SettingsModule().pagesMap,
   };
 }

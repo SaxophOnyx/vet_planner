@@ -2,10 +2,8 @@
   "common":{
     "validation": {
       "notEmpty": "This field must not be empty",
-      "notExceed": "Length of this field must not exceed {max}"
-    },
-    "actions": {
-      "confirm": "Confirm"
+      "notExceed": "Length of this field must not exceed {max} character(s)",
+      "incorrectDate": "This date is incorrect"
     },
     "medicationType": {
       "tablet": "Tablet",
@@ -17,28 +15,30 @@
       "ml": "mg/ml"
     }
   },
-  "medKit": {
-    "medications": {
-      "title": "Medical kit",
-      "emptyPlaceholder": "There is nothing here yet"
+  "home": {
+    "navbar": {
+      "prescriptions": "Prescriptions",
+      "medKit": "Medical kit",
+      "settings": "Settings"
+    }
+  },
+  "addPrescription": {
+    "entryTypes": {
+      "fixed": "Fixed",
+      "periodic": "Periodic"
     },
-    "addMedication": {
-      "title": "Add medication",
-      "labels": {
-        "name": "Name",
-        "type": "Type",
-        "concentration": "Concentration"
-      },
-      "submit": "Add medication"
+    "main": {
+      "title": "New prescription",
+      "commentOptional": "Comment (optional)",
+      "prescriptionEntries": "Prescription entries",
+      "addEntry": "Add another entry",
+      "submit": "Submit prescription"
     },
-    "stored": {
-
+    "chooseType": {
+      "title": "Choose entry type"
     },
-    "addStored": {
-      "title": "Add new batch of {name}",
-      "expirationDate": "Expires at",
-      "numberOfPacks": "Number of packs",
-      "quantityPerPack": "Quantity per pack"
+    "addFixed": {
+      "title": "Add fixed entry"
     }
   }
 }

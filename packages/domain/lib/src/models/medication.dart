@@ -12,4 +12,10 @@ class Medication {
     required this.type,
     required this.concentrationPerUnit,
   });
+
+  const Medication.empty()
+      : id = 0,
+        name = '',
+        type = MedicationType.ampoule,
+        concentrationPerUnit = 0;
 }

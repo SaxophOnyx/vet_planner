@@ -35,6 +35,10 @@ Future<void> _setupProviders() async {
       appDatabase: appDI.get<AppDatabase>(),
     ),
   );
+
+  appDI.registerSingleton<NotificationProvider>(
+    NotificationProvider(),
+  );
 }
 
 Future<void> _setupRepositories() async {
@@ -42,6 +46,12 @@ Future<void> _setupRepositories() async {
     MedicationRepositoryImpl(
       medicationProvider: appDI.get<MedicationProvider>(),
       storedMedicationProvider: appDI.get<StoredMedicationProvider>(),
+    ),
+  );
+
+  appDI.registerSingleton<NotificationsRepository>(
+    NotificationRepositoryImpl(
+      notificationProvider: appDI.get<NotificationProvider>(),
     ),
   );
 }

@@ -1,3 +1,4 @@
+import 'package:add_prescription/add_prescription.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:home/home.dart';
 import 'package:medical_kit/medical_kit.dart';
@@ -15,6 +16,7 @@ part 'app_router.gr.dart';
   HomeModule,
   MedicalKitModule,
   PrescriptionsModule,
+  AddPrescriptionModule,
   SettingsModule,
 ])
 class AppRouter extends _$AppRouter {
@@ -22,10 +24,13 @@ class AppRouter extends _$AppRouter {
 
   @override
   List<AutoRoute> get routes => <AutoRoute>[
+        // Splash
         AutoRoute(
           initial: true,
           page: SplashRoute.page,
         ),
+
+        // Home
         AutoRoute(
           page: HomeRoute.page,
           children: <AutoRoute>[
@@ -56,14 +61,21 @@ class AppRouter extends _$AppRouter {
           customRouteBuilder: RouteBuilder.screen,
         ),
 
-        // Prescriptions
+        // Add prescription
         CustomRoute(
           page: AddPrescriptionRoute.page,
           customRouteBuilder: RouteBuilder.screen,
         ),
-        // Prescriptions
         CustomRoute(
-          page: AddPrescriptionEntryRoute.page,
+          page: ChoosePrescriptionTypeRoute.page,
+          customRouteBuilder: RouteBuilder.bottomSheet,
+        ),
+        CustomRoute(
+          page: AddFixedEntryRoute.page,
+          customRouteBuilder: RouteBuilder.bottomSheet,
+        ),
+        CustomRoute(
+          page: AddPeriodicEntryRoute.page,
           customRouteBuilder: RouteBuilder.bottomSheet,
         ),
       ];
