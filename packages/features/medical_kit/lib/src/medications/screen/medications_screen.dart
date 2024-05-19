@@ -19,6 +19,7 @@ class MedicationsScreen extends StatelessWidget {
         appRouter: appDI.get<AppRouter>(),
         getMedicationsUseCase: appDI.get<GetMedicationsUseCase>(),
         getStoredMedicationsUseCase: appDI.get<GetStoredMedicationsUseCase>(),
+        observeStoredMedicationCreatedUseCase: appDI.get<ObserveStoredMedicationCreatedUseCase>(),
       )..add(const Initialize()),
       child: const MedicationsContent(),
     );

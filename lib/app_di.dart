@@ -115,6 +115,12 @@ Future<void> _setupUseCases() async {
     ),
   );
 
+  appDI.registerSingleton<ObserveStoredMedicationCreatedUseCase>(
+    ObserveStoredMedicationCreatedUseCase(
+      medicationRepository: appDI.get<MedicationRepository>(),
+    ),
+  );
+
   appDI.registerSingleton<AddPrescriptionUseCase>(
     AddPrescriptionUseCase(
       prescriptionRepository: appDI.get<PrescriptionRepository>(),

@@ -21,7 +21,7 @@ class PrescriptionEntryProvider {
   }) async {
     final List<int> ids = <int>[];
 
-    return entries.mapIndexed(
+    return entries.customMapIndexed(
       (PrescriptionEntryEntity entry, int i) => PrescriptionEntryEntity(
         id: ids[i],
         prescriptionId: entry.prescriptionId,

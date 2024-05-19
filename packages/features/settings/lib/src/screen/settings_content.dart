@@ -15,6 +15,7 @@ class SettingsContent extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: LocaleKeys.settings_title.observeTranslation(context),
+        style: CustomAppBarStyle.secondary,
       ),
       backgroundColor: colors.background,
       body: BlocBuilder<SettingsBloc, SettingsState>(

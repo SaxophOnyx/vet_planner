@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class StoredMedicationsChild extends StatelessWidget {
           ),
           const SizedBox(height: AppDimens.DEFAULT_CONTAINER_PADDING * 2),
           AppButton(
-            text: 'Manage stored',
+            text: LocaleKeys.medKit_medications_manageStored.observeTranslation(context),
             onPressed: onManageStoredMedicationsPressed,
             style: AppButtonStyle.secondary,
           ),

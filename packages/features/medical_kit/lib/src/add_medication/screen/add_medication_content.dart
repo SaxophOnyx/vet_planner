@@ -46,8 +46,7 @@ class _AddMedicationContentState extends State<AddMedicationContent> {
 
     return Scaffold(
       appBar: CustomAppBar(
-        // title: LocaleKeys.medKit_addMedication_title.observeTranslation(context),
-        title: 'TMP',
+        title: LocaleKeys.medKit_addMedication_title.observeTranslation(context),
       ),
       backgroundColor: colors.background,
       body: Padding(
@@ -57,15 +56,13 @@ class _AddMedicationContentState extends State<AddMedicationContent> {
             return Column(
               children: <Widget>[
                 AppTextField(
-                  // label: LocaleKeys.medKit_addMedication_labels_name.observeTranslation(context),
-                  label: 'TMP',
+                  label: LocaleKeys.medKit_addMedication_name.observeTranslation(context),
                   textEditingController: _nameController,
                   error: state.nameError?.translate(),
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 AppCarousel<MedicationType>(
-                  // label: LocaleKeys.medKit_addMedication_labels_type.observeTranslation(context),
-                  label: 'TMP',
+                  label: LocaleKeys.medKit_addMedication_type.observeTranslation(context),
                   value: MedicationType.ampoule,
                   values: MedicationType.values,
                   onValueChanged: (MedicationType value) => bloc.add(
@@ -76,8 +73,7 @@ class _AddMedicationContentState extends State<AddMedicationContent> {
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 AppTextField(
-                  // label: LocaleKeys.medKit_addMedication_labels_concentration.observeTranslation(context),
-                  label: 'TMP',
+                  label: LocaleKeys.medKit_addMedication_concentration.observeTranslation(context),
                   textEditingController: _concentrationController,
                   formatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly,
@@ -88,8 +84,7 @@ class _AddMedicationContentState extends State<AddMedicationContent> {
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 const Spacer(),
                 AppButton(
-                  // text: LocaleKeys.medKit_addMedication_actions_add.observeTranslation(context),
-                  text: 'TMP',
+                  text: LocaleKeys.medKit_addMedication_add.observeTranslation(context),
                   onPressed: () => bloc.add(const SubmitInput()),
                 ),
               ],

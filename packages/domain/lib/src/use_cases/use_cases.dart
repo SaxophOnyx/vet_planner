@@ -7,3 +7,4 @@ export 'settings/get_notification_settings_use_case.dart';
 export 'settings/update_notification_settings_use_case.dart';
 export 'stored_medication/add_stored_medication_use_case.dart';
 export 'stored_medication/get_stored_medications_use_case.dart';
+export 'stored_medication/observe_stored_medication_created_use_case.dart';

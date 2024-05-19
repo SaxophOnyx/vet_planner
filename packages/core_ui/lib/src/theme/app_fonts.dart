@@ -70,4 +70,12 @@ abstract class AppFonts {
     fontFamily: _interFamily,
     package: kPackageName,
   );
+
+  static const TextStyle inter32SemiBold = TextStyle(
+    fontSize: 32,
+    height: 1.5,
+    fontWeight: _semiBoldWeight,
+    fontFamily: _interFamily,
+    package: kPackageName,
+  );
 }

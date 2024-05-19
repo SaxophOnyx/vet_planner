@@ -7,7 +7,7 @@
     },
     "medicationType": {
       "tablet": "Таблетка",
-      "vial": "Флагон",
+      "vial": "Флакон",
       "ampoule": "Ампула"
     },
     "measurementUnit": {
@@ -15,10 +15,13 @@
       "ml": "мл/мг"
     }
   },
+  "splash": {
+    "appName": "VetPlanner"
+  },
   "home": {
     "navbar": {
       "prescriptions": "Назначения",
-      "medKit": "Аптечка",
+      "medKit": "Препараты",
       "settings": "Настройки"
     }
   },
@@ -31,6 +34,33 @@
     },
     "prescriptionNotifications": "Уведомление о приемах",
     "medicationNotifications": "Уведомления о препаратах"
+  },
+  "medKit": {
+    "medications": {
+      "title": "Препараты",
+      "noMedications": "В приложении пока что не были зарегистрированы препараты",
+      "addStored": "Добавить партию препарата",
+      "manageStored": "Управлять партиями препарата",
+      "storedWithId": "Партия {id}",
+      "expiresAt": "Годен до {date}"
+    },
+    "addMedication": {
+      "title": "Новый препарат",
+      "name": "Название",
+      "type": "Тип",
+      "concentration": "Концентрация",
+      "add": "Зарегистрировать"
+    },
+    "stored": {
+      "title": "Партии препаратов",
+      "add": "Добавить партию"
+    },
+    "addStored": {
+      "title": "Новая партия",
+      "expirationDate": "Годен до",
+      "quantity": "Количество",
+      "submit": "Подтвердить"
+    }
   },
   "addPrescription": {
     "entryTypes": {

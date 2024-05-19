@@ -31,7 +31,7 @@ class AppToggle extends StatelessWidget {
             child: Text(
               label,
               style: AppFonts.inter16Regular.copyWith(
-                color: colors.textSecondary,
+                color: colors.text,
               ),
             ),
           ),

@@ -15,6 +15,9 @@
       "ml": "mg/ml"
     }
   },
+  "splash": {
+    "appName": "VetPlanner"
+  },
   "home": {
     "navbar": {
       "prescriptions": "Prescriptions",
@@ -31,6 +34,33 @@
     },
     "prescriptionNotifications": "Prescription notifications",
     "medicationNotifications": "Medication notifications"
+  },
+  "medKit": {
+    "medications": {
+      "title": "Medications",
+      "noMedications": "There is no medications registered in app yet",
+      "addStored": "Add stored medication",
+      "manageStored": "Manage stored medications",
+      "storedWithId": "Stored {id}",
+      "expiresAt": "Expires at {date}"
+    },
+    "addMedication": {
+      "title": "Register medication",
+      "name": "Name",
+      "type": "Type",
+      "concentration": "Concentration",
+      "add": "Register"
+    },
+    "stored": {
+      "title": "Stored medications",
+      "add": "Add stored medication"
+    },
+    "addStored": {
+      "title": "Add stored medication",
+      "expirationDate": "Expires at",
+      "quantity": "Quantity",
+      "submit": "Submit"
+    }
   },
   "addPrescription": {
     "entryTypes": {

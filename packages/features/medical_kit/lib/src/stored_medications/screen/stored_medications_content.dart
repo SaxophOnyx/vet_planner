@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class StoredMedicationsContent extends StatelessWidget {
 
     return Scaffold(
       appBar: CustomAppBar(
-        title: 'Placeholder',
+        title: LocaleKeys.medKit_stored_title.observeTranslation(context),
         style: CustomAppBarStyle.secondary,
       ),
       backgroundColor: colors.background,
@@ -37,7 +38,7 @@ class StoredMedicationsContent extends StatelessWidget {
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 AppButton(
-                  text: 'Add stored medication',
+                  text: LocaleKeys.medKit_stored_add.observeTranslation(context),
                   onPressed: () => bloc.add(const AddStoredMedication()),
                 ),
               ],

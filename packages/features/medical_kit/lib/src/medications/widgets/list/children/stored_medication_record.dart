@@ -15,7 +15,6 @@ class StoredMedicationRecord extends StatelessWidget {
   Widget build(BuildContext context) {
     final AppColors colors = context.appColors;
 
-    // TODO(SaxophOnyx): Implement locale
     return DecoratedBox(
       decoration: BoxDecoration(
         border: Border(
@@ -32,13 +31,24 @@ class StoredMedicationRecord extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
-              medication.manualTitle ?? medication.id.toString(),
+              medication.manualTitle ??
+                  LocaleKeys.medKit_medications_storedWithId.observeTranslation(
+                    context,
+                    namedArgs: <String, String>{
+                      'id': '${medication.id}',
+                    },
+                  ),
               style: AppFonts.inter16SemiBold.copyWith(
                 color: colors.text,
               ),
             ),
             Text(
-              'Expires on ${AppDateUtils.formatDate(medication.expirationDate)}',
+              LocaleKeys.medKit_medications_expiresAt.observeTranslation(
+                context,
+                namedArgs: <String, String>{
+                  'date': '${AppDateUtils.formatDate(medication.expirationDate)}',
+                },
+              ),
               style: AppFonts.inter14Regular.copyWith(
                 color: colors.text,
               ),

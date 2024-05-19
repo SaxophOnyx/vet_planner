@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -42,8 +43,8 @@ class _AddStoredMedicationContentState extends State<AddStoredMedicationContent>
     final AddStoredMedicationBloc bloc = context.read<AddStoredMedicationBloc>();
 
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Placeholder',
+      appBar: CustomAppBar(
+        title: LocaleKeys.medKit_addStored_title.observeTranslation(context),
       ),
       backgroundColor: colors.background,
       body: Padding(
@@ -53,20 +54,20 @@ class _AddStoredMedicationContentState extends State<AddStoredMedicationContent>
             return Column(
               children: <Widget>[
                 AppDateTextField(
-                  label: 'Placeholder',
+                  label: LocaleKeys.medKit_addStored_expirationDate.observeTranslation(context),
                   textEditingController: _expirationDateController,
                   error: state.expirationDateError,
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 AppTextField(
-                  label: 'Quantity',
+                  label: LocaleKeys.medKit_addStored_quantity.observeTranslation(context),
                   textEditingController: _quantityController,
                   error: state.quantityError,
                 ),
                 const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                 const Spacer(),
                 AppButton(
-                  text: 'Submit',
+                  text: LocaleKeys.medKit_addStored_submit.observeTranslation(context),
                   onPressed: () => bloc.add(const SubmitInput()),
                 ),
               ],

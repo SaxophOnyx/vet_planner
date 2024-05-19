@@ -31,7 +31,8 @@ class AddStoredMedicationBloc extends Bloc<AddStoredMedicationEvent, AddStoredMe
     emit(
       state.copyWithExpirationDate(
         expirationDate: date,
-        expirationDateError: date == null ? LocaleKeys.common_validation_incorrectDate.translate() : null,
+        expirationDateError:
+            (event.date.isNotEmpty && date == null) ? LocaleKeys.common_validation_incorrectDate.translate() : null,
       ),
     );
   }

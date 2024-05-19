@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class NoStoredMedicationsChild extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChildContainer(
       child: AppButton(
-        text: 'Add stored medication',
+        text: LocaleKeys.medKit_medications_addStored.observeTranslation(context),
         onPressed: onAddStoredPressed,
         style: AppButtonStyle.secondary,
       ),

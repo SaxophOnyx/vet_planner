@@ -23,3 +23,9 @@ class AddStoredMedication extends MedicationsEvent {
 
   const AddStoredMedication(this.medicationIndex);
 }
+
+class StoredMedicationAdded extends MedicationsEvent {
+  final StoredMedication storedMedication;
+
+  const StoredMedicationAdded(this.storedMedication);
+}

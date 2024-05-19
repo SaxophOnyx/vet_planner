@@ -1,5 +1,5 @@
 extension AppListExtension<T> on List<T> {
-  List<E> mapIndexed<E>(E Function(T item, int index) transform) {
+  List<E> customMapIndexed<E>(E Function(T item, int index) transform) {
     final List<E> result = <E>[];
 
     for (int i = 0; i < length; ++i) {

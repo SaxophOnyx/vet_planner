@@ -33,6 +33,6 @@ abstract class AppCarouselStyleMapper {
       return colors.onPrimary;
     }
 
-    return colors.text;
+    return colors.primary;
   }
 }

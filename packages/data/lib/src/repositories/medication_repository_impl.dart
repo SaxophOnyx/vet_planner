@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain/domain.dart';
 
 import '../../data.dart';
@@ -6,7 +8,13 @@ class MedicationRepositoryImpl implements MedicationRepository {
   final MedicationProvider _medicationProvider;
   final StoredMedicationProvider _storedMedicationProvider;
 
-  const MedicationRepositoryImpl({
+  final StreamController<StoredMedication> _createdStoredMedicationController =
+      StreamController<StoredMedication>.broadcast();
+
+  @override
+  Stream<StoredMedication> get createdStoredMedication => _createdStoredMedicationController.stream;
+
+  MedicationRepositoryImpl({
     required MedicationProvider medicationProvider,
     required StoredMedicationProvider storedMedicationProvider,
   })  : _medicationProvider = medicationProvider,
@@ -41,7 +49,9 @@ class MedicationRepositoryImpl implements MedicationRepository {
       manualTitle: manualTitle,
     );
 
-    return StoredMedicationMapper.fromEntity(entity);
+    final StoredMedication stored = StoredMedicationMapper.fromEntity(entity);
+    _createdStoredMedicationController.add(stored);
+    return stored;
   }
 
   @override

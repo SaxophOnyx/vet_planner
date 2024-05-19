@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
@@ -13,26 +15,37 @@ class MedicationsBloc extends Bloc<MedicationsEvent, MedicationsState> {
   final AppRouter _appRouter;
   final GetMedicationsUseCase _getMedicationsUseCase;
   final GetStoredMedicationsUseCase _getStoredMedicationsUseCase;
+  final ObserveStoredMedicationCreatedUseCase _observeStoredMedicationCreatedUseCase;
 
-  // TODO(SaxophOnyx): Implement observe
+  late final StreamSubscription<StoredMedication> _storedMedicationSubscription;
+
   MedicationsBloc({
     required AppRouter appRouter,
     required GetMedicationsUseCase getMedicationsUseCase,
     required GetStoredMedicationsUseCase getStoredMedicationsUseCase,
+    required ObserveStoredMedicationCreatedUseCase observeStoredMedicationCreatedUseCase,
   })  : _appRouter = appRouter,
         _getMedicationsUseCase = getMedicationsUseCase,
         _getStoredMedicationsUseCase = getStoredMedicationsUseCase,
+        _observeStoredMedicationCreatedUseCase = observeStoredMedicationCreatedUseCase,
         super(const MedicationsState.initial()) {
     on<Initialize>(_onInitialize);
     on<AddMedication>(_onAddMedication);
     on<ManageStoredMedications>(_onManageStoredMedications);
     on<AddStoredMedication>(_onAddStoredMedication);
+    on<StoredMedicationAdded>(_onStoredMedicationAdded);
   }
 
   Future<void> _onInitialize(
     Initialize event,
     Emitter<MedicationsState> emit,
   ) async {
+    _storedMedicationSubscription = _observeStoredMedicationCreatedUseCase.execute().listen(
+      (StoredMedication event) {
+        add(StoredMedicationAdded(event));
+      },
+    );
+
     try {
       final List<Medication> medications = await _getMedicationsUseCase.execute();
 
@@ -42,7 +55,7 @@ class MedicationsBloc extends Bloc<MedicationsEvent, MedicationsState> {
         ),
       );
 
-      final List<MedicationEntry> models = medications.mapIndexed(
+      final List<MedicationEntry> models = medications.customMapIndexed(
         (Medication item, int index) => MedicationEntry(
           medication: item,
           stored: stored[index],
@@ -97,10 +110,42 @@ class MedicationsBloc extends Bloc<MedicationsEvent, MedicationsState> {
     Emitter<MedicationsState> emit,
   ) async {
     final Medication medication = state.medications[event.medicationIndex].medication;
-    final StoredMedication? stored = await _appRouter.push(AddStoredMedicationRoute(medication: medication));
+    await _appRouter.push(AddStoredMedicationRoute(medication: medication));
+  }
 
-    if (stored != null) {
-      // TODO(SaxophOnyx): Update UI & show toast
+  void _onStoredMedicationAdded(
+    StoredMedicationAdded event,
+    Emitter<MedicationsState> emit,
+  ) {
+    final StoredMedication stored = event.storedMedication;
+
+    final int index = state.medications.indexWhere(
+      (MedicationEntry entry) => entry.medication.id == stored.medicationId,
+    );
+
+    if (index != -1) {
+      final MedicationEntry entry = state.medications[index];
+
+      final MedicationEntry updatedEntry = MedicationEntry(
+        medication: entry.medication,
+        stored: <StoredMedication>[
+          ...entry.stored,
+          stored,
+        ],
+      );
+
+      final List<MedicationEntry> updatedMedications = List<MedicationEntry>.from(state.medications);
+      updatedMedications[index] = updatedEntry;
+
+      emit(state.copyWith(
+        medications: updatedMedications,
+      ));
     }
+  }
+
+  @override
+  Future<void> close() async {
+    await _storedMedicationSubscription.cancel();
+    super.close();
   }
 }

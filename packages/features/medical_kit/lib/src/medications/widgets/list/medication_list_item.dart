@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,7 @@ class _MedicationListItemState extends State<MedicationListItem> {
           ),
         ),
         subtitle: Text(
-          'Placeholder',
+          MedicationTypeLocaleMapper.getLocaleKey(widget.medication.medication.type).observeTranslation(context),
           style: AppFonts.inter16Regular.copyWith(
             color: textColor,
           ),

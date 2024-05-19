@@ -8,7 +8,9 @@ extension LocalizationExtensions on BuildContext {
 
   List<LocalizationsDelegate<dynamic>> get localeDelegates => this.localizationDelegates;
 
-  Future<void> setCurrentLocale(Locale locale) async => await this.setLocale(locale);
+  Future<void> setCurrentLocale(Locale locale) async {
+    await this.setLocale(locale);
+  }
 }
 
 extension TranslationExtensions on String {

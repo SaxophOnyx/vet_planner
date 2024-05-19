@@ -1,6 +1,8 @@
 import '../../domain.dart';
 
 abstract class MedicationRepository {
+  Stream<StoredMedication> get createdStoredMedication;
+
   Future<List<Medication>> getMedications();
 
   Future<Medication> addMedication({
