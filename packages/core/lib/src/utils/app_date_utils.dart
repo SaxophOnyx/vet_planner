@@ -31,4 +31,20 @@ abstract class AppDateUtils {
 
     return DateTime(year, month, day);
   }
+
+  static DateTime mergeTime({
+    required DateTime date,
+    required DateTime time,
+  }) {
+    return DateTime.utc(
+      date.year,
+      date.month,
+      date.day,
+      time.hour,
+      time.minute,
+      time.second,
+      time.millisecond,
+      time.microsecond,
+    );
+  }
 }

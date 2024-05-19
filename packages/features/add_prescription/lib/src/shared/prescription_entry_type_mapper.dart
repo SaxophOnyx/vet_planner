@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 
-import '../models/prescription_entry_type.dart';
+import 'models/prescription_entry_type.dart';
 
 abstract class PrescriptionEntryTypeMapper {
   static String getLocaleKey(PrescriptionEntryType entry) {

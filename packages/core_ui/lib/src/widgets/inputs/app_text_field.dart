@@ -26,7 +26,8 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppColors colors = context.appColors;
-    final bool hasError = error != null;
+    // TODO(SaxophOnyx): Refactor to use empty string
+    final bool hasError = error != null && error!.isNotEmpty;
 
     return Column(
       mainAxisSize: MainAxisSize.min,

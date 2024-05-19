@@ -1,0 +1,4 @@
+enum AppCarouselStyle {
+  large,
+  small,
+}

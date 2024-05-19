@@ -22,6 +22,16 @@
       "settings": "Settings"
     }
   },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "lang": {
+      "en": "English",
+      "ru": "Russian"
+    },
+    "prescriptionNotifications": "Prescription notifications",
+    "medicationNotifications": "Medication notifications"
+  },
   "addPrescription": {
     "entryTypes": {
       "fixed": "Fixed",

@@ -29,3 +29,9 @@ extension AppDateTimeExtension on DateTime {
     return isAfter(a) && isBefore(b);
   }
 }
+
+extension AppStringExtension on String {
+  String? nullIfEmpty() {
+    return isEmpty ? null : this;
+  }
+}

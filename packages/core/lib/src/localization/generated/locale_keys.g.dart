@@ -18,6 +18,14 @@ abstract class  LocaleKeys {
   static const home_navbar_settings = 'home.navbar.settings';
   static const home_navbar = 'home.navbar';
   static const home = 'home';
+  static const settings_title = 'settings.title';
+  static const settings_language = 'settings.language';
+  static const settings_lang_en = 'settings.lang.en';
+  static const settings_lang_ru = 'settings.lang.ru';
+  static const settings_lang = 'settings.lang';
+  static const settings_prescriptionNotifications = 'settings.prescriptionNotifications';
+  static const settings_medicationNotifications = 'settings.medicationNotifications';
+  static const settings = 'settings';
   static const addPrescription_entryTypes_fixed = 'addPrescription.entryTypes.fixed';
   static const addPrescription_entryTypes_periodic = 'addPrescription.entryTypes.periodic';
   static const addPrescription_entryTypes = 'addPrescription.entryTypes';

@@ -1,5 +1,9 @@
 export 'measurement_unit.dart';
 export 'medication.dart';
 export 'medication_type.dart';
+export 'notification_settings.dart';
 export 'patient.dart';
+export 'prescription.dart';
+export 'prescription_entry.dart';
+export 'prescription_plan.dart';
 export 'stored_medication.dart';

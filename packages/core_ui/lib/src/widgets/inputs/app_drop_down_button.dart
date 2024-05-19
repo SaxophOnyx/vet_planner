@@ -80,8 +80,10 @@ class AppDropdownButton<T> extends StatelessWidget {
                 },
               ).toList(),
               buttonStyleData: ButtonStyleData(
-                padding: const EdgeInsets.symmetric(
-                  vertical: AppDimens.DEFAULT_CONTAINER_PADDING,
+                padding: const EdgeInsets.only(
+                  top: AppDimens.DEFAULT_CONTAINER_PADDING,
+                  bottom: AppDimens.DEFAULT_CONTAINER_PADDING,
+                  right: AppDimens.DEFAULT_CONTAINER_PADDING,
                 ),
                 decoration: BoxDecoration(
                   color: colors.container,

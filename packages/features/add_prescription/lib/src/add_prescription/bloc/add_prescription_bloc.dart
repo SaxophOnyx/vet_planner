@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:navigation/navigation.dart';
@@ -11,13 +12,18 @@ part 'add_prescription_state.dart';
 
 class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionState> {
   final AppRouter _appRouter;
+  final AddPrescriptionUseCase _addPrescriptionUseCase;
 
   AddPrescriptionBloc({
     required AppRouter appRouter,
+    required AddPrescriptionUseCase addPrescriptionUseCase,
   })  : _appRouter = appRouter,
+        _addPrescriptionUseCase = addPrescriptionUseCase,
         super(const AddPrescriptionState.initial()) {
+    on<UpdatePatientName>(_onUpdatePatientName);
     on<UpdateComment>(_onUpdateComment);
     on<AddPrescriptionEntry>(_onAddPrescriptionEntry);
+    on<DeleteFixedPrescriptionEntry>(_onDeleteFixedPrescriptionEntry);
     on<SubmitPrescription>(_onSubmitPrescription);
   }
 
@@ -27,6 +33,22 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
   ) {
     emit(state.copyWith(
       comment: event.comment,
+    ));
+  }
+
+  void _onUpdatePatientName(
+    UpdatePatientName event,
+    Emitter<AddPrescriptionState> emit,
+  ) {
+    // TODO(SaxophOnyx): Implement search
+    final Patient patient = Patient(
+      id: event.name.length,
+      name: event.name,
+    );
+
+    emit(state.copyWith(
+      patient: patient,
+      patientError: '',
     ));
   }
 
@@ -53,6 +75,7 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
 
             emit(state.copyWith(
               fixedEntries: fixedEntries,
+              fixedEntriesError: '',
             ));
           }
         }
@@ -65,8 +88,50 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
     }
   }
 
+  void _onDeleteFixedPrescriptionEntry(
+    DeleteFixedPrescriptionEntry event,
+    Emitter<AddPrescriptionState> emit,
+  ) {
+    state.fixedEntries.removeAt(event.index);
+
+    emit(state.copyWith(
+      fixedEntries: List<FixedPrescriptionEntry>.from(
+        state.fixedEntries,
+        growable: true,
+      ),
+    ));
+  }
+
   Future<void> _onSubmitPrescription(
     SubmitPrescription event,
     Emitter<AddPrescriptionState> emit,
-  ) async {}
+  ) async {
+    final String patientError = state.patient.id != 0 ? '' : 'Select a patient';
+    final String fixedEntriesError = state.fixedEntries.isNotEmpty ? '' : 'Enter al least one prescription entry';
+
+    emit(state.copyWith(
+      patientError: patientError,
+      fixedEntriesError: fixedEntriesError,
+    ));
+
+    final PrescriptionPlan plan = PrescriptionPlan(
+      patientId: state.patient.id,
+      comment: state.comment.nullIfEmpty(),
+      fixedPlans: state.fixedEntries
+          .map((FixedPrescriptionEntry entry) => FixedPrescriptionPlan(
+                medicationId: entry.medication.id,
+                dates: entry.dates,
+                dose: entry.dose,
+              ))
+          .toList(),
+    );
+
+    try {
+      final Prescription prescription = await _addPrescriptionUseCase.execute(plan);
+    } on ImpossiblePrescriptionException catch (_) {
+      // TODO(SaxophOnyx): Show error toast
+    } catch (_) {
+      // TODO(SaxophOnyx): Show error toast
+    }
+  }
 }

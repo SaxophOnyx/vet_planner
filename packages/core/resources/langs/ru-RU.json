@@ -1,0 +1,54 @@
+{
+  "common":{
+    "validation": {
+      "notEmpty": "Это поле не может быть пустым",
+      "notExceed": "Длина этого поля не должна превышать {max} символов",
+      "incorrectDate": "Эта дата некорректна"
+    },
+    "medicationType": {
+      "tablet": "Таблетка",
+      "vial": "Флагон",
+      "ampoule": "Ампула"
+    },
+    "measurementUnit": {
+      "piece": "мг/шт",
+      "ml": "мл/мг"
+    }
+  },
+  "home": {
+    "navbar": {
+      "prescriptions": "Назначения",
+      "medKit": "Аптечка",
+      "settings": "Настройки"
+    }
+  },
+  "settings": {
+    "title": "Настройки",
+    "language": "Язык",
+    "lang": {
+      "en": "Английский",
+      "ru": "Русский"
+    },
+    "prescriptionNotifications": "Уведомление о приемах",
+    "medicationNotifications": "Уведомления о препаратах"
+  },
+  "addPrescription": {
+    "entryTypes": {
+      "fixed": "Fixed",
+      "periodic": "Periodic"
+    },
+    "main": {
+      "title": "New prescription",
+      "commentOptional": "Comment (optional)",
+      "prescriptionEntries": "Prescription entries",
+      "addEntry": "Add another entry",
+      "submit": "Submit prescription"
+    },
+    "chooseType": {
+      "title": "Choose entry type"
+    },
+    "addFixed": {
+      "title": "Add fixed entry"
+    }
+  }
+}

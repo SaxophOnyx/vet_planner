@@ -3,8 +3,8 @@ import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 
-import '../../shared/mappers/prescription_entry_type_mapper.dart';
 import '../../shared/models/prescription_entry_type.dart';
+import '../../shared/prescription_entry_type_mapper.dart';
 
 @RoutePage<PrescriptionEntryType>()
 class ChoosePrescriptionTypeScreen extends StatelessWidget {

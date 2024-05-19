@@ -11,5 +11,8 @@ export 'controls/app_floating_button.dart';
 export 'inputs/app_date_text_field.dart';
 export 'inputs/app_drop_down_button.dart';
 export 'inputs/app_text_field.dart';
+export 'inputs/app_toggle.dart';
 export 'inputs/carousel/app_carousel.dart';
+export 'inputs/carousel/app_carousel_style.dart';
+export 'inputs/search_bar/app_search_bar.dart';
 export 'utils/no_glow_scroll_behavior.dart';

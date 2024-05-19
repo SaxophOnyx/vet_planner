@@ -24,6 +24,12 @@ Future<void> _setupProviders() async {
     AppDatabase(),
   );
 
+  appDI.registerSingletonAsync(
+    () async => await LocalDataProvider.createInstance(),
+  );
+
+  await appDI.ready();
+
   appDI.registerSingleton<MedicationProvider>(
     MedicationProvider(
       appDatabase: appDI.get<AppDatabase>(),
@@ -33,6 +39,12 @@ Future<void> _setupProviders() async {
   appDI.registerSingleton<StoredMedicationProvider>(
     StoredMedicationProvider(
       appDatabase: appDI.get<AppDatabase>(),
+    ),
+  );
+
+  appDI.registerSingleton<NotificationSettingsProvider>(
+    NotificationSettingsProvider(
+      localDataProvider: appDI.get<LocalDataProvider>(),
     ),
   );
 
@@ -49,6 +61,16 @@ Future<void> _setupRepositories() async {
     ),
   );
 
+  appDI.registerSingleton<PrescriptionRepository>(
+    PrescriptionRepositoryImpl(),
+  );
+
+  appDI.registerSingleton<SettingsRepository>(
+    SettingsRepositoryImpl(
+      notificationSettingsProvider: appDI.get<NotificationSettingsProvider>(),
+    ),
+  );
+
   appDI.registerSingleton<NotificationsRepository>(
     NotificationRepositoryImpl(
       notificationProvider: appDI.get<NotificationProvider>(),
@@ -57,6 +79,18 @@ Future<void> _setupRepositories() async {
 }
 
 Future<void> _setupUseCases() async {
+  appDI.registerSingleton<GetNotificationSettingsUseCase>(
+    GetNotificationSettingsUseCase(
+      settingsRepository: appDI.get<SettingsRepository>(),
+    ),
+  );
+
+  appDI.registerSingleton<UpdateNotificationSettingsUseCase>(
+    UpdateNotificationSettingsUseCase(
+      settingsRepository: appDI.get<SettingsRepository>(),
+    ),
+  );
+
   appDI.registerSingleton<GetMedicationsUseCase>(
     GetMedicationsUseCase(
       medicationRepository: appDI.get<MedicationRepository>(),
@@ -78,6 +112,12 @@ Future<void> _setupUseCases() async {
   appDI.registerSingleton<AddStoredMedicationUseCase>(
     AddStoredMedicationUseCase(
       medicationRepository: appDI.get<MedicationRepository>(),
+    ),
+  );
+
+  appDI.registerSingleton<AddPrescriptionUseCase>(
+    AddPrescriptionUseCase(
+      prescriptionRepository: appDI.get<PrescriptionRepository>(),
     ),
   );
 }

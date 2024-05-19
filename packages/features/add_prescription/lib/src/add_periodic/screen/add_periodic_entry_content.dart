@@ -1,3 +1,4 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
 class AddPeriodicEntryContent extends StatelessWidget {
@@ -5,6 +6,9 @@ class AddPeriodicEntryContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const AppBottomSheet(
+      title: 'Not Implemented',
+      child: SizedBox(height: 40),
+    );
   }
 }

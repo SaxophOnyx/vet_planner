@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 
@@ -15,6 +16,7 @@ class AddPrescriptionScreen extends StatelessWidget {
     return BlocProvider<AddPrescriptionBloc>(
       create: (_) => AddPrescriptionBloc(
         appRouter: appDI.get<AppRouter>(),
+        addPrescriptionUseCase: appDI.get<AddPrescriptionUseCase>(),
       ),
       child: const AddPrescriptionContent(),
     );

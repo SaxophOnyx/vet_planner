@@ -10,6 +10,24 @@ class DayPressed extends AddFixedEntryEvent {
   const DayPressed(this.day);
 }
 
+class UpdateDose extends AddFixedEntryEvent {
+  final int dose;
+
+  const UpdateDose(this.dose);
+}
+
+class UpdateTime extends AddFixedEntryEvent {
+  final int hour;
+
+  const UpdateTime(this.hour);
+}
+
+class UpdateMedicationName extends AddFixedEntryEvent {
+  final String name;
+
+  const UpdateMedicationName(this.name);
+}
+
 class SubmitEntry extends AddFixedEntryEvent {
   const SubmitEntry();
 }

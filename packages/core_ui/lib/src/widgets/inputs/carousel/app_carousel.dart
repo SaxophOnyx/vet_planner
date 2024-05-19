@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core_ui.dart';
 import 'app_carousel_item.dart';
+import 'app_carousel_style_mapper.dart';
 
 class AppCarousel<T> extends StatelessWidget {
   final String label;
@@ -10,6 +11,7 @@ class AppCarousel<T> extends StatelessWidget {
   final List<T> values;
   final void Function(T value) onValueChanged;
   final String Function(T item) stringifier;
+  final AppCarouselStyle style;
 
   const AppCarousel({
     super.key,
@@ -18,6 +20,7 @@ class AppCarousel<T> extends StatelessWidget {
     required this.values,
     required this.onValueChanged,
     required this.stringifier,
+    this.style = AppCarouselStyle.large,
   });
 
   @override
@@ -44,13 +47,15 @@ class AppCarousel<T> extends StatelessWidget {
             ),
             child: CarouselSlider(
               items: values
-                  .map((T value) => AppCarouselItem(
-                        title: stringifier(value),
+                  .map((T item) => AppCarouselItem(
+                        title: stringifier(item),
+                        style: style,
+                        isSelected: item == value,
                       ))
                   .toList(),
               options: CarouselOptions(
                 height: AppDimens.DEFAULT_INPUT_HEIGHT,
-                viewportFraction: 0.5,
+                viewportFraction: AppCarouselStyleMapper.getViewportFraction(style),
                 scrollPhysics: const ClampingScrollPhysics(),
                 onPageChanged: (int index, CarouselPageChangedReason reason) {
                   if (reason == CarouselPageChangedReason.manual) {

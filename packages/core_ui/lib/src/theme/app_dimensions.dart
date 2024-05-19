@@ -32,7 +32,7 @@ abstract class AppDimens {
   // Bottom Sheet
   static const double BOTTOM_SHEET_MAX_HEIGHT_RATIO = 3 / 4;
   static const double BOTTOM_SHEET_MIN_HEIGHT = 50;
-  static const double BOTTOM_SHEET_BORDER_RADIUS = 24;
+  static const double BOTTOM_SHEET_BORDER_RADIUS = 16;
 
   // List
   static const double DEFAULT_LIST_ITEM_GAP = 12;

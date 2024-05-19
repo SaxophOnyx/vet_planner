@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core_ui.dart';
+import 'app_carousel_style_mapper.dart';
 
 class AppCarouselItem extends StatelessWidget {
   final String title;
+  final bool isSelected;
+  final AppCarouselStyle style;
 
   const AppCarouselItem({
     super.key,
     required this.title,
+    required this.isSelected,
+    required this.style,
   });
 
   @override
   Widget build(BuildContext context) {
     final AppColors colors = context.appColors;
 
-    return Container(
+    return AnimatedContainer(
+      duration: AppDimens.DEFAULT_ANIMATION_DURATION,
       margin: const EdgeInsets.symmetric(horizontal: AppDimens.DEFAULT_LABEL_GAP),
       decoration: BoxDecoration(
-        color: colors.container,
+        color: AppCarouselStyleMapper.getBackgroundColor(
+          colors: colors,
+          style: style,
+          isSelected: isSelected,
+        ),
         borderRadius: BorderRadius.circular(AppDimens.DEFAULT_BORDER_RADIUS),
         border: Border.all(
           color: colors.primary,
@@ -29,7 +39,11 @@ class AppCarouselItem extends StatelessWidget {
         title,
         textAlign: TextAlign.center,
         style: AppFonts.inter16Regular.copyWith(
-          color: colors.primary,
+          color: AppCarouselStyleMapper.getTextColor(
+            colors: colors,
+            style: style,
+            isSelected: isSelected,
+          ),
         ),
       ),
     );

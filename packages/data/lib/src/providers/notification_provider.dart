@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationProvider {
@@ -11,7 +11,7 @@ class NotificationProvider {
         .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>();
 
     if (aPlugin == null) {
-      throw const AppException.unknown();
+      throw const AppException();
     }
 
     return NotificationProvider._internal(aPlugin);

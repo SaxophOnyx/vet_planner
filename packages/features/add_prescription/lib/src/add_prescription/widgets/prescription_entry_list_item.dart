@@ -2,17 +2,19 @@ import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
-import '../../shared/mappers/prescription_entry_type_mapper.dart';
 import '../../shared/models/prescription_entry_type.dart';
+import '../../shared/prescription_entry_type_mapper.dart';
 
 class PrescriptionEntryListItem extends StatelessWidget {
   final String title;
   final PrescriptionEntryType entryType;
+  final void Function() onDeletePressed;
 
   const PrescriptionEntryListItem({
     super.key,
     required this.title,
     required this.entryType,
+    required this.onDeletePressed,
   });
 
   @override
@@ -27,8 +29,8 @@ class PrescriptionEntryListItem extends StatelessWidget {
       tileColor: colors.container,
       title: Text(
         title,
-        style: AppFonts.inter16Regular.copyWith(
-          color: colors.text,
+        style: AppFonts.inter18SemiBold.copyWith(
+          color: colors.primary,
         ),
       ),
       subtitle: Text(
@@ -42,10 +44,13 @@ class PrescriptionEntryListItem extends StatelessWidget {
         size: AppDimens.DEFAULT_SMALL_ICON_SIZE,
         color: colors.text,
       ),
-      trailing: Icon(
-        Icons.delete,
-        size: AppDimens.DEFAULT_SMALL_ICON_SIZE,
-        color: colors.text,
+      trailing: GestureDetector(
+        onTap: onDeletePressed,
+        child: Icon(
+          Icons.delete,
+          size: AppDimens.DEFAULT_SMALL_ICON_SIZE,
+          color: colors.text,
+        ),
       ),
     );
   }
