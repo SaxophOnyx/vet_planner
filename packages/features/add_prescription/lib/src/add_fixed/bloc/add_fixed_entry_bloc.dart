@@ -10,15 +10,19 @@ part 'add_fixed_entry_state.dart';
 
 class AddFixedEntryBloc extends Bloc<AddFixedEntryEvent, AddFixedEntryState> {
   final AppRouter _appRouter;
+  final FindMedicationsByNameUseCase _findMedicationsByNameUseCase;
 
   AddFixedEntryBloc({
     required AppRouter appRouter,
+    required FindMedicationsByNameUseCase findMedicationsByNameUseCase,
   })  : _appRouter = appRouter,
+        _findMedicationsByNameUseCase = findMedicationsByNameUseCase,
         super(const AddFixedEntryState.initial()) {
     on<DayPressed>(_onDayPressed);
     on<UpdateDose>(_onUpdateDose);
     on<UpdateTime>(_onUpdateTime);
     on<UpdateMedicationName>(_onUpdateMedicationName);
+    on<SelectMedication>(_onSelectMedication);
     on<SubmitEntry>(_onSubmitEntry);
   }
 
@@ -53,20 +57,37 @@ class AddFixedEntryBloc extends Bloc<AddFixedEntryEvent, AddFixedEntryState> {
     ));
   }
 
-  void _onUpdateMedicationName(
+  Future<void> _onUpdateMedicationName(
     UpdateMedicationName event,
     Emitter<AddFixedEntryState> emit,
-  ) {
-    // TODO(SaxophOnyx): Implement search
-    final Medication medication = Medication(
-      id: 1,
-      name: event.name,
-      type: MedicationType.ampoule,
-      concentrationPerUnit: 0,
+  ) async {
+    final String name = event.name;
+
+    emit(state.copyWith(
+      isLoadingMedications: true,
+      medicationName: name,
+    ));
+
+    final List<Medication> patients = await _findMedicationsByNameUseCase.execute(
+      FindMedicationsByNamePayload(
+        name: name,
+        limit: AppConstants.SEARCH_BAR_LIMIT,
+      ),
     );
 
     emit(state.copyWith(
-      medication: medication,
+      suggestedMedications: patients,
+      isLoadingMedications: false,
+      medicationError: '',
+    ));
+  }
+
+  void _onSelectMedication(
+    SelectMedication event,
+    Emitter<AddFixedEntryState> emit,
+  ) {
+    emit(state.copyWith(
+      medication: event.medication,
       medicationError: '',
     ));
   }
@@ -76,7 +97,8 @@ class AddFixedEntryBloc extends Bloc<AddFixedEntryEvent, AddFixedEntryState> {
     Emitter<AddFixedEntryState> emit,
   ) async {
     final String datesError = state.dates.isNotEmpty ? '' : 'Select at least one day';
-    final String medicationError = state.medication.id != 0 ? '' : 'Select a medication';
+    final String medicationError =
+        (state.medication.id != 0 || state.medicationName.isNotEmpty) ? '' : 'Select a medication';
     final String doseError = state.dose != 0 ? '' : 'Select a dose';
 
     emit(state.copyWith(

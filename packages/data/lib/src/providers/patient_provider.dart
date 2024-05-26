@@ -52,4 +52,20 @@ class PatientProvider {
         .map((PatientTableData data) => PatientEntity.fromJson(data.toJson()))
         .getSingleOrNull();
   }
+
+  Future<List<PatientEntity>> findByName({
+    required String name,
+    required int limit,
+  }) async {
+    // ignore: always_specify_types
+    final query = _appDatabase.select(_appDatabase.patientTable)
+      ..where(($PatientTableTable table) => table.name.contains(name))
+      ..limit(limit);
+
+    return query
+        .map(
+          (PatientTableData data) => PatientEntity.fromJson(data.toJson()),
+        )
+        .get();
+  }
 }

@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -59,6 +60,7 @@ class _FixedEntryCalenderState extends State<FixedEntryCalender> {
             ),
           ),
           child: TableCalendar<int>(
+            locale: context.currentLocale.languageCode,
             sixWeekMonthsEnforced: true,
             startingDayOfWeek: StartingDayOfWeek.monday,
             pageAnimationCurve: AppDimens.DEFAULT_ANIMATION_CURVE,
@@ -67,7 +69,6 @@ class _FixedEntryCalenderState extends State<FixedEntryCalender> {
             availableGestures: AvailableGestures.horizontalSwipe,
             daysOfWeekHeight: 32,
             calendarStyle: CalendarStyle(
-              // TODO(SaxophOnyx): Enable outsideDaysVisible when fix jump issue
               outsideDaysVisible: false,
               isTodayHighlighted: false,
               defaultDecoration: defaultDecoration,

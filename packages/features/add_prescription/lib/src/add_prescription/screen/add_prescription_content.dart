@@ -52,9 +52,10 @@ class _AddPrescriptionContentState extends State<AddPrescriptionContent> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
-                      SearchBarWithSuggestions<Patient>(
-                        label: 'Patient',
-                        nothingFoundLabel: 'Nothing found, patient will be created',
+                      AppSearchTextField<Patient>(
+                        label: LocaleKeys.addPrescription_main_patient.observeTranslation(context),
+                        nothingFoundLabel: LocaleKeys.addPrescription_main_patientsNotFound
+                            .observeTranslation(context),
                         error: state.patientError,
                         isReloading: state.isLoadingPatientSuggestions,
                         suggestions: state.patientSuggestions,

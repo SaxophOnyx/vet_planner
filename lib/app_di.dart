@@ -65,10 +65,6 @@ Future<void> _setupProviders() async {
       appDatabase: appDI.get<AppDatabase>(),
     ),
   );
-
-  appDI.registerSingleton<NotificationProvider>(
-    NotificationProvider(),
-  );
 }
 
 Future<void> _setupRepositories() async {
@@ -99,12 +95,6 @@ Future<void> _setupRepositories() async {
       patientProvider: appDI.get<PatientProvider>(),
     ),
   );
-
-  appDI.registerSingleton<NotificationsRepository>(
-    NotificationRepositoryImpl(
-      notificationProvider: appDI.get<NotificationProvider>(),
-    ),
-  );
 }
 
 Future<void> _setupUseCases() async {
@@ -128,6 +118,12 @@ Future<void> _setupUseCases() async {
 
   appDI.registerSingleton<AddMedicationUseCase>(
     AddMedicationUseCase(
+      medicationRepository: appDI.get<MedicationRepository>(),
+    ),
+  );
+
+  appDI.registerSingleton<FindMedicationsByNameUseCase>(
+    FindMedicationsByNameUseCase(
       medicationRepository: appDI.get<MedicationRepository>(),
     ),
   );
@@ -174,6 +170,12 @@ Future<void> _setupUseCases() async {
     ),
   );
 
+  appDI.registerSingleton<FindPatientsByNameUseCase>(
+    FindPatientsByNameUseCase(
+      patientRepository: appDI.get<PatientRepository>(),
+    ),
+  );
+
   appDI.registerSingleton<GetPatientByIdUseCase>(
     GetPatientByIdUseCase(
       patientRepository: appDI.get<PatientRepository>(),
@@ -184,6 +186,18 @@ Future<void> _setupUseCases() async {
     TestUseCase(
       patientRepository: appDI.get<PatientRepository>(),
       prescriptionRepository: appDI.get<PrescriptionRepository>(),
+      medicationRepository: appDI.get<MedicationRepository>(),
+    ),
+  );
+
+  appDI.registerSingleton<GetPendingPrescriptionEntriesUseCase>(
+    GetPendingPrescriptionEntriesUseCase(
+      prescriptionRepository: appDI.get<PrescriptionRepository>(),
+    ),
+  );
+
+  appDI.registerSingleton<GetPendingStoredMedicationsUseCase>(
+    GetPendingStoredMedicationsUseCase(
       medicationRepository: appDI.get<MedicationRepository>(),
     ),
   );

@@ -22,7 +22,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     StartLoading event,
     Emitter<SplashState> emit,
   ) async {
-    await Future<void>.delayed(const Duration(milliseconds: Constants.MIN_SPLASH_DURATION_MS));
+    await Future<void>.delayed(const Duration(milliseconds: AppConstants.MIN_SPLASH_DURATION_MS));
     unawaited(_appRouter.replace(const HomeRoute()));
   }
 }

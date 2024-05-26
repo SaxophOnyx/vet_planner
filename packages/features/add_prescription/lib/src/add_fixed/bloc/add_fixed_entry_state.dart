@@ -10,6 +10,10 @@ class AddFixedEntryState {
   final String datesError;
   final String doseError;
 
+  final String medicationName;
+  final List<Medication> suggestedMedications;
+  final bool isLoadingMedications;
+
   bool get hasError => medicationError.isNotEmpty || datesError.isNotEmpty || doseError.isNotEmpty;
 
   const AddFixedEntryState.initial()
@@ -18,7 +22,11 @@ class AddFixedEntryState {
         dose = 0,
         hour = 0,
         medicationError = '',
-        datesError = '', doseError = '';
+        datesError = '',
+        doseError = '',
+        medicationName = '',
+        suggestedMedications = const <Medication>[],
+        isLoadingMedications = false;
 
   const AddFixedEntryState({
     required this.medication,
@@ -28,6 +36,9 @@ class AddFixedEntryState {
     required this.medicationError,
     required this.datesError,
     required this.doseError,
+    required this.medicationName,
+    required this.suggestedMedications,
+    required this.isLoadingMedications,
   });
 
   AddFixedEntryState copyWith({
@@ -38,6 +49,9 @@ class AddFixedEntryState {
     String? medicationError,
     String? datesError,
     String? doseError,
+    String? medicationName,
+    List<Medication>? suggestedMedications,
+    bool? isLoadingMedications,
   }) {
     return AddFixedEntryState(
       medication: medication ?? this.medication,
@@ -47,6 +61,9 @@ class AddFixedEntryState {
       medicationError: medicationError ?? this.medicationError,
       datesError: datesError ?? this.datesError,
       doseError: doseError ?? this.doseError,
+      medicationName: medicationName ?? this.medicationName,
+      suggestedMedications: suggestedMedications ?? this.suggestedMedications,
+      isLoadingMedications: isLoadingMedications ?? this.isLoadingMedications,
     );
   }
 }

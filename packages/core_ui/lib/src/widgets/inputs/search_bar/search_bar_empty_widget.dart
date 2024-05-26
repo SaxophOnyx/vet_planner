@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../../core_ui.dart';
 
 class SearchBarEmptyWidget extends StatelessWidget {
+  final String nothingFoundLabel;
   final bool isSearchStringEmpty;
 
   const SearchBarEmptyWidget({
     super.key,
+    required this.nothingFoundLabel,
     required this.isSearchStringEmpty,
   });
 
@@ -18,11 +20,16 @@ class SearchBarEmptyWidget extends StatelessWidget {
       return const SizedBox();
     }
 
-    return ListTile(
-      title: Text(
-        'Nothing found',
-        style: AppFonts.inter16Regular.copyWith(
-          color: colors.text,
+    return Container(
+      height: AppDimens.DEFAULT_CONTROL_HEIGHT,
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(AppDimens.DEFAULT_CONTAINER_PADDING),
+      child: FittedBox(
+        child: Text(
+          nothingFoundLabel,
+          style: AppFonts.inter16Regular.copyWith(
+            color: colors.text,
+          ),
         ),
       ),
     );

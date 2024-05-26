@@ -61,7 +61,7 @@ class MedicationRepositoryImpl implements MedicationRepository {
   }
 
   @override
-  Future<List<List<StoredMedication>>> getStoredMedications({
+  Future<List<List<StoredMedication>>> getStoredMedicationsForMedications({
     required List<int> medicationIds,
     int? maxItems,
   }) async {
@@ -69,7 +69,7 @@ class MedicationRepositoryImpl implements MedicationRepository {
 
     for (final int id in medicationIds) {
       final List<StoredMedicationEntity> entities =
-          await _storedMedicationProvider.getStoredMedicationsForId(
+          await _storedMedicationProvider.getStoredMedicationsForMedicationId(
         medicationId: id,
         maxItems: maxItems,
       );
@@ -80,5 +80,28 @@ class MedicationRepositoryImpl implements MedicationRepository {
     }
 
     return result;
+  }
+
+  @override
+  Future<List<Medication>> findByName({
+    required String name,
+    required int limit,
+  }) async {
+    final List<MedicationEntity> entities = await _medicationProvider.findByName(
+      name: name,
+      limit: limit,
+    );
+
+    return entities.map(MedicationMapper.fromEntity).toList();
+  }
+
+  @override
+  Future<List<StoredMedication>> getPendingStoredMedications() async {
+    final int start = DateTime.now().millisecondsSinceEpoch;
+
+    final List<StoredMedicationEntity> entities =
+        await _storedMedicationProvider.getExpiredStoredMedicationsSince(start);
+
+    return entities.map(StoredMedicationMapper.fromEntity).toList();
   }
 }

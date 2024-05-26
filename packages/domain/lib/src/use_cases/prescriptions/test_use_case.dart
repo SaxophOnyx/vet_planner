@@ -109,7 +109,8 @@ class TestUseCase extends FutureUseCase<PrescriptionPlan, void> {
   }
 
   Future<Map<int, List<StoredMedication>>> _getStored(List<int> medicationIds) async {
-    final List<List<StoredMedication>> storedRaw = await _medicationRepository.getStoredMedications(
+    final List<List<StoredMedication>> storedRaw =
+        await _medicationRepository.getStoredMedicationsForMedications(
       medicationIds: medicationIds,
     );
 

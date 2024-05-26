@@ -10,6 +10,7 @@ abstract class WorkmanagerService {
   }) async {
     await _workmanager.initialize(
       callback,
+      // TODO(SaxophOnyx): Remove flag
       isInDebugMode: true,
     );
   }
@@ -24,18 +25,18 @@ abstract class WorkmanagerService {
 
   static Future<void> scheduleA() async {
     await _workmanager.registerOneOffTask(
-      Constants.HANDLER_A_UNIQUE_NAME,
-      Constants.HANDLER_A_TASK_NAME,
-      initialDelay: Constants.HANDLER_CALL_PERIOD,
+      AppConstants.HANDLER_A_UNIQUE_NAME,
+      AppConstants.HANDLER_A_TASK_NAME,
+      initialDelay: AppConstants.HANDLER_CALL_PERIOD,
       existingWorkPolicy: ExistingWorkPolicy.replace,
     );
   }
 
   static Future<void> scheduleB() async {
     await _workmanager.registerOneOffTask(
-      Constants.HANDLER_B_UNIQUE_NAME,
-      Constants.HANDLER_B_TASK_NAME,
-      initialDelay: Constants.HANDLER_CALL_PERIOD,
+      AppConstants.HANDLER_B_UNIQUE_NAME,
+      AppConstants.HANDLER_B_TASK_NAME,
+      initialDelay: AppConstants.HANDLER_CALL_PERIOD,
       existingWorkPolicy: ExistingWorkPolicy.replace,
     );
   }

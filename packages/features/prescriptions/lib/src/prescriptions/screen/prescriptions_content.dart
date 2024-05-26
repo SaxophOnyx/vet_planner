@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -13,8 +14,8 @@ class PrescriptionsContent extends StatelessWidget {
     final PrescriptionsBloc bloc = context.read<PrescriptionsBloc>();
 
     return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Prescriptions',
+      appBar: CustomAppBar(
+        title: LocaleKeys.prescriptions_title.observeTranslation(context),
         style: CustomAppBarStyle.secondary,
       ),
       backgroundColor: colors.background,

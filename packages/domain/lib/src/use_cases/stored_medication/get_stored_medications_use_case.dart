@@ -10,7 +10,8 @@ class GetStoredMedicationsPayload {
   });
 }
 
-class GetStoredMedicationsUseCase extends FutureUseCase<GetStoredMedicationsPayload, List<List<StoredMedication>>> {
+class GetStoredMedicationsUseCase
+    extends FutureUseCase<GetStoredMedicationsPayload, List<List<StoredMedication>>> {
   final MedicationRepository _medicationRepository;
 
   GetStoredMedicationsUseCase({
@@ -19,7 +20,7 @@ class GetStoredMedicationsUseCase extends FutureUseCase<GetStoredMedicationsPayl
 
   @override
   Future<List<List<StoredMedication>>> execute(GetStoredMedicationsPayload payload) async {
-    return _medicationRepository.getStoredMedications(
+    return _medicationRepository.getStoredMedicationsForMedications(
       medicationIds: payload.medicationIds,
       maxItems: payload.maxItems,
     );

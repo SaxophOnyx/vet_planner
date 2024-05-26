@@ -62,17 +62,24 @@
       "submit": "Подтвердить"
     }
   },
+  "prescriptions": {
+    "title": "Назначения"
+  },
   "addPrescription": {
     "entryTypes": {
       "fixed": "Fixed",
       "periodic": "Periodic"
     },
     "main": {
-      "title": "New prescription",
-      "commentOptional": "Comment (optional)",
-      "prescriptionEntries": "Prescription entries",
-      "addEntry": "Add another entry",
-      "submit": "Submit prescription"
+      "title": "Новое назначение",
+      "commentOptional": "Комментарий (необязательный)",
+      "prescriptionEntries": "Планы приема",
+      "addEntry": "Добавить новый план",
+      "submit": "Подтвердить назначение",
+      "patient": "Пациент",
+      "patientsNotFound": "Пациент не найден; запись о нем будет создана",
+      "selectPatient": "Выберите пациента",
+      "enterPrescriptionEntry": "Укажите хотя бы один план приема"
     },
     "chooseType": {
       "title": "Choose entry type"

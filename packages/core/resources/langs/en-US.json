@@ -62,6 +62,9 @@
       "submit": "Submit"
     }
   },
+  "prescriptions": {
+    "title": "Prescriptions"
+  },
   "addPrescription": {
     "entryTypes": {
       "fixed": "Fixed",
@@ -72,7 +75,11 @@
       "commentOptional": "Comment (optional)",
       "prescriptionEntries": "Prescription entries",
       "addEntry": "Add another entry",
-      "submit": "Submit prescription"
+      "submit": "Submit prescription",
+      "patient": "Patient",
+      "patientsNotFound": "Nothing found, patient will be created",
+      "selectPatient": "Select a patient",
+      "enterPrescriptionEntry": "Enter al least one prescription entry"
     },
     "chooseType": {
       "title": "Choose entry type"

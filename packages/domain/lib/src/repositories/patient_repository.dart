@@ -12,4 +12,9 @@ abstract class PatientRepository {
   Future<void> deletePatient({required int id});
 
   Future<Patient> getById({required int id});
+
+  Future<List<Patient>> findByName({
+    required String name,
+    required int limit,
+  });
 }

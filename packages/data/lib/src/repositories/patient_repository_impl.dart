@@ -42,4 +42,17 @@ class PatientRepositoryImpl implements PatientRepository {
 
     throw const AppException();
   }
+
+  @override
+  Future<List<Patient>> findByName({
+    required String name,
+    required int limit,
+  }) async {
+    final List<PatientEntity> entities = await _patientProvider.findByName(
+      name: name,
+      limit: limit,
+    );
+
+    return entities.map(PatientMapper.fromEntity).toList();
+  }
 }

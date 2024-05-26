@@ -11,7 +11,7 @@ abstract class MedicationRepository {
     required int concentrationPerUnit,
   });
 
-  Future<List<List<StoredMedication>>> getStoredMedications({
+  Future<List<List<StoredMedication>>> getStoredMedicationsForMedications({
     required List<int> medicationIds,
     int? maxItems,
   });
@@ -22,4 +22,11 @@ abstract class MedicationRepository {
     required int quantity,
     String? manualTitle,
   });
+
+  Future<List<Medication>> findByName({
+    required String name,
+    required int limit,
+  });
+
+  Future<List<StoredMedication>> getPendingStoredMedications();
 }

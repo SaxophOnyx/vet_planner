@@ -28,6 +28,12 @@ class UpdateMedicationName extends AddFixedEntryEvent {
   const UpdateMedicationName(this.name);
 }
 
+class SelectMedication extends AddFixedEntryEvent {
+  final Medication medication;
+
+  const SelectMedication(this.medication);
+}
+
 class SubmitEntry extends AddFixedEntryEvent {
   const SubmitEntry();
 }

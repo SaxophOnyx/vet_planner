@@ -50,8 +50,6 @@ abstract class  LocaleKeys {
   static const medKit_addStored_submit = 'medKit.addStored.submit';
   static const medKit_addStored = 'medKit.addStored';
   static const medKit = 'medKit';
-  static const prescriptions_title = 'prescriptions.title';
-  static const prescriptions = 'prescriptions';
   static const addPrescription_entryTypes_fixed = 'addPrescription.entryTypes.fixed';
   static const addPrescription_entryTypes_periodic = 'addPrescription.entryTypes.periodic';
   static const addPrescription_entryTypes = 'addPrescription.entryTypes';
@@ -60,14 +58,12 @@ abstract class  LocaleKeys {
   static const addPrescription_main_prescriptionEntries = 'addPrescription.main.prescriptionEntries';
   static const addPrescription_main_addEntry = 'addPrescription.main.addEntry';
   static const addPrescription_main_submit = 'addPrescription.main.submit';
-  static const addPrescription_main_patient = 'addPrescription.main.patient';
-  static const addPrescription_main_patientsNotFound = 'addPrescription.main.patientsNotFound';
-  static const addPrescription_main_selectPatient = 'addPrescription.main.selectPatient';
-  static const addPrescription_main_enterPrescriptionEntry = 'addPrescription.main.enterPrescriptionEntry';
   static const addPrescription_main = 'addPrescription.main';
   static const addPrescription_chooseType_title = 'addPrescription.chooseType.title';
   static const addPrescription_chooseType = 'addPrescription.chooseType';
   static const addPrescription_addFixed_title = 'addPrescription.addFixed.title';
+  static const addPrescription_addFixed_patient = 'addPrescription.addFixed.patient';
+  static const addPrescription_addFixed_patientsNotFound = 'addPrescription.addFixed.patientsNotFound';
   static const addPrescription_addFixed = 'addPrescription.addFixed';
   static const addPrescription = 'addPrescription';
 

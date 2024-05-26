@@ -13,12 +13,15 @@ part 'add_prescription_state.dart';
 class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionState> {
   final AppRouter _appRouter;
   final AddPrescriptionUseCase _addPrescriptionUseCase;
+  final FindPatientsByNameUseCase _findPatientsByNameUseCase;
 
   AddPrescriptionBloc({
     required AppRouter appRouter,
     required AddPrescriptionUseCase addPrescriptionUseCase,
+    required FindPatientsByNameUseCase findPatientsByNameUseCase,
   })  : _appRouter = appRouter,
         _addPrescriptionUseCase = addPrescriptionUseCase,
+        _findPatientsByNameUseCase = findPatientsByNameUseCase,
         super(const AddPrescriptionState.initial()) {
     on<UpdatePatientName>(_onUpdatePatientName);
     on<SelectPatient>(_onSelectPatient);
@@ -41,30 +44,24 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
     UpdatePatientName event,
     Emitter<AddPrescriptionState> emit,
   ) async {
-    // TODO(SaxophOnyx): Implement search
+    final String name = event.name;
+
     emit(state.copyWith(
       isLoadingPatientSuggestions: true,
-      patientName: event.name,
+      patientName: name,
     ));
 
-    await Future<void>.delayed(const Duration(seconds: 2));
+    final List<Patient> patients = await _findPatientsByNameUseCase.execute(
+      FindPatientsByNamePayload(
+        name: name,
+        limit: AppConstants.SEARCH_BAR_LIMIT,
+      ),
+    );
 
     emit(state.copyWith(
-      patientSuggestions: <Patient>[
-        Patient(
-          id: 1,
-          name: event.name + '1',
-        ),
-        Patient(
-          id: 1,
-          name: event.name + '2',
-        ),
-        Patient(
-          id: 1,
-          name: event.name + '3',
-        ),
-      ],
+      patientSuggestions: patients,
       isLoadingPatientSuggestions: false,
+      patientError: '',
     ));
   }
 
@@ -132,9 +129,13 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
     SubmitPrescription event,
     Emitter<AddPrescriptionState> emit,
   ) async {
-    final String patientError = state.patient.id != 0 ? '' : 'Select a patient';
-    final String fixedEntriesError =
-        state.fixedEntries.isNotEmpty ? '' : 'Enter al least one prescription entry';
+    final String patientError = (state.patient.id != 0 || state.patientName.isNotEmpty)
+        ? ''
+        : LocaleKeys.addPrescription_main_selectPatient.translate();
+
+    final String fixedEntriesError = state.fixedEntries.isNotEmpty
+        ? ''
+        : LocaleKeys.addPrescription_main_enterPrescriptionEntry.translate();
 
     emit(state.copyWith(
       patientError: patientError,

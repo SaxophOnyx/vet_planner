@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
 import '../../shared/prescription_service.dart';
@@ -46,17 +47,23 @@ class _AddFixedEntryContentState extends State<AddFixedEntryContent> {
             children: <Widget>[
               BlocBuilder<AddFixedEntryBloc, AddFixedEntryState>(
                 builder: (BuildContext context, AddFixedEntryState state) {
-                  return AppSearchTextField(
+                  return AppSearchTextField<Medication>(
                     label: 'Medication',
-                    textEditingController: _medicationController,
                     error: state.medicationError,
+                    nothingFoundLabel: 'No medications found',
+                    isReloading: state.isLoadingMedications,
+                    suggestions: state.suggestedMedications,
+                    stringifier: (Medication item) => item.name,
+                    onSearchStringUpdated: (String name) => bloc.add(UpdateMedicationName(name)),
+                    onSelected: (Medication item) => bloc.add(SelectMedication(item)),
                   );
                 },
               ),
               const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
               BlocBuilder<AddFixedEntryBloc, AddFixedEntryState>(
                 buildWhen: (AddFixedEntryState prev, AddFixedEntryState curr) {
-                  return (prev.dates.length != curr.dates.length) || (prev.datesError != curr.datesError);
+                  return (prev.dates.length != curr.dates.length) ||
+                      (prev.datesError != curr.datesError);
                 },
                 builder: (BuildContext context, AddFixedEntryState state) {
                   return FixedEntryCalender(
@@ -74,7 +81,8 @@ class _AddFixedEntryContentState extends State<AddFixedEntryContent> {
                       AppCarousel<int>(
                         label: 'Dose',
                         value: state.dose,
-                        values: PrescriptionService.getAvailableDosages(state.medication.type.measurementUnit),
+                        values: PrescriptionService.getAvailableDosages(
+                            state.medication.type.measurementUnit),
                         onValueChanged: (int value) => bloc.add(UpdateDose(value)),
                         stringifier: (int item) => item.toString(),
                         style: AppCarouselStyle.small,

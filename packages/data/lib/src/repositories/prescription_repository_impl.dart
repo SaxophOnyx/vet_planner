@@ -29,7 +29,7 @@ class PrescriptionRepositoryImpl implements PrescriptionRepository {
     final Map<int, List<_PrescriptionPlanEntry>> flatPlans = _processPlan(plan);
 
     final Map<int, List<StoredMedicationEntity>> storedMedications = await _storedMedicationProvider
-        .getStoredMedicationsForIds(medicationIds: flatPlans.keys.toList());
+        .getStoredMedicationsForMedicationIds(medicationIds: flatPlans.keys.toList());
 
     for (final List<StoredMedicationEntity> list in storedMedications.values) {
       list.sort(

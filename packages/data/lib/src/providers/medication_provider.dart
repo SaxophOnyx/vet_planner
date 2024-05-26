@@ -1,3 +1,5 @@
+import 'package:drift/drift.dart';
+
 import '../../data.dart';
 
 class MedicationProvider {
@@ -33,5 +35,21 @@ class MedicationProvider {
       medicationTypeId: medicationTypeId,
       concentrationPerUnit: concentrationPerUnit,
     );
+  }
+
+  Future<List<MedicationEntity>> findByName({
+    required String name,
+    required int limit,
+  }) async {
+    // ignore: always_specify_types
+    final query = _appDatabase.select(_appDatabase.medicationTable)
+      ..where(($MedicationTableTable table) => table.name.contains(name))
+      ..limit(limit);
+
+    return query
+        .map(
+          (MedicationTableData data) => MedicationEntity.fromJson(data.toJson()),
+        )
+        .get();
   }
 }
