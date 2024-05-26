@@ -17,6 +17,7 @@ dependencies:
   dropdown_button2: ^2.3.9
   carousel_slider: ^4.2.1
   animated_toggle_switch: ^0.8.2
+  flutter_typeahead: ^5.2.0
 
 dev_dependencies:
   lints: ^2.0.0

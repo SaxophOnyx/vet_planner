@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 
 import '../bloc/add_prescription_bloc.dart';
@@ -15,19 +16,16 @@ class AddPrescriptionContent extends StatefulWidget {
 class _AddPrescriptionContentState extends State<AddPrescriptionContent> {
   late final AddPrescriptionBloc _bloc = context.read<AddPrescriptionBloc>();
   final TextEditingController _commentController = TextEditingController();
-  final TextEditingController _patientController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _commentController.addListener(() => _bloc.add(UpdateComment(_commentController.text)));
-    _patientController.addListener(() => _bloc.add(UpdatePatientName(_patientController.text)));
   }
 
   @override
   void dispose() {
     _commentController.dispose();
-    _patientController.dispose();
     super.dispose();
   }
 
@@ -54,20 +52,27 @@ class _AddPrescriptionContentState extends State<AddPrescriptionContent> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
-                      AppSearchTextField(
+                      SearchBarWithSuggestions<Patient>(
                         label: 'Patient',
-                        textEditingController: _patientController,
+                        nothingFoundLabel: 'Nothing found, patient will be created',
                         error: state.patientError,
+                        isReloading: state.isLoadingPatientSuggestions,
+                        suggestions: state.patientSuggestions,
+                        stringifier: (Patient patient) => patient.name,
+                        onSearchStringUpdated: (String name) => _bloc.add(UpdatePatientName(name)),
+                        onSelected: (Patient patient) => _bloc.add(SelectPatient(patient)),
                       ),
                       const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                       AppTextField(
-                        label: LocaleKeys.addPrescription_main_commentOptional.observeTranslation(context),
+                        label: LocaleKeys.addPrescription_main_commentOptional
+                            .observeTranslation(context),
                         textEditingController: _commentController,
                         isMultiline: true,
                       ),
                       const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                       Text(
-                        LocaleKeys.addPrescription_main_prescriptionEntries.observeTranslation(context),
+                        LocaleKeys.addPrescription_main_prescriptionEntries
+                            .observeTranslation(context),
                         style: AppFonts.inter16Regular.copyWith(
                           color: colors.textSecondary,
                         ),

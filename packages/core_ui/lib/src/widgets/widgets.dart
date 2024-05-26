@@ -15,4 +15,5 @@ export 'inputs/app_toggle.dart';
 export 'inputs/carousel/app_carousel.dart';
 export 'inputs/carousel/app_carousel_style.dart';
 export 'inputs/search_bar/app_search_bar.dart';
+export 'inputs/search_bar/search_bar_with_suggestions.dart';
 export 'utils/no_glow_scroll_behavior.dart';

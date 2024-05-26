@@ -59,7 +59,7 @@ class AddFixedEntryBloc extends Bloc<AddFixedEntryEvent, AddFixedEntryState> {
   ) {
     // TODO(SaxophOnyx): Implement search
     final Medication medication = Medication(
-      id: event.name.length,
+      id: 1,
       name: event.name,
       type: MedicationType.ampoule,
       concentrationPerUnit: 0,

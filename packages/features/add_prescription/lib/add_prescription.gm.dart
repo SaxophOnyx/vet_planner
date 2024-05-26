@@ -38,7 +38,7 @@ abstract class $AddPrescriptionModule extends _i5.AutoRouterModule {
       );
     },
     AddPrescriptionRoute.name: (routeData) {
-      return _i5.AutoRoutePage<dynamic>(
+      return _i5.AutoRoutePage<bool>(
         routeData: routeData,
         child: const _i3.AddPrescriptionScreen(),
       );

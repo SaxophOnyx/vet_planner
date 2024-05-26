@@ -659,6 +659,222 @@ class StoredMedicationsTableCompanion
   }
 }
 
+class $PrescriptionTableTable extends PrescriptionTable
+    with TableInfo<$PrescriptionTableTable, PrescriptionTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PrescriptionTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _patientIdMeta =
+      const VerificationMeta('patientId');
+  @override
+  late final GeneratedColumn<int> patientId = GeneratedColumn<int>(
+      'patient_id', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  static const VerificationMeta _commentMeta =
+      const VerificationMeta('comment');
+  @override
+  late final GeneratedColumn<String> comment = GeneratedColumn<String>(
+      'comment', aliasedName, true,
+      type: DriftSqlType.string, requiredDuringInsert: false);
+  @override
+  List<GeneratedColumn> get $columns => [id, patientId, comment];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'prescription_table';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<PrescriptionTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('patient_id')) {
+      context.handle(_patientIdMeta,
+          patientId.isAcceptableOrUnknown(data['patient_id']!, _patientIdMeta));
+    } else if (isInserting) {
+      context.missing(_patientIdMeta);
+    }
+    if (data.containsKey('comment')) {
+      context.handle(_commentMeta,
+          comment.isAcceptableOrUnknown(data['comment']!, _commentMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PrescriptionTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PrescriptionTableData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      patientId: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}patient_id'])!,
+      comment: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}comment']),
+    );
+  }
+
+  @override
+  $PrescriptionTableTable createAlias(String alias) {
+    return $PrescriptionTableTable(attachedDatabase, alias);
+  }
+}
+
+class PrescriptionTableData extends DataClass
+    implements Insertable<PrescriptionTableData> {
+  final int id;
+  final int patientId;
+  final String? comment;
+  const PrescriptionTableData(
+      {required this.id, required this.patientId, this.comment});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['patient_id'] = Variable<int>(patientId);
+    if (!nullToAbsent || comment != null) {
+      map['comment'] = Variable<String>(comment);
+    }
+    return map;
+  }
+
+  PrescriptionTableCompanion toCompanion(bool nullToAbsent) {
+    return PrescriptionTableCompanion(
+      id: Value(id),
+      patientId: Value(patientId),
+      comment: comment == null && nullToAbsent
+          ? const Value.absent()
+          : Value(comment),
+    );
+  }
+
+  factory PrescriptionTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PrescriptionTableData(
+      id: serializer.fromJson<int>(json['id']),
+      patientId: serializer.fromJson<int>(json['patientId']),
+      comment: serializer.fromJson<String?>(json['comment']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'patientId': serializer.toJson<int>(patientId),
+      'comment': serializer.toJson<String?>(comment),
+    };
+  }
+
+  PrescriptionTableData copyWith(
+          {int? id,
+          int? patientId,
+          Value<String?> comment = const Value.absent()}) =>
+      PrescriptionTableData(
+        id: id ?? this.id,
+        patientId: patientId ?? this.patientId,
+        comment: comment.present ? comment.value : this.comment,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('PrescriptionTableData(')
+          ..write('id: $id, ')
+          ..write('patientId: $patientId, ')
+          ..write('comment: $comment')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, patientId, comment);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PrescriptionTableData &&
+          other.id == this.id &&
+          other.patientId == this.patientId &&
+          other.comment == this.comment);
+}
+
+class PrescriptionTableCompanion
+    extends UpdateCompanion<PrescriptionTableData> {
+  final Value<int> id;
+  final Value<int> patientId;
+  final Value<String?> comment;
+  const PrescriptionTableCompanion({
+    this.id = const Value.absent(),
+    this.patientId = const Value.absent(),
+    this.comment = const Value.absent(),
+  });
+  PrescriptionTableCompanion.insert({
+    this.id = const Value.absent(),
+    required int patientId,
+    this.comment = const Value.absent(),
+  }) : patientId = Value(patientId);
+  static Insertable<PrescriptionTableData> custom({
+    Expression<int>? id,
+    Expression<int>? patientId,
+    Expression<String>? comment,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (patientId != null) 'patient_id': patientId,
+      if (comment != null) 'comment': comment,
+    });
+  }
+
+  PrescriptionTableCompanion copyWith(
+      {Value<int>? id, Value<int>? patientId, Value<String?>? comment}) {
+    return PrescriptionTableCompanion(
+      id: id ?? this.id,
+      patientId: patientId ?? this.patientId,
+      comment: comment ?? this.comment,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (patientId.present) {
+      map['patient_id'] = Variable<int>(patientId.value);
+    }
+    if (comment.present) {
+      map['comment'] = Variable<String>(comment.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PrescriptionTableCompanion(')
+          ..write('id: $id, ')
+          ..write('patientId: $patientId, ')
+          ..write('comment: $comment')
+          ..write(')'))
+        .toString();
+  }
+}
+
 class $PrescriptionEntryTableTable extends PrescriptionEntryTable
     with TableInfo<$PrescriptionEntryTableTable, PrescriptionEntryTableData> {
   @override
@@ -962,6 +1178,181 @@ class PrescriptionEntryTableCompanion
   }
 }
 
+class $PatientTableTable extends PatientTable
+    with TableInfo<$PatientTableTable, PatientTableData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $PatientTableTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      hasAutoIncrement: true,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints:
+          GeneratedColumn.constraintIsAlways('PRIMARY KEY AUTOINCREMENT'));
+  static const VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      defaultConstraints: GeneratedColumn.constraintIsAlways('UNIQUE'));
+  @override
+  List<GeneratedColumn> get $columns => [id, name];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'patient_table';
+  @override
+  VerificationContext validateIntegrity(Insertable<PatientTableData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PatientTableData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return PatientTableData(
+      id: attachedDatabase.typeMapping
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+    );
+  }
+
+  @override
+  $PatientTableTable createAlias(String alias) {
+    return $PatientTableTable(attachedDatabase, alias);
+  }
+}
+
+class PatientTableData extends DataClass
+    implements Insertable<PatientTableData> {
+  final int id;
+  final String name;
+  const PatientTableData({required this.id, required this.name});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    return map;
+  }
+
+  PatientTableCompanion toCompanion(bool nullToAbsent) {
+    return PatientTableCompanion(
+      id: Value(id),
+      name: Value(name),
+    );
+  }
+
+  factory PatientTableData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return PatientTableData(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+    };
+  }
+
+  PatientTableData copyWith({int? id, String? name}) => PatientTableData(
+        id: id ?? this.id,
+        name: name ?? this.name,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('PatientTableData(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is PatientTableData &&
+          other.id == this.id &&
+          other.name == this.name);
+}
+
+class PatientTableCompanion extends UpdateCompanion<PatientTableData> {
+  final Value<int> id;
+  final Value<String> name;
+  const PatientTableCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+  });
+  PatientTableCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+  }) : name = Value(name);
+  static Insertable<PatientTableData> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+    });
+  }
+
+  PatientTableCompanion copyWith({Value<int>? id, Value<String>? name}) {
+    return PatientTableCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PatientTableCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   _$AppDatabaseManager get managers => _$AppDatabaseManager(this);
@@ -969,14 +1360,22 @@ abstract class _$AppDatabase extends GeneratedDatabase {
       $MedicationTableTable(this);
   late final $StoredMedicationsTableTable storedMedicationsTable =
       $StoredMedicationsTableTable(this);
+  late final $PrescriptionTableTable prescriptionTable =
+      $PrescriptionTableTable(this);
   late final $PrescriptionEntryTableTable prescriptionEntryTable =
       $PrescriptionEntryTableTable(this);
+  late final $PatientTableTable patientTable = $PatientTableTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [medicationTable, storedMedicationsTable, prescriptionEntryTable];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [
+        medicationTable,
+        storedMedicationsTable,
+        prescriptionTable,
+        prescriptionEntryTable,
+        patientTable
+      ];
 }
 
 typedef $$MedicationTableTableInsertCompanionBuilder = MedicationTableCompanion
@@ -1273,6 +1672,113 @@ class $$StoredMedicationsTableTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
+typedef $$PrescriptionTableTableInsertCompanionBuilder
+    = PrescriptionTableCompanion Function({
+  Value<int> id,
+  required int patientId,
+  Value<String?> comment,
+});
+typedef $$PrescriptionTableTableUpdateCompanionBuilder
+    = PrescriptionTableCompanion Function({
+  Value<int> id,
+  Value<int> patientId,
+  Value<String?> comment,
+});
+
+class $$PrescriptionTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $PrescriptionTableTable,
+    PrescriptionTableData,
+    $$PrescriptionTableTableFilterComposer,
+    $$PrescriptionTableTableOrderingComposer,
+    $$PrescriptionTableTableProcessedTableManager,
+    $$PrescriptionTableTableInsertCompanionBuilder,
+    $$PrescriptionTableTableUpdateCompanionBuilder> {
+  $$PrescriptionTableTableTableManager(
+      _$AppDatabase db, $PrescriptionTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$PrescriptionTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer: $$PrescriptionTableTableOrderingComposer(
+              ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $$PrescriptionTableTableProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            Value<int> patientId = const Value.absent(),
+            Value<String?> comment = const Value.absent(),
+          }) =>
+              PrescriptionTableCompanion(
+            id: id,
+            patientId: patientId,
+            comment: comment,
+          ),
+          getInsertCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            required int patientId,
+            Value<String?> comment = const Value.absent(),
+          }) =>
+              PrescriptionTableCompanion.insert(
+            id: id,
+            patientId: patientId,
+            comment: comment,
+          ),
+        ));
+}
+
+class $$PrescriptionTableTableProcessedTableManager
+    extends ProcessedTableManager<
+        _$AppDatabase,
+        $PrescriptionTableTable,
+        PrescriptionTableData,
+        $$PrescriptionTableTableFilterComposer,
+        $$PrescriptionTableTableOrderingComposer,
+        $$PrescriptionTableTableProcessedTableManager,
+        $$PrescriptionTableTableInsertCompanionBuilder,
+        $$PrescriptionTableTableUpdateCompanionBuilder> {
+  $$PrescriptionTableTableProcessedTableManager(super.$state);
+}
+
+class $$PrescriptionTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $PrescriptionTableTable> {
+  $$PrescriptionTableTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<int> get patientId => $state.composableBuilder(
+      column: $state.table.patientId,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get comment => $state.composableBuilder(
+      column: $state.table.comment,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$PrescriptionTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $PrescriptionTableTable> {
+  $$PrescriptionTableTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<int> get patientId => $state.composableBuilder(
+      column: $state.table.patientId,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get comment => $state.composableBuilder(
+      column: $state.table.comment,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
 typedef $$PrescriptionEntryTableTableInsertCompanionBuilder
     = PrescriptionEntryTableCompanion Function({
   Value<int> id,
@@ -1412,6 +1918,95 @@ class $$PrescriptionEntryTableTableOrderingComposer
           ColumnOrderings(column, joinBuilders: joinBuilders));
 }
 
+typedef $$PatientTableTableInsertCompanionBuilder = PatientTableCompanion
+    Function({
+  Value<int> id,
+  required String name,
+});
+typedef $$PatientTableTableUpdateCompanionBuilder = PatientTableCompanion
+    Function({
+  Value<int> id,
+  Value<String> name,
+});
+
+class $$PatientTableTableTableManager extends RootTableManager<
+    _$AppDatabase,
+    $PatientTableTable,
+    PatientTableData,
+    $$PatientTableTableFilterComposer,
+    $$PatientTableTableOrderingComposer,
+    $$PatientTableTableProcessedTableManager,
+    $$PatientTableTableInsertCompanionBuilder,
+    $$PatientTableTableUpdateCompanionBuilder> {
+  $$PatientTableTableTableManager(_$AppDatabase db, $PatientTableTable table)
+      : super(TableManagerState(
+          db: db,
+          table: table,
+          filteringComposer:
+              $$PatientTableTableFilterComposer(ComposerState(db, table)),
+          orderingComposer:
+              $$PatientTableTableOrderingComposer(ComposerState(db, table)),
+          getChildManagerBuilder: (p) =>
+              $$PatientTableTableProcessedTableManager(p),
+          getUpdateCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            Value<String> name = const Value.absent(),
+          }) =>
+              PatientTableCompanion(
+            id: id,
+            name: name,
+          ),
+          getInsertCompanionBuilder: ({
+            Value<int> id = const Value.absent(),
+            required String name,
+          }) =>
+              PatientTableCompanion.insert(
+            id: id,
+            name: name,
+          ),
+        ));
+}
+
+class $$PatientTableTableProcessedTableManager extends ProcessedTableManager<
+    _$AppDatabase,
+    $PatientTableTable,
+    PatientTableData,
+    $$PatientTableTableFilterComposer,
+    $$PatientTableTableOrderingComposer,
+    $$PatientTableTableProcessedTableManager,
+    $$PatientTableTableInsertCompanionBuilder,
+    $$PatientTableTableUpdateCompanionBuilder> {
+  $$PatientTableTableProcessedTableManager(super.$state);
+}
+
+class $$PatientTableTableFilterComposer
+    extends FilterComposer<_$AppDatabase, $PatientTableTable> {
+  $$PatientTableTableFilterComposer(super.$state);
+  ColumnFilters<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+
+  ColumnFilters<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnFilters(column, joinBuilders: joinBuilders));
+}
+
+class $$PatientTableTableOrderingComposer
+    extends OrderingComposer<_$AppDatabase, $PatientTableTable> {
+  $$PatientTableTableOrderingComposer(super.$state);
+  ColumnOrderings<int> get id => $state.composableBuilder(
+      column: $state.table.id,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+
+  ColumnOrderings<String> get name => $state.composableBuilder(
+      column: $state.table.name,
+      builder: (column, joinBuilders) =>
+          ColumnOrderings(column, joinBuilders: joinBuilders));
+}
+
 class _$AppDatabaseManager {
   final _$AppDatabase _db;
   _$AppDatabaseManager(this._db);
@@ -1420,7 +2015,11 @@ class _$AppDatabaseManager {
   $$StoredMedicationsTableTableTableManager get storedMedicationsTable =>
       $$StoredMedicationsTableTableTableManager(
           _db, _db.storedMedicationsTable);
+  $$PrescriptionTableTableTableManager get prescriptionTable =>
+      $$PrescriptionTableTableTableManager(_db, _db.prescriptionTable);
   $$PrescriptionEntryTableTableTableManager get prescriptionEntryTable =>
       $$PrescriptionEntryTableTableTableManager(
           _db, _db.prescriptionEntryTable);
+  $$PatientTableTableTableManager get patientTable =>
+      $$PatientTableTableTableManager(_db, _db.patientTable);
 }

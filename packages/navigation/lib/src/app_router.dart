@@ -61,6 +61,12 @@ class AppRouter extends _$AppRouter {
           customRouteBuilder: RouteBuilder.screen,
         ),
 
+        // Prescriptions
+        CustomRoute(
+          page: PrescriptionDetailsRoute.page,
+          customRouteBuilder: RouteBuilder.bottomSheet,
+        ),
+
         // Add prescription
         CustomRoute(
           page: AddPrescriptionRoute.page,

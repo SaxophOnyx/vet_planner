@@ -7,7 +7,7 @@ import 'package:navigation/navigation.dart';
 import '../bloc/add_prescription_bloc.dart';
 import 'add_prescription_content.dart';
 
-@RoutePage()
+@RoutePage<bool>()
 class AddPrescriptionScreen extends StatelessWidget {
   const AddPrescriptionScreen({super.key});
 

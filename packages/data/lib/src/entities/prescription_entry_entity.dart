@@ -18,7 +18,8 @@ class PrescriptionEntryEntity {
     required this.datetimeMsSinceEpoch,
   });
 
-  factory PrescriptionEntryEntity.fromJson(Map<String, dynamic> json) => _$PrescriptionEntryEntityFromJson(json);
+  factory PrescriptionEntryEntity.fromJson(Map<String, dynamic> json) =>
+      _$PrescriptionEntryEntityFromJson(json);
 
   Map<String, dynamic> toJson() => _$PrescriptionEntryEntityToJson(this);
 }

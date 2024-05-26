@@ -48,6 +48,24 @@ Future<void> _setupProviders() async {
     ),
   );
 
+  appDI.registerSingleton<PrescriptionProvider>(
+    PrescriptionProvider(
+      appDatabase: appDI.get<AppDatabase>(),
+    ),
+  );
+
+  appDI.registerSingleton<PrescriptionEntryProvider>(
+    PrescriptionEntryProvider(
+      appDatabase: appDI.get<AppDatabase>(),
+    ),
+  );
+
+  appDI.registerSingleton<PatientProvider>(
+    PatientProvider(
+      appDatabase: appDI.get<AppDatabase>(),
+    ),
+  );
+
   appDI.registerSingleton<NotificationProvider>(
     NotificationProvider(),
   );
@@ -62,12 +80,23 @@ Future<void> _setupRepositories() async {
   );
 
   appDI.registerSingleton<PrescriptionRepository>(
-    PrescriptionRepositoryImpl(),
+    PrescriptionRepositoryImpl(
+      medicationProvider: appDI.get<MedicationProvider>(),
+      storedMedicationProvider: appDI.get<StoredMedicationProvider>(),
+      prescriptionProvider: appDI.get<PrescriptionProvider>(),
+      prescriptionEntryProvider: appDI.get<PrescriptionEntryProvider>(),
+    ),
   );
 
   appDI.registerSingleton<SettingsRepository>(
     SettingsRepositoryImpl(
       notificationSettingsProvider: appDI.get<NotificationSettingsProvider>(),
+    ),
+  );
+
+  appDI.registerSingleton<PatientRepository>(
+    PatientRepositoryImpl(
+      patientProvider: appDI.get<PatientProvider>(),
     ),
   );
 
@@ -121,9 +150,41 @@ Future<void> _setupUseCases() async {
     ),
   );
 
+  appDI.registerSingleton<GetExpiringPrescriptionEntriesUseCase>(
+    GetExpiringPrescriptionEntriesUseCase(
+      prescriptionRepository: appDI.get<PrescriptionRepository>(),
+    ),
+  );
+
   appDI.registerSingleton<AddPrescriptionUseCase>(
     AddPrescriptionUseCase(
       prescriptionRepository: appDI.get<PrescriptionRepository>(),
+    ),
+  );
+
+  appDI.registerSingleton<GetPrescriptionByIdUseCase>(
+    GetPrescriptionByIdUseCase(
+      prescriptionRepository: appDI.get<PrescriptionRepository>(),
+    ),
+  );
+
+  appDI.registerSingleton<DeletePrescriptionEntriesByIdsUseCase>(
+    DeletePrescriptionEntriesByIdsUseCase(
+      prescriptionRepository: appDI.get<PrescriptionRepository>(),
+    ),
+  );
+
+  appDI.registerSingleton<GetPatientByIdUseCase>(
+    GetPatientByIdUseCase(
+      patientRepository: appDI.get<PatientRepository>(),
+    ),
+  );
+
+  appDI.registerSingleton<TestUseCase>(
+    TestUseCase(
+      patientRepository: appDI.get<PatientRepository>(),
+      prescriptionRepository: appDI.get<PrescriptionRepository>(),
+      medicationRepository: appDI.get<MedicationRepository>(),
     ),
   );
 }

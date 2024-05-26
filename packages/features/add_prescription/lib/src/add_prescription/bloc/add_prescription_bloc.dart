@@ -21,6 +21,7 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
         _addPrescriptionUseCase = addPrescriptionUseCase,
         super(const AddPrescriptionState.initial()) {
     on<UpdatePatientName>(_onUpdatePatientName);
+    on<SelectPatient>(_onSelectPatient);
     on<UpdateComment>(_onUpdateComment);
     on<AddPrescriptionEntry>(_onAddPrescriptionEntry);
     on<DeleteFixedPrescriptionEntry>(_onDeleteFixedPrescriptionEntry);
@@ -36,18 +37,43 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
     ));
   }
 
-  void _onUpdatePatientName(
+  Future<void> _onUpdatePatientName(
     UpdatePatientName event,
     Emitter<AddPrescriptionState> emit,
-  ) {
+  ) async {
     // TODO(SaxophOnyx): Implement search
-    final Patient patient = Patient(
-      id: event.name.length,
-      name: event.name,
-    );
+    emit(state.copyWith(
+      isLoadingPatientSuggestions: true,
+      patientName: event.name,
+    ));
+
+    await Future<void>.delayed(const Duration(seconds: 2));
 
     emit(state.copyWith(
-      patient: patient,
+      patientSuggestions: <Patient>[
+        Patient(
+          id: 1,
+          name: event.name + '1',
+        ),
+        Patient(
+          id: 1,
+          name: event.name + '2',
+        ),
+        Patient(
+          id: 1,
+          name: event.name + '3',
+        ),
+      ],
+      isLoadingPatientSuggestions: false,
+    ));
+  }
+
+  void _onSelectPatient(
+    SelectPatient event,
+    Emitter<AddPrescriptionState> emit,
+  ) {
+    emit(state.copyWith(
+      patient: event.patient,
       patientError: '',
     ));
   }
@@ -107,7 +133,8 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
     Emitter<AddPrescriptionState> emit,
   ) async {
     final String patientError = state.patient.id != 0 ? '' : 'Select a patient';
-    final String fixedEntriesError = state.fixedEntries.isNotEmpty ? '' : 'Enter al least one prescription entry';
+    final String fixedEntriesError =
+        state.fixedEntries.isNotEmpty ? '' : 'Enter al least one prescription entry';
 
     emit(state.copyWith(
       patientError: patientError,
@@ -127,7 +154,10 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
     );
 
     try {
-      final Prescription prescription = await _addPrescriptionUseCase.execute(plan);
+      final TestUseCase useCase = appDI.get<TestUseCase>();
+      await useCase.execute(plan);
+
+      // final Prescription prescription = await _addPrescriptionUseCase.execute(plan);
     } on ImpossiblePrescriptionException catch (_) {
       // TODO(SaxophOnyx): Show error toast
     } catch (_) {

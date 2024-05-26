@@ -10,6 +10,12 @@ class UpdatePatientName extends AddPrescriptionEvent {
   const UpdatePatientName(this.name);
 }
 
+class SelectPatient extends AddPrescriptionEvent {
+  final Patient patient;
+
+  const SelectPatient(this.patient);
+}
+
 class UpdateComment extends AddPrescriptionEvent {
   final String comment;
 

@@ -6,4 +6,10 @@ abstract class PrescriptionRepository {
   });
 
   Future<List<PrescriptionEntry>> getExpiringPrescriptionEntries();
+
+  Future<Prescription> getPrescription({required int id});
+
+  Future<void> deletePrescriptionEntries({
+    required List<int> ids,
+  });
 }

@@ -1,8 +1,11 @@
-import 'package:add_prescription/add_prescription.dart';
 import 'package:core/core.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
+
+import '../bloc/prescriptions_bloc.dart';
+import 'prescriptions_content.dart';
 
 @RoutePage()
 class PrescriptionsScreen extends StatelessWidget {
@@ -10,22 +13,13 @@ class PrescriptionsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final AppColors colors = context.appColors;
-
-    return Scaffold(
-      appBar: const CustomAppBar(
-        title: 'Prescriptions',
-        style: CustomAppBarStyle.secondary,
-      ),
-      backgroundColor: colors.background,
-      body: Center(
-        child: AppFloatingButton(
-          onPressed: () async {
-            final AppRouter appRouter = appDI.get<AppRouter>();
-            appRouter.push(const AddPrescriptionRoute());
-          },
-        ),
-      ),
+    return BlocProvider<PrescriptionsBloc>(
+      create: (_) => PrescriptionsBloc(
+        appRouter: appDI.get<AppRouter>(),
+        getExpiringPrescriptionEntriesUseCase: appDI.get<GetExpiringPrescriptionEntriesUseCase>(),
+        deletePrescriptionEntriesByIdsUseCase: appDI.get<DeletePrescriptionEntriesByIdsUseCase>(),
+      )..add(const LoadData()),
+      child: const PrescriptionsContent(),
     );
   }
 }

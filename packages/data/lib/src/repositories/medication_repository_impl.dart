@@ -68,12 +68,14 @@ class MedicationRepositoryImpl implements MedicationRepository {
     final List<List<StoredMedication>> result = List<List<StoredMedication>>.empty(growable: true);
 
     for (final int id in medicationIds) {
-      final List<StoredMedicationEntity> entities = await _storedMedicationProvider.getStoredMedications(
+      final List<StoredMedicationEntity> entities =
+          await _storedMedicationProvider.getStoredMedicationsForId(
         medicationId: id,
         maxItems: maxItems,
       );
 
-      final List<StoredMedication> medications = entities.map(StoredMedicationMapper.fromEntity).toList();
+      final List<StoredMedication> medications =
+          entities.map(StoredMedicationMapper.fromEntity).toList();
       result.add(medications);
     }
 

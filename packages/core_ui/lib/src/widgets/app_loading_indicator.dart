@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import '../../core_ui.dart';
 
 class AppLoadingIndicator extends StatelessWidget {
-  const AppLoadingIndicator({super.key});
+  final double size;
+
+  const AppLoadingIndicator({
+    super.key,
+    this.size = AppDimens.DEFAULT_CONTROL_HEIGHT,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +16,8 @@ class AppLoadingIndicator extends StatelessWidget {
 
     // TODO(SaxophOnyx): Make rounded square
     return SizedBox(
-      height: AppDimens.DEFAULT_CONTROL_HEIGHT,
-      width: AppDimens.DEFAULT_CONTROL_HEIGHT,
+      height: size,
+      width: size,
       child: CircularProgressIndicator(
         color: colors.primary,
         strokeWidth: AppDimens.DEFAULT_LOADER_THICKNESS,

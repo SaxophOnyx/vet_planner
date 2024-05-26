@@ -10,6 +10,10 @@ extension AppListExtension<T> on List<T> {
 
     return result;
   }
+
+  T? tryByIndex(int index) {
+    return index < length ? this[index] : null;
+  }
 }
 
 extension AppSetExtension<T> on Set<T> {

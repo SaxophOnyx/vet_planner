@@ -9,7 +9,7 @@ class StoredMedicationProvider {
     required AppDatabase appDatabase,
   }) : _appDatabase = appDatabase;
 
-  Future<List<StoredMedicationEntity>> getStoredMedications({
+  Future<List<StoredMedicationEntity>> getStoredMedicationsForId({
     required int medicationId,
     int? maxItems,
   }) async {
@@ -19,7 +19,25 @@ class StoredMedicationProvider {
           // TODO(SaxophOnyx): Refactor const
           ..limit(maxItems ?? 10000);
 
-    return query.map((StoredMedicationsTableData data) => StoredMedicationEntity.fromJson(data.toJson())).get();
+    return query
+        .map((StoredMedicationsTableData data) => StoredMedicationEntity.fromJson(data.toJson()))
+        .get();
+  }
+
+  Future<Map<int, List<StoredMedicationEntity>>> getStoredMedicationsForIds({
+    required List<int> medicationIds,
+  }) async {
+    // TODO(SaxophOnyx): Refactor to avoid multiple DB calls
+    final Map<int, List<StoredMedicationEntity>> result = <int, List<StoredMedicationEntity>>{};
+
+    for (final int id in medicationIds) {
+      final List<StoredMedicationEntity> storedMedications =
+          await getStoredMedicationsForId(medicationId: id);
+
+      result[id] = storedMedications;
+    }
+
+    return result;
   }
 
   Future<StoredMedicationEntity> addStoredMedication({

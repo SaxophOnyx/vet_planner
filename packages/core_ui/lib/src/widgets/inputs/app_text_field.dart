@@ -10,6 +10,7 @@ class AppTextField extends StatelessWidget {
   final TextInputType? inputType;
   final String? error;
   final Widget? suffixIcon;
+  final FocusNode? focusNode;
   final bool isMultiline;
 
   const AppTextField({
@@ -20,6 +21,7 @@ class AppTextField extends StatelessWidget {
     this.inputType,
     this.error,
     this.suffixIcon,
+    this.focusNode,
     this.isMultiline = false,
   });
 
@@ -47,6 +49,7 @@ class AppTextField extends StatelessWidget {
           controller: textEditingController,
           cursorColor: colors.primary,
           cursorErrorColor: colors.error,
+          focusNode: focusNode,
           cursorWidth: AppDimens.DEFAULT_BORDER_THICKNESS,
           style: AppFonts.inter16Regular.copyWith(
             color: colors.text,
