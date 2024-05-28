@@ -11,12 +11,12 @@ part 'prescriptions_state.dart';
 
 class PrescriptionsBloc extends Bloc<PrescriptionsEvent, PrescriptionsState> {
   final AppRouter _appRouter;
-  final GetExpiringPrescriptionEntriesUseCase _getExpiringPrescriptionEntriesUseCase;
+  final GetPrescriptionEntriesUseCase _getExpiringPrescriptionEntriesUseCase;
   final DeletePrescriptionEntriesByIdsUseCase _deletePrescriptionEntriesByIdsUseCase;
 
   PrescriptionsBloc({
     required AppRouter appRouter,
-    required GetExpiringPrescriptionEntriesUseCase getExpiringPrescriptionEntriesUseCase,
+    required GetPrescriptionEntriesUseCase getExpiringPrescriptionEntriesUseCase,
     required DeletePrescriptionEntriesByIdsUseCase deletePrescriptionEntriesByIdsUseCase,
   })  : _appRouter = appRouter,
         _getExpiringPrescriptionEntriesUseCase = getExpiringPrescriptionEntriesUseCase,

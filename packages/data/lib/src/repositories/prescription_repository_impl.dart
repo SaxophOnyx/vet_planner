@@ -49,7 +49,7 @@ class PrescriptionRepositoryImpl implements PrescriptionRepository {
   }
 
   @override
-  Future<List<PrescriptionEntry>> getExpiringPrescriptionEntries() async {
+  Future<List<PrescriptionEntry>> getPrescriptionEntries() async {
     final List<PrescriptionEntryEntity> entities =
         await _prescriptionEntryProvider.getPrescriptionEntries();
 
@@ -81,5 +81,18 @@ class PrescriptionRepositoryImpl implements PrescriptionRepository {
     }
 
     throw const AppException();
+  }
+
+  @override
+  Future<List<PrescriptionEntry>> getPendingPrescriptionEntries() async {
+    // TODO(SaxophOnyx): Refactor
+    final List<PrescriptionEntryEntity> entries =
+        await _prescriptionEntryProvider.getPrescriptionEntries();
+
+    final int now = DateTime.now().millisecondsSinceEpoch;
+    return entries
+        .where((PrescriptionEntryEntity entry) => entry.datetimeMsSinceEpoch < now)
+        .map(PrescriptionEntryMapper.fromEntity)
+        .toList();
   }
 }

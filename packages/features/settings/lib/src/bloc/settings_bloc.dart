@@ -36,6 +36,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     UpdateNotificationSettings event,
     Emitter<SettingsState> emit,
   ) async {
+    if ((event.receivePrescriptions ?? false) || (event.receiveMedications ?? false)) {
+      final bool hasPermission = await NotificationService.requestPermission();
+
+      if (!hasPermission) {
+        return;
+      }
+    }
+
     emit(state.copyWith(
       receivePrescriptions: event.receivePrescriptions,
       receiveMedications: event.receiveMedications,

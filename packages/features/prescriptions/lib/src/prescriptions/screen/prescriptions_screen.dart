@@ -16,7 +16,7 @@ class PrescriptionsScreen extends StatelessWidget {
     return BlocProvider<PrescriptionsBloc>(
       create: (_) => PrescriptionsBloc(
         appRouter: appDI.get<AppRouter>(),
-        getExpiringPrescriptionEntriesUseCase: appDI.get<GetExpiringPrescriptionEntriesUseCase>(),
+        getExpiringPrescriptionEntriesUseCase: appDI.get<GetPrescriptionEntriesUseCase>(),
         deletePrescriptionEntriesByIdsUseCase: appDI.get<DeletePrescriptionEntriesByIdsUseCase>(),
       )..add(const LoadData()),
       child: const PrescriptionsContent(),

@@ -6,7 +6,8 @@ abstract class AppConstants {
   static const String HANDLER_A_TASK_NAME = 'scheduleA';
   static const String HANDLER_B_UNIQUE_NAME = 'scheduleB_U';
   static const String HANDLER_B_TASK_NAME = 'scheduleB';
-  static const Duration HANDLER_CALL_PERIOD = Duration();
+  // TODO(SaxophOnyx): Replace with proper duration
+  static const Duration HANDLER_CALL_PERIOD = Duration(seconds: 30);
   static const int SEARCH_BAR_LIMIT = 5;
 
   static const int PRESCRIPTION_NOTIFICATION_ID = 42;

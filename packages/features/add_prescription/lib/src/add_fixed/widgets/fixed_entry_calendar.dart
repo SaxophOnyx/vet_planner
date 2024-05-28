@@ -5,12 +5,16 @@ import 'package:table_calendar/table_calendar.dart';
 
 class FixedEntryCalender extends StatefulWidget {
   final Set<DateTime> dates;
-  final void Function(DateTime date) onDayPressed;
+  final DateTime firstDay;
+  final DateTime lastDay;
   final String error;
+  final void Function(DateTime date) onDayPressed;
 
   const FixedEntryCalender({
     super.key,
     required this.dates,
+    required this.firstDay,
+    required this.lastDay,
     required this.onDayPressed,
     this.error = '',
   });
@@ -91,7 +95,7 @@ class _FixedEntryCalenderState extends State<FixedEntryCalender> {
                 color: colors.onPrimary,
               ),
               disabledTextStyle: defaultTextStyle.copyWith(
-                color: colors.transparent,
+                color: colors.textSecondary,
               ),
             ),
             daysOfWeekStyle: DaysOfWeekStyle(
@@ -120,8 +124,8 @@ class _FixedEntryCalenderState extends State<FixedEntryCalender> {
               widget.onDayPressed(date);
             },
             focusedDay: _focusedDay,
-            firstDay: DateTime.now().subtract(const Duration(days: 365)),
-            lastDay: DateTime.now().add(const Duration(days: 365)),
+            firstDay: widget.firstDay,
+            lastDay: widget.lastDay,
           ),
         ),
         if (hasError)

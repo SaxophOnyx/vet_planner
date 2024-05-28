@@ -158,8 +158,8 @@ Future<void> _setupUseCases() async {
     ),
   );
 
-  appDI.registerSingleton<GetExpiringPrescriptionEntriesUseCase>(
-    GetExpiringPrescriptionEntriesUseCase(
+  appDI.registerSingleton<GetPrescriptionEntriesUseCase>(
+    GetPrescriptionEntriesUseCase(
       prescriptionRepository: appDI.get<PrescriptionRepository>(),
     ),
   );

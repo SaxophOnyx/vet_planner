@@ -40,4 +40,12 @@ abstract class WorkmanagerService {
       existingWorkPolicy: ExistingWorkPolicy.replace,
     );
   }
+
+  static Future<void> scheduleNext(String name) async {
+    if (name == AppConstants.HANDLER_B_TASK_NAME) {
+      await WorkmanagerService.scheduleA();
+    } else if (name == AppConstants.HANDLER_A_TASK_NAME) {
+      await WorkmanagerService.scheduleB();
+    }
+  }
 }

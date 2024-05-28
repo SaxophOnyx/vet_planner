@@ -10,7 +10,6 @@ class GetPendingPrescriptionEntriesUseCase
 
   @override
   Future<List<PrescriptionEntry>> execute([NoParams? payload]) async {
-    // TODO: implement execute
-    throw UnimplementedError();
+    return _prescriptionRepository.getPendingPrescriptionEntries();
   }
 }

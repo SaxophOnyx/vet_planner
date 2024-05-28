@@ -7,11 +7,13 @@ abstract class PrescriptionRepository {
     String? comment,
   });
 
-  Future<List<PrescriptionEntry>> getExpiringPrescriptionEntries();
+  Future<List<PrescriptionEntry>> getPrescriptionEntries();
 
   Future<Prescription> getPrescription({required int id});
 
   Future<void> deletePrescriptionEntries({
     required List<int> ids,
   });
+
+  Future<List<PrescriptionEntry>> getPendingPrescriptionEntries();
 }

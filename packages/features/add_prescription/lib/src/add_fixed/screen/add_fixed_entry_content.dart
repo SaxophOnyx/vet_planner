@@ -70,6 +70,8 @@ class _AddFixedEntryContentState extends State<AddFixedEntryContent> {
                 builder: (BuildContext context, AddFixedEntryState state) {
                   return FixedEntryCalender(
                     dates: state.dates,
+                    firstDay: DateTime.now(),
+                    lastDay: DateTime.now().add(const Duration(days: 365)),
                     onDayPressed: (DateTime day) => bloc.add(DayPressed(day)),
                     error: state.datesError,
                   );
