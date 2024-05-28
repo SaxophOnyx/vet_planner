@@ -52,4 +52,16 @@ class MedicationProvider {
         )
         .get();
   }
+
+  Future<MedicationEntity?> findById(int id) async {
+    // ignore: always_specify_types
+    final query = _appDatabase.select(_appDatabase.medicationTable)
+      ..where(($MedicationTableTable table) => table.id.equals(id));
+
+    return query
+        .map(
+          (MedicationTableData data) => MedicationEntity.fromJson(data.toJson()),
+        )
+        .getSingleOrNull();
+  }
 }

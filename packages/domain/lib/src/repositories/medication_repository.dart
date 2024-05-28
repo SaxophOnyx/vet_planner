@@ -23,10 +23,23 @@ abstract class MedicationRepository {
     String? manualTitle,
   });
 
-  Future<List<Medication>> findByName({
+  Future<List<Medication>> findMedicationByName({
     required String name,
     required int limit,
   });
 
+  Future<Medication> findMedicationById({required int id});
+
+  Future<StoredMedication> getStoredMedicationById({required int id});
+
   Future<List<StoredMedication>> getPendingStoredMedications();
+
+  Future<ReservationPlanResult?> tryGetReservationPlan({
+    required Set<int> medicationIds,
+    required Map<int, List<PlainPrescriptionPlanEntry>> plainPlans,
+  });
+
+  Future<void> reserveStoredMedications({
+    required Map<int, int> quantities,
+  });
 }

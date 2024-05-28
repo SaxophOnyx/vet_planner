@@ -22,37 +22,30 @@ class PrescriptionRepositoryImpl implements PrescriptionRepository {
 
   @override
   Future<Prescription> addPrescription({
-    required PrescriptionPlan plan,
+    required List<ReservationPlanEntry> payloads,
+    required int patientId,
+    String? comment,
   }) async {
-    throw UnimplementedError();
+    final PrescriptionEntity entity = await _prescriptionProvider.addPrescription(
+      patientId: patientId,
+      comment: comment,
+    );
 
-    final Map<int, List<_PrescriptionPlanEntry>> flatPlans = _processPlan(plan);
+    final List<PrescriptionEntryEntity> entries = payloads
+        .map((ReservationPlanEntry payload) => PrescriptionEntryEntity(
+              id: 0,
+              prescriptionId: entity.id,
+              storedMedicationId: payload.storedMedicationId,
+              dosage: payload.dose,
+              datetimeMsSinceEpoch: payload.datetime.millisecondsSinceEpoch,
+            ))
+        .toList();
 
-    final Map<int, List<StoredMedicationEntity>> storedMedications = await _storedMedicationProvider
-        .getStoredMedicationsForMedicationIds(medicationIds: flatPlans.keys.toList());
+    await _prescriptionEntryProvider.addPrescriptionEntries(
+      entries: entries,
+    );
 
-    for (final List<StoredMedicationEntity> list in storedMedications.values) {
-      list.sort(
-        (StoredMedicationEntity a, StoredMedicationEntity b) =>
-            a.expirationDateMsSinceEpoch.compareTo(b.expirationDateMsSinceEpoch),
-      );
-    }
-
-    final List<PrescriptionEntryEntity> prescriptionEntries =
-        List<PrescriptionEntryEntity>.empty(growable: true);
-
-    for (final MapEntry<int, List<_PrescriptionPlanEntry>> flatPlanEntry in flatPlans.entries) {
-      final List<_PrescriptionPlanEntry> flatPlan = flatPlanEntry.value;
-      final List<StoredMedicationEntity>? stored = storedMedications[flatPlanEntry.key];
-
-      if (stored == null) {
-        throw const ImpossiblePrescriptionException();
-      }
-
-      int currStoredIndex = 0;
-
-      for (final _PrescriptionPlanEntry entry in flatPlan) {}
-    }
+    return PrescriptionMapper.fromEntity(entity);
   }
 
   @override

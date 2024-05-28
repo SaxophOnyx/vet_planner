@@ -20,15 +20,4 @@ abstract class ExpirationDateMapper {
 
     return colors.success;
   }
-
-  // TODO(SaxophOnyx): Use locale
-  static String getText({required Duration remaining, required BuildContext context}) {
-    final int inDays = remaining.inDays;
-
-    if (inDays.isNegative) {
-      return 'Expired';
-    }
-
-    return 'Expires in $inDays day(s)';
-  }
 }

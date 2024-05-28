@@ -1,15 +1,16 @@
 import '../../../domain.dart';
 
-Map<int, List<PrescriptionPlanEntry>> processPlan(PrescriptionPlan plan) {
-  final Map<int, List<PrescriptionPlanEntry>> result = <int, List<PrescriptionPlanEntry>>{};
+Map<int, List<PlainPrescriptionPlanEntry>> processPlan(PrescriptionPlan plan) {
+  final Map<int, List<PlainPrescriptionPlanEntry>> result =
+      <int, List<PlainPrescriptionPlanEntry>>{};
 
   for (final FixedPrescriptionPlan fixed in plan.fixedPlans) {
-    final List<PrescriptionPlanEntry> list =
-        result[fixed.medicationId] ?? List<PrescriptionPlanEntry>.empty(growable: true);
+    final List<PlainPrescriptionPlanEntry> list =
+        result[fixed.medicationId] ?? List<PlainPrescriptionPlanEntry>.empty(growable: true);
 
     list.addAll(fixed.dates.map(
-      (DateTime date) => PrescriptionPlanEntry(
-        date: date.millisecondsSinceEpoch,
+      (DateTime date) => PlainPrescriptionPlanEntry(
+        datetime: date,
         dose: fixed.dose,
       ),
     ));
@@ -17,8 +18,11 @@ Map<int, List<PrescriptionPlanEntry>> processPlan(PrescriptionPlan plan) {
     result[fixed.medicationId] = list;
   }
 
-  for (final List<PrescriptionPlanEntry> list in result.values) {
-    list.sort((PrescriptionPlanEntry a, PrescriptionPlanEntry b) => a.date.compareTo(b.date));
+  for (final List<PlainPrescriptionPlanEntry> list in result.values) {
+    list.sort(
+      (PlainPrescriptionPlanEntry a, PlainPrescriptionPlanEntry b) =>
+          a.datetime.compareTo(b.datetime),
+    );
   }
 
   return result;

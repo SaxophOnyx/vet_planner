@@ -8,4 +8,9 @@ class Prescription {
     required this.patientId,
     required this.comment,
   });
+
+  const Prescription.empty()
+      : id = 0,
+        patientId = 0,
+        comment = null;
 }

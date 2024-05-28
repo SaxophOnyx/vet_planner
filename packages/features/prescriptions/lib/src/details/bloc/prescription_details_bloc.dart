@@ -10,22 +10,53 @@ class PrescriptionDetailsBloc extends Bloc<PrescriptionDetailsEvent, Prescriptio
   final AppRouter _appRouter;
   final GetPrescriptionByIdUseCase _getPrescriptionByIdUseCase;
   final GetPatientByIdUseCase _getPatientByIdUseCase;
+  final GetStoredMedicationByIdUseCase _getStoredMedicationsUseCase;
+  final GetMedicationByIdUseCase _getMedicationByIdUseCase;
 
   PrescriptionDetailsBloc({
     required AppRouter appRouter,
     required GetPrescriptionByIdUseCase getPrescriptionByIdUseCase,
     required GetPatientByIdUseCase getPatientByIdUseCase,
+    required GetStoredMedicationByIdUseCase getStoredMedicationsUseCase,
+    required GetMedicationByIdUseCase getMedicationByIdUseCase,
+    required PrescriptionEntry entry,
   })  : _appRouter = appRouter,
         _getPrescriptionByIdUseCase = getPrescriptionByIdUseCase,
         _getPatientByIdUseCase = getPatientByIdUseCase,
-        super(const PrescriptionDetailsState()) {
+        _getStoredMedicationsUseCase = getStoredMedicationsUseCase,
+        _getMedicationByIdUseCase = getMedicationByIdUseCase,
+        super(PrescriptionDetailsState.initial(entry: entry)) {
     on<LoadData>(_onLoadData);
+    on<Close>(_onClose);
   }
 
   Future<void> _onLoadData(
     LoadData event,
     Emitter<PrescriptionDetailsState> emit,
   ) async {
-    // TODO(SaxophOnyx): Implement
+    final Prescription prescription = await _getPrescriptionByIdUseCase.execute(
+      state.entry.prescriptionId,
+    );
+
+    final Patient patient = await _getPatientByIdUseCase.execute(prescription.patientId);
+    final StoredMedication stored =
+        await _getStoredMedicationsUseCase.execute(state.entry.storedMedicationId);
+    final Medication medication = await _getMedicationByIdUseCase.execute(stored.medicationId);
+
+    emit(
+      state.copyWith(
+        patient: patient,
+        prescription: prescription,
+        medication: medication,
+        loading: Loading.completed,
+      ),
+    );
+  }
+
+  Future<void> _onClose(
+    Close event,
+    Emitter<PrescriptionDetailsState> emit,
+  ) async {
+    await _appRouter.maybePop();
   }
 }

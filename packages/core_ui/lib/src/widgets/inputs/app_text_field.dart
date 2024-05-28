@@ -12,6 +12,7 @@ class AppTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final FocusNode? focusNode;
   final bool isMultiline;
+  final bool isReadOnly;
 
   const AppTextField({
     super.key,
@@ -23,6 +24,7 @@ class AppTextField extends StatelessWidget {
     this.suffixIcon,
     this.focusNode,
     this.isMultiline = false,
+    this.isReadOnly = false,
   });
 
   @override
@@ -43,6 +45,7 @@ class AppTextField extends StatelessWidget {
         ),
         const SizedBox(height: AppDimens.DEFAULT_LABEL_GAP),
         TextField(
+          readOnly: isReadOnly,
           keyboardType: inputType,
           minLines: isMultiline ? 4 : null,
           maxLines: isMultiline ? 4 : 1,

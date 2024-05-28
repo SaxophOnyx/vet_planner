@@ -2,7 +2,9 @@ import '../../domain.dart';
 
 abstract class PrescriptionRepository {
   Future<Prescription> addPrescription({
-    required PrescriptionPlan plan,
+    required List<ReservationPlanEntry> payloads,
+    required int patientId,
+    String? comment,
   });
 
   Future<List<PrescriptionEntry>> getExpiringPrescriptionEntries();

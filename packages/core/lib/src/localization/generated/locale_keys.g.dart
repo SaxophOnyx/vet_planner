@@ -43,6 +43,8 @@ abstract class  LocaleKeys {
   static const medKit_addMedication = 'medKit.addMedication';
   static const medKit_stored_title = 'medKit.stored.title';
   static const medKit_stored_add = 'medKit.stored.add';
+  static const medKit_stored_quantityText = 'medKit.stored.quantityText';
+  static const medKit_stored_expiresInDays = 'medKit.stored.expiresInDays';
   static const medKit_stored = 'medKit.stored';
   static const medKit_addStored_title = 'medKit.addStored.title';
   static const medKit_addStored_expirationDate = 'medKit.addStored.expirationDate';
@@ -52,6 +54,9 @@ abstract class  LocaleKeys {
   static const medKit = 'medKit';
   static const prescriptions_title = 'prescriptions.title';
   static const prescriptions = 'prescriptions';
+  static const prescriptionDetails_title = 'prescriptionDetails.title';
+  static const prescriptionDetails_close = 'prescriptionDetails.close';
+  static const prescriptionDetails = 'prescriptionDetails';
   static const addPrescription_entryTypes_fixed = 'addPrescription.entryTypes.fixed';
   static const addPrescription_entryTypes_periodic = 'addPrescription.entryTypes.periodic';
   static const addPrescription_entryTypes = 'addPrescription.entryTypes';
@@ -68,6 +73,14 @@ abstract class  LocaleKeys {
   static const addPrescription_chooseType_title = 'addPrescription.chooseType.title';
   static const addPrescription_chooseType = 'addPrescription.chooseType';
   static const addPrescription_addFixed_title = 'addPrescription.addFixed.title';
+  static const addPrescription_addFixed_dose = 'addPrescription.addFixed.dose';
+  static const addPrescription_addFixed_medication = 'addPrescription.addFixed.medication';
+  static const addPrescription_addFixed_noMedicationFound = 'addPrescription.addFixed.noMedicationFound';
+  static const addPrescription_addFixed_hour = 'addPrescription.addFixed.hour';
+  static const addPrescription_addFixed_submit = 'addPrescription.addFixed.submit';
+  static const addPrescription_addFixed_selectAtLeastOneDay = 'addPrescription.addFixed.selectAtLeastOneDay';
+  static const addPrescription_addFixed_selectMedication = 'addPrescription.addFixed.selectMedication';
+  static const addPrescription_addFixed_selectADose = 'addPrescription.addFixed.selectADose';
   static const addPrescription_addFixed = 'addPrescription.addFixed';
   static const addPrescription = 'addPrescription';
 

@@ -65,10 +65,11 @@ class AddFixedEntryBloc extends Bloc<AddFixedEntryEvent, AddFixedEntryState> {
 
     emit(state.copyWith(
       isLoadingMedications: true,
+      medication: const Medication.empty(),
       medicationName: name,
     ));
 
-    final List<Medication> patients = await _findMedicationsByNameUseCase.execute(
+    final List<Medication> medications = await _findMedicationsByNameUseCase.execute(
       FindMedicationsByNamePayload(
         name: name,
         limit: AppConstants.SEARCH_BAR_LIMIT,
@@ -76,7 +77,7 @@ class AddFixedEntryBloc extends Bloc<AddFixedEntryEvent, AddFixedEntryState> {
     );
 
     emit(state.copyWith(
-      suggestedMedications: patients,
+      suggestedMedications: medications,
       isLoadingMedications: false,
       medicationError: '',
     ));
@@ -88,6 +89,7 @@ class AddFixedEntryBloc extends Bloc<AddFixedEntryEvent, AddFixedEntryState> {
   ) {
     emit(state.copyWith(
       medication: event.medication,
+      medicationName: event.medication.name,
       medicationError: '',
     ));
   }
@@ -96,10 +98,14 @@ class AddFixedEntryBloc extends Bloc<AddFixedEntryEvent, AddFixedEntryState> {
     SubmitEntry event,
     Emitter<AddFixedEntryState> emit,
   ) async {
-    final String datesError = state.dates.isNotEmpty ? '' : 'Select at least one day';
-    final String medicationError =
-        (state.medication.id != 0 || state.medicationName.isNotEmpty) ? '' : 'Select a medication';
-    final String doseError = state.dose != 0 ? '' : 'Select a dose';
+    final String datesError = state.dates.isNotEmpty
+        ? ''
+        : LocaleKeys.addPrescription_addFixed_selectAtLeastOneDay.translate();
+    final String medicationError = state.medication.id != 0
+        ? ''
+        : LocaleKeys.addPrescription_addFixed_selectMedication.translate();
+    final String doseError =
+        state.dose != 0 ? '' : LocaleKeys.addPrescription_addFixed_selectADose.translate();
 
     emit(state.copyWith(
       datesError: datesError,

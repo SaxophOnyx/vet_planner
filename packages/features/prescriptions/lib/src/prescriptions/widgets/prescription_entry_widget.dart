@@ -27,7 +27,7 @@ class PrescriptionEntryWidget extends StatelessWidget {
       title: GestureDetector(
         onTap: onViewDetailsPressed,
         child: Text(
-          AppDateUtils.formatDate(entry.datetime),
+          AppDateUtils.formatDateTime(entry.datetime),
           style: AppFonts.inter16SemiBold.copyWith(
             color: colors.text,
           ),

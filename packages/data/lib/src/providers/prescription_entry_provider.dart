@@ -44,8 +44,8 @@ class PrescriptionEntryProvider {
               (PrescriptionEntryEntity e) => PrescriptionEntryTableCompanion.insert(
                 prescriptionId: e.prescriptionId,
                 storedMedicationId: e.storedMedicationId,
-                dosage: e.storedMedicationId,
-                datetimeMsSinceEpoch: e.storedMedicationId,
+                dosage: e.dosage,
+                datetimeMsSinceEpoch: e.datetimeMsSinceEpoch,
               ),
             )
             .toList(),

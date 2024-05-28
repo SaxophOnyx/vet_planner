@@ -1,8 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
-
-import 'stored_medication_list_item.dart';
+import 'package:medical_kit/src/stored_medications/widgets/stored_medication_list_item.dart';
 
 class StoredMedicationList extends StatelessWidget {
   final List<StoredMedication> medications;

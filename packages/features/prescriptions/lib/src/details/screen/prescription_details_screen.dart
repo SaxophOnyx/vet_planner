@@ -23,6 +23,9 @@ class PrescriptionDetailsScreen extends StatelessWidget {
         appRouter: appDI.get<AppRouter>(),
         getPrescriptionByIdUseCase: appDI.get<GetPrescriptionByIdUseCase>(),
         getPatientByIdUseCase: appDI.get<GetPatientByIdUseCase>(),
+        getStoredMedicationsUseCase: appDI.get<GetStoredMedicationByIdUseCase>(),
+        getMedicationByIdUseCase: appDI.get<GetMedicationByIdUseCase>(),
+        entry: entry,
       )..add(const LoadData()),
       child: const PrescriptionDetailsContent(),
     );

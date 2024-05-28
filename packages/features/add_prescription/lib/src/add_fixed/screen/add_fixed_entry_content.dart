@@ -48,9 +48,11 @@ class _AddFixedEntryContentState extends State<AddFixedEntryContent> {
               BlocBuilder<AddFixedEntryBloc, AddFixedEntryState>(
                 builder: (BuildContext context, AddFixedEntryState state) {
                   return AppSearchTextField<Medication>(
-                    label: 'Medication',
+                    label:
+                        LocaleKeys.addPrescription_addFixed_medication.observeTranslation(context),
                     error: state.medicationError,
-                    nothingFoundLabel: 'No medications found',
+                    nothingFoundLabel: LocaleKeys.addPrescription_addFixed_noMedicationFound
+                        .observeTranslation(context),
                     isReloading: state.isLoadingMedications,
                     suggestions: state.suggestedMedications,
                     stringifier: (Medication item) => item.name,
@@ -79,7 +81,7 @@ class _AddFixedEntryContentState extends State<AddFixedEntryContent> {
                   return Column(
                     children: <Widget>[
                       AppCarousel<int>(
-                        label: 'Dose',
+                        label: LocaleKeys.addPrescription_addFixed_dose.observeTranslation(context),
                         value: state.dose,
                         values: PrescriptionService.getAvailableDosages(
                             state.medication.type.measurementUnit),
@@ -89,7 +91,7 @@ class _AddFixedEntryContentState extends State<AddFixedEntryContent> {
                       ),
                       const SizedBox(height: AppDimens.DEFAULT_PAGE_PADDING),
                       AppCarousel<int>(
-                        label: 'Hour',
+                        label: LocaleKeys.addPrescription_addFixed_hour.observeTranslation(context),
                         value: state.hour,
                         values: PrescriptionService.getAvailableHours(),
                         onValueChanged: (int value) => bloc.add(UpdateTime(value)),
@@ -102,7 +104,7 @@ class _AddFixedEntryContentState extends State<AddFixedEntryContent> {
               ),
               const SizedBox(height: AppDimens.MIN_BUTTON_AREA_SPACER_HEIGHT),
               AppButton(
-                text: 'Submit',
+                text: LocaleKeys.addPrescription_addFixed_submit.observeTranslation(context),
                 onPressed: () => bloc.add(const SubmitEntry()),
               ),
             ],

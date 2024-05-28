@@ -53,7 +53,9 @@
     },
     "stored": {
       "title": "Партии препаратов",
-      "add": "Добавить партию"
+      "add": "Добавить партию",
+      "quantityText": "(b)(c {freeColor}){free}(/c)(/b) свободно, (b)(c {reservedColor}){reserved}(/c)(/b) зарезервировано",
+      "expiresInDays": "Срок годности истекает через (b)(c {daysColor}){days}(/c)(/b) дней"
     },
     "addStored": {
       "title": "Новая партия",
@@ -65,16 +67,20 @@
   "prescriptions": {
     "title": "Назначения"
   },
+  "prescriptionDetails": {
+    "title": "Подробности приема",
+    "close": "Закрыть"
+  },
   "addPrescription": {
     "entryTypes": {
-      "fixed": "Fixed",
-      "periodic": "Periodic"
+      "fixed": "С фиксированнами датами",
+      "periodic": "С периодический приемом"
     },
     "main": {
       "title": "Новое назначение",
       "commentOptional": "Комментарий (необязательный)",
       "prescriptionEntries": "Планы приема",
-      "addEntry": "Добавить новый план",
+      "addEntry": "Добавить новый план приема",
       "submit": "Подтвердить назначение",
       "patient": "Пациент",
       "patientsNotFound": "Пациент не найден; запись о нем будет создана",
@@ -82,10 +88,18 @@
       "enterPrescriptionEntry": "Укажите хотя бы один план приема"
     },
     "chooseType": {
-      "title": "Choose entry type"
+      "title": "Выберите тип плана приема"
     },
     "addFixed": {
-      "title": "Add fixed entry"
+      "title": "Прием с фиксированными датами",
+      "dose": "Доза",
+      "medication": "Препарат",
+      "noMedicationFound": "Препарат не найден",
+      "hour": "Час",
+      "submit": "Подтвердить",
+      "selectAtLeastOneDay": "Выберите хотя бы один день приема",
+      "selectMedication": "Выберите медикамент",
+      "selectADose": "Укажите дозу"
     }
   }
 }

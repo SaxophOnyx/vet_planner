@@ -53,7 +53,9 @@
     },
     "stored": {
       "title": "Stored medications",
-      "add": "Add stored medication"
+      "add": "Add stored medication",
+      "quantityText": "(b)(c {freeColor}){free}(/c)(/b) free, (b)(c {reservedColor}){reserved}(/c)(/b) reserved",
+      "expiresInDays": "Expires in (b)(c {daysColor}){days}(/c)(/b) day(s)"
     },
     "addStored": {
       "title": "Add stored medication",
@@ -64,6 +66,10 @@
   },
   "prescriptions": {
     "title": "Prescriptions"
+  },
+  "prescriptionDetails": {
+    "title": "Details",
+    "close": "Close"
   },
   "addPrescription": {
     "entryTypes": {
@@ -85,7 +91,15 @@
       "title": "Choose entry type"
     },
     "addFixed": {
-      "title": "Add fixed entry"
+      "title": "Add fixed entry",
+      "dose": "Dose",
+      "medication": "Medication",
+      "noMedicationFound": "No medications found",
+      "hour": "Hour",
+      "submit": "Submit",
+      "selectAtLeastOneDay": "Select at least one day",
+      "selectMedication": "Select a medication",
+      "selectADose": "Select a dose"
     }
   }
 }

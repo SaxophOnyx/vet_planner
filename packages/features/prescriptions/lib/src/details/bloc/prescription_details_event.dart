@@ -7,3 +7,7 @@ abstract class PrescriptionDetailsEvent {
 class LoadData extends PrescriptionDetailsEvent {
   const LoadData();
 }
+
+class Close extends PrescriptionDetailsEvent {
+  const Close();
+}

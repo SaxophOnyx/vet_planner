@@ -16,8 +16,8 @@ class AddPrescriptionScreen extends StatelessWidget {
     return BlocProvider<AddPrescriptionBloc>(
       create: (_) => AddPrescriptionBloc(
         appRouter: appDI.get<AppRouter>(),
-        addPrescriptionUseCase: appDI.get<AddPrescriptionUseCase>(),
         findPatientsByNameUseCase: appDI.get<FindPatientsByNameUseCase>(),
+        addPrescriptionUseCase: appDI.get<AddPrescriptionUseCase>(),
       ),
       child: const AddPrescriptionContent(),
     );

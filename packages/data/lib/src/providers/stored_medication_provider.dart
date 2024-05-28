@@ -72,6 +72,34 @@ class StoredMedicationProvider {
     );
   }
 
+  Future<List<StoredMedicationEntity>> getStoredMedications(List<int> ids) async {
+    // ignore: always_specify_types
+    final query = _appDatabase.storedMedicationsTable.select()
+      ..where(
+        ($StoredMedicationsTableTable table) => table.id.isIn(ids),
+      );
+
+    return query
+        .map((StoredMedicationsTableData data) => StoredMedicationEntity.fromJson(data.toJson()))
+        .get();
+  }
+
+  Future<void> updateStoredMedications(List<StoredMedicationEntity> entities) async {
+    // TODO(SaxophOnyx): Refactor for more efficient approach
+    for (final StoredMedicationEntity entity in entities) {
+      await _appDatabase.update(_appDatabase.storedMedicationsTable).replace(
+            StoredMedicationsTableData(
+              id: entity.id,
+              medicationId: entity.medicationId,
+              initialQuantity: entity.initialQuantity,
+              freeQuantity: entity.freeQuantity,
+              reservedQuantity: entity.reservedQuantity,
+              expirationDateMsSinceEpoch: entity.expirationDateMsSinceEpoch,
+            ),
+          );
+    }
+  }
+
   // TODO(SaxophOnyx): Check
   Future<List<StoredMedicationEntity>> getExpiredStoredMedicationsSince(int datetimeMs) async {
     // ignore: always_specify_types

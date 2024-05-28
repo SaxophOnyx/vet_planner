@@ -4,7 +4,22 @@ abstract class AppDateUtils {
   static const String _separator = '/';
 
   static String formatDate(DateTime date) {
-    return '${date.day.toString().padLeft(2, '0')}$_separator${date.month.toString().padLeft(2, '0')}$_separator${date.year}';
+    final String day = date.day.toString().padLeft(2, '0');
+    final String month = date.month.toString().padLeft(2, '0');
+    final String year = date.year.toString();
+
+    return '$day$_separator$month$_separator$year';
+  }
+
+  static String formatDateTime(DateTime date) {
+    final String day = date.day.toString().padLeft(2, '0');
+    final String month = date.month.toString().padLeft(2, '0');
+    final String year = date.year.toString();
+
+    final String hour = date.hour.toString().padLeft(2, '0');
+    final String minute = date.minute.toString().padLeft(2, '0');
+
+    return '$day$_separator$month$_separator$year, $hour:$minute';
   }
 
   static DateTime? tryParseDate(String date) {

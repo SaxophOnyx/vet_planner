@@ -1,3 +1,5 @@
+import 'package:flutter/rendering.dart';
+
 extension AppListExtension<T> on List<T> {
   List<E> customMapIndexed<E>(E Function(T item, int index) transform) {
     final List<E> result = <E>[];
@@ -38,4 +40,12 @@ extension AppStringExtension on String {
   String? nullIfEmpty() {
     return isEmpty ? null : this;
   }
+}
+
+extension AppColorExtension on Color {
+  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
+      '${alpha.toRadixString(16).padLeft(2, '0')}'
+      '${red.toRadixString(16).padLeft(2, '0')}'
+      '${green.toRadixString(16).padLeft(2, '0')}'
+      '${blue.toRadixString(16).padLeft(2, '0')}';
 }

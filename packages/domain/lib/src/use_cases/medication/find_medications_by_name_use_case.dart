@@ -20,7 +20,7 @@ class FindMedicationsByNameUseCase
 
   @override
   Future<List<Medication>> execute(FindMedicationsByNamePayload payload) async {
-    return _medicationRepository.findByName(
+    return _medicationRepository.findMedicationByName(
       name: payload.name,
       limit: payload.limit,
     );

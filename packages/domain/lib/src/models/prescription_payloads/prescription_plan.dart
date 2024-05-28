@@ -1,10 +1,10 @@
 class PrescriptionPlan {
-  final int patientId;
+  final String patientName;
   final String? comment;
   final List<FixedPrescriptionPlan> fixedPlans;
 
   const PrescriptionPlan({
-    required this.patientId,
+    required this.patientName,
     this.comment,
     required this.fixedPlans,
   });

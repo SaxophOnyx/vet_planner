@@ -12,16 +12,16 @@ part 'add_prescription_state.dart';
 
 class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionState> {
   final AppRouter _appRouter;
-  final AddPrescriptionUseCase _addPrescriptionUseCase;
   final FindPatientsByNameUseCase _findPatientsByNameUseCase;
+  final AddPrescriptionUseCase _addPrescriptionUseCase;
 
   AddPrescriptionBloc({
     required AppRouter appRouter,
-    required AddPrescriptionUseCase addPrescriptionUseCase,
     required FindPatientsByNameUseCase findPatientsByNameUseCase,
+    required AddPrescriptionUseCase addPrescriptionUseCase,
   })  : _appRouter = appRouter,
-        _addPrescriptionUseCase = addPrescriptionUseCase,
         _findPatientsByNameUseCase = findPatientsByNameUseCase,
+        _addPrescriptionUseCase = addPrescriptionUseCase,
         super(const AddPrescriptionState.initial()) {
     on<UpdatePatientName>(_onUpdatePatientName);
     on<SelectPatient>(_onSelectPatient);
@@ -48,6 +48,7 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
 
     emit(state.copyWith(
       isLoadingPatientSuggestions: true,
+      patient: const Patient.empty(),
       patientName: name,
     ));
 
@@ -71,6 +72,7 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
   ) {
     emit(state.copyWith(
       patient: event.patient,
+      patientName: event.patient.name,
       patientError: '',
     ));
   }
@@ -142,8 +144,12 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
       fixedEntriesError: fixedEntriesError,
     ));
 
+    if (state.hasError) {
+      return;
+    }
+
     final PrescriptionPlan plan = PrescriptionPlan(
-      patientId: state.patient.id,
+      patientName: state.patient.id != 0 ? state.patient.name : state.patientName,
       comment: state.comment.nullIfEmpty(),
       fixedPlans: state.fixedEntries
           .map((FixedPrescriptionEntry entry) => FixedPrescriptionPlan(
@@ -155,8 +161,9 @@ class AddPrescriptionBloc extends Bloc<AddPrescriptionEvent, AddPrescriptionStat
     );
 
     try {
-      final TestUseCase useCase = appDI.get<TestUseCase>();
+      final AddPrescriptionUseCase useCase = appDI.get<AddPrescriptionUseCase>();
       await useCase.execute(plan);
+      await _appRouter.maybePop<bool>(true);
 
       // final Prescription prescription = await _addPrescriptionUseCase.execute(plan);
     } on ImpossiblePrescriptionException catch (_) {
