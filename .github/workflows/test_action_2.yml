@@ -1,6 +1,9 @@
 name: "Hello World 2"
 
 on:
+  schedule:
+    - cron: "6 * * * *" 
+    
   workflow_dispatch:  # This allows manual triggering of the workflow
 
 jobs:
